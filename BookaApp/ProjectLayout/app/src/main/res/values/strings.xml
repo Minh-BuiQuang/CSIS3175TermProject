@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ProjectLayout</string>
+    <string name="prompt">Choose a group</string>
+    <string-array name="groups">
+        <item>Adventure</item>
+        <item>Romance</item>
+        <item>Mystery</item>
+        <item>Horror</item>
+        <item>Thriller</item>
+        <item>Science Fiction</item>
+        <item>Children’s</item>
+        <item>Self-help</item>
+        <item>Development</item>
+        <item>Motivational</item>
+    </string-array>
+</resources>

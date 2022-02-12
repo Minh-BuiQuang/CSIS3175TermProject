@@ -20,7 +20,7 @@
         android:layout_marginStart="57dp"
         android:layout_marginTop="31dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Welcome to Booka"
+        android:text="@string/txtWelcome"
         android:textColor="#523A28"
         android:textSize="34sp" />
 
@@ -36,9 +36,11 @@
         android:layout_marginTop="88dp"
         android:layout_marginEnd="16dp"
         android:ems="18"
-        android:hint="User Name"
+        android:hint="@string/txtUserName"
         android:inputType="textPersonName"
-        android:textColorHint="#A47551" />
+        android:textColorHint="#A47551"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/edtPassword"
@@ -50,12 +52,14 @@
         android:layout_marginStart="17dp"
         android:layout_marginTop="144dp"
         android:ems="18"
-        android:hint="Password"
+        android:hint="@string/txtPassword"
         android:inputType="textPassword"
-        android:textColorHint="#A47551" />
+        android:textColorHint="#A47551"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
+        android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnUpdateAccount"
         style="@style/Widget.Material3.Button"
         android:layout_width="254dp"
         android:layout_height="wrap_content"
@@ -64,7 +68,7 @@
         android:layout_marginTop="196dp"
         android:backgroundTint="#A47551"
         android:fontFamily="@font/roboto_medium"
-        android:text="Log in"
+        android:text="@string/txtLogin"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
@@ -79,9 +83,10 @@
         android:layout_marginStart="112dp"
         android:layout_marginBottom="294dp"
         android:backgroundTintMode="multiply"
-        android:text="Forgot password?"
+        android:text="@string/txtForgotPassword"
         android:textColor="#D0B49F"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/btnSignUp"
@@ -93,9 +98,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="214dp"
         android:layout_marginBottom="237dp"
-        android:text="Sign Up"
+        android:text="@string/txtSignUp"
         android:textColor="#D0B49F"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/txtNewUser"
@@ -105,9 +111,10 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="96dp"
         android:layout_marginBottom="249dp"
-        android:text="New Users?"
+        android:text="@string/txtNewUsers"
         android:textColor="#D0B49F"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        tools:ignore="TextContrastCheck" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -116,5 +123,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="42dp"
+        android:contentDescription="@string/signImg"
         app:srcCompat="@drawable/welcomeImg" />
 </RelativeLayout>

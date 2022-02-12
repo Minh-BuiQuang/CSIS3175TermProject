@@ -1,130 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:weightSum="5">
+    tools:context=".MainMenuActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="*"
-        android:layout_weight="0.4">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:background="#E4D4C8"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            app:srcCompat="@drawable/icon" />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="*"
-        android:layout_weight="2.6"
-        android:orientation="vertical"
-        >
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:fontFamily="@font/roboto_medium"
-            android:text="BOOKA"
-            android:textAlignment="center"
-            android:textColor="#523A28"
-            android:textSize="54sp" />
-
-        <TextView
-            android:id="@+id/txtSignIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="Sign in to share your book"
-            android:textAlignment="center"
-            android:textColor="#523A28"
-            android:textSize="20sp" />
+        android:id="@+id/linearLayout"
+        android:layout_width="411dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="3dp"
+        android:background="#523A28"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/btnSignIn"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:text="Sign In"
-            android:textColor="#A47551"
-            android:textSize="24sp" />
+            android:id="@+id/btnMenu"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/menu"
+            app:backgroundTint="#FFFFFF"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
-            android:id="@+id/txtSignUp"
+            android:id="@+id/txtAppTitle"
+            android:layout_width="320dp"
+            android:layout_height="57dp"
+            android:background="#523A28"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/txtAppTitle"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="Don't have an account?"
-            android:textAlignment="center"
-            android:textColor="#523A28"
-            android:textSize="20sp" />
+            android:layout_marginTop="70dp"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnSignUp"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:text="SIGN UP"
-            android:textColor="#A47551"
-            android:textSize="24sp" />
+            <LinearLayout
+                android:layout_width="386dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/add_bg"
+                android:orientation="horizontal"
+                android:padding="3dp">
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="*"
-        android:background="##478C5C"
-        android:layout_weight="0.3"
-        android:weightSum="10">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-/>
+                    <TextView
+                        android:id="@+id/txtAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/txtAdd"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="*"
-        android:background="##478C5C"
-        android:layout_weight="1.3"
-        android:weightSum="10">
+                    <TextView
+                        android:id="@+id/txtAddDetails"
+                        android:layout_width="249dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/txtAddSlogan"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/welcomeImg" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="*"
-        android:background="##478C5C"
-        android:layout_weight="0.2"
-        android:weightSum="10">
+                <ImageView
+                    android:id="@+id/imgAdd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/add_img"
+                    tools:ignore="ImageContrastCheck"
+                    android:contentDescription="@string/addImg" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtFooter"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Copyright @BookaTeam"
-            android:textAlignment="center"
-            android:textColor="#523A28"
-            android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="386dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/update_bg"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtUpdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/txtUpdate"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtUpdateDetail"
+                        android:layout_width="249dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/txtUpdateSlogan"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imgUpdate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/update_img"
+                    tools:ignore="ImageContrastCheck"
+                    android:contentDescription="@string/updateImg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="386dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/borrow_bg"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtBorrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/txtBorrow"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:ignore="TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/txtBorrowDetails"
+                        android:layout_width="249dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/txtBorrowSlogan"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="TextContrastCheck" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imgBorrow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/borrow_img1"
+                    tools:ignore="ImageContrastCheck"
+                    android:contentDescription="@string/borrowImg" />
+            </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="386dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/tracker_bg"
+                android:orientation="horizontal"
+                android:padding="3dp">
 
-    </LinearLayout>
-</LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/txtTracker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/txtTrack"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:ignore="TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/txtTrackerDetails"
+                        android:layout_width="249dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/txtTrackSlogan"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:ignore="TextContrastCheck" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imgTracker"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/track_img"
+                    android:contentDescription="@string/trackImg" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

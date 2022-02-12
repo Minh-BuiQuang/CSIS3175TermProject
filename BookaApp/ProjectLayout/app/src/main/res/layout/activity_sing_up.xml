@@ -17,7 +17,7 @@
         android:layout_marginEnd="167dp"
         android:layout_marginBottom="271dp"
         android:backgroundTint="#A47551"
-        android:text="Sign Up"
+        android:text="@string/btnSignUp"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
@@ -30,9 +30,11 @@
         android:layout_marginStart="81dp"
         android:layout_marginTop="49dp"
         android:ems="10"
-        android:hint="Name"
+        android:hint="@string/txtUserName"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
-        android:textColorHint="#A47551" />
+        android:textColorHint="#A47551"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     <EditText
         android:id="@+id/txtSignUpAddress"
@@ -43,9 +45,11 @@
         android:layout_marginStart="81dp"
         android:layout_marginTop="127dp"
         android:ems="10"
-        android:hint="Address"
+        android:hint="@string/txtAddress"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
-        android:textColorHint="#A47551" />
+        android:textColorHint="#A47551"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     <Spinner
         android:id="@+id/spGenre"
@@ -56,7 +60,8 @@
         android:layout_marginStart="185dp"
         android:layout_marginTop="221dp"
         android:entries="@array/groups"
-        android:scrollbarSize="6dp" />
+        android:scrollbarSize="6dp"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/lblGenre"
@@ -66,9 +71,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="25dp"
         android:layout_marginTop="222dp"
-        android:text="Interested genres:"
+        android:text="@string/txtInterestedGenre"
         android:textColor="#A47551"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/bllHasAccount"
@@ -78,7 +84,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="41dp"
         android:layout_marginBottom="159dp"
-        android:text="Already have account?"
+        android:text="@string/txtHadAccount"
         android:textColor="#A47551"
         android:textSize="20sp" />
 
@@ -92,7 +98,7 @@
         android:layout_marginEnd="38dp"
         android:layout_marginBottom="149dp"
         android:backgroundTint="#A47551"
-        android:text="Login"
+        android:text="@string/btnLogin"
         android:textColor="@color/white"
         android:textSize="20sp" />
 </RelativeLayout>

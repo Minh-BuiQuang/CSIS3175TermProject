@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="10dp"
-    tools:context=".BorrowActivity">
+    tools:context=".UpdateAccountActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="411dp"
-        android:layout_height="58dp"
+        android:layout_height="0dp"
         android:layout_marginTop="3dp"
+        android:layout_marginBottom="87dp"
         android:background="#523A28"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/txtUpdateAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -57,7 +58,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/arrow"
             app:backgroundTint="#523A28"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/txtMainMenu"
@@ -82,93 +83,69 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <TextView
-        android:id="@+id/txtPostalCodePrompt"
+        android:id="@+id/txtUpdateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="21dp"
-        android:text="@string/txtPostalCode"
+        android:layout_marginBottom="48dp"
+        android:text="@string/yxyUpdateAccInfo"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnFind"
-        app:layout_constraintEnd_toStartOf="@+id/edtPostalCode"
+        app:layout_constraintBottom_toTopOf="@+id/edtUserName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAddressPrompt" />
-
-    <TextView
-        android:id="@+id/txtAddressPrompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="18dp"
-        android:text="@string/txtAddress"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewMainMenu" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <EditText
-        android:id="@+id/edtPostalCode"
+        android:id="@+id/edtUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="21dp"
-        android:ems="10"
-        android:hint="@string/txtYourAddress"
-        android:importantForAutofill="no"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:ems="18"
+        android:hint="@string/txtUserName"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/btnFind"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtPostalCodePrompt"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddress"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/edtAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="15dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/edtPostalCode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/txtAddressPrompt"
-        app:layout_constraintTop_toBottomOf="@+id/viewMainMenu"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+        android:textColorHint="#A47551"
+        app:layout_constraintBottom_toTopOf="@+id/edtPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtUpdateAccount"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
         android:importantForAutofill="no" />
 
-    <Button
-        android:id="@+id/btnFind"
-        style="@style/Widget.Material3.Button"
+    <EditText
+        android:id="@+id/edtPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="138dp"
-        android:layout_marginEnd="169dp"
-        android:backgroundTint="#523A28"
-        android:fontFamily="@font/roboto_medium"
-        android:text="@string/btnFind"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="57dp"
+        android:ems="18"
+        android:hint="@string/txtPassword"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:textColorHint="#A47551"
+        app:layout_constraintBottom_toTopOf="@+id/btnUpdateAccount"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.462" />
+        app:layout_constraintTop_toBottomOf="@+id/edtUserName"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="369dp"
-        android:layout_height="275dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/spashimg"
+    <Button
+        android:id="@+id/btnUpdateAccount"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="254dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="145dp"
+        android:backgroundTint="#A47551"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/btnUpdate"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/borrow_img" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>

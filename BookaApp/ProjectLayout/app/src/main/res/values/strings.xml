@@ -1,5 +1,66 @@
 <resources>
     <string name="app_name">ProjectLayout</string>
+
+    <string name="viewReportDaily">Daily</string>
+    <string name="viewReportMonthly">Monthly</string>
+    <string name="viewReportYearly">Yearly</string>
+    //add layout
+    <string-array name="availability">
+        <item>Share</item>
+        <item>Give away</item>
+        <item>Rent out</item>
+    </string-array>
+    <string name="publisher">Publisher</string>
+    <string name="publication_year">Publication Year</string>
+    <string name="title">Title</string>
+    <string name="btnAdd">Add</string>
+    <string name="txtAvailability">Availability to:</string>
+    <string name="txtAuthor">Author</string>
+    <string name="txtBookDetails">Book Details</string>
+    //Splash Layout
+    <string name="txtAppTitle">BOOKA</string>
+    <string name="txtAppSlogan">A great place to be stranded.</string>
+    <string name="spashimg">SpashImg</string>
+    //Borrow layout
+    <string name="txtMainMenu">Main Menu</string>
+    <string name="txtPostalCode">Postal Code</string>
+    <string name="txtAddress">Address</string>
+    <string name="txtYourAddress">Your address</string>
+    <string name="btnFind">Find</string>
+    //Borrow request layout
+    <string name="txtBorrowMenu">Borrow menu</string>
+    <string name="txtBookNearby">Book Available Nearby</string>
+    <string name="txtContactInfo">Contact Infomation</string>
+    <string name="txtContactName">Name</string>
+    <string name="txtMessage">Message</string>
+    <string name="btnRequest">Request</string>
+    <string name="txtBook1">Book1</string>
+    <string name="txtBook2">Book2</string>
+    <string name="txtBook3">Book3</string>
+    <string name="txtBook4">Book4</string>
+    <string name="txtBook5">Book5</string>
+    //Main menu layout
+    <string name="txtBorrow">BORROW BOOK</string>
+    <string name="txtBorrowSlogan">Let\'s broaden your horizon</string>
+    <string name="txtAdd">ADD BOOK</string>
+    <string name="txtAddSlogan">Add your favorite books to library</string>
+    <string name="txtTrack">TRACKING BOOK</string>
+    <string name="txtTrackSlogan">Tracking your activities</string>
+    <string name="txtUpdate">UPDATE BOOK</string>
+    <string name="txtUpdateSlogan">Update book information</string>
+    <string name="updateImg">Update Image</string>
+    <string name="borrowImg">Borrow Image</string>
+    <string name="addImg">Add Image</string>
+    <string name="trackImg">Tracking Image</string>
+    //Signin layout
+    <string name="txtWelcome">Welcome to Booka</string>
+    <string name="txtUserName">User Name</string>
+    <string name="txtPassword">Password</string>
+    <string name="txtLogin">Log in</string>
+    <string name="txtForgotPassword">Forgot password?</string>
+    //Signup layout
+    <string name="txtSignUp">Sign Up</string>
+    <string name="txtNewUsers">New Users?</string>
     <string name="prompt">Choose a group</string>
     <string-array name="groups">
         <item>Adventure</item>
@@ -13,4 +74,36 @@
         <item>Development</item>
         <item>Motivational</item>
     </string-array>
+    <string name="signImg">SignInImage</string>
+    <string name="btnSignUp">Sign Up</string>
+    <string name="txtInterestedGenre">Interested genres:</string>
+    <string name="txtHadAccount">Already have account?</string>
+    <string name="btnLogin">Login</string>
+    //Tracking layout
+    <string name="txtTitle">Title</string>
+    <string name="txtReport">Report</string>
+    <string name="txtReaderId">Reader Id</string>
+    <string name="txtBookId">Book Id</string>
+    <string name="txtStartDay">Start Day</string>
+    <string name="txtEndday">End Day</string>
+    <string name="txtCurrentPage">Current Page</string>
+    <string name="btnSubmit">Submit</string>
+    //Update layout
+    <string name="txtUpdateBookDetails">Update Book Details</string>
+    <string name="txtNote">Owner note</string>
+    <string name="txtPageCount">Page Count</string>
+    <string name="txtOwnerId">Owner Id</string>
+    <string name="txtRentPrice">Rent Price</string>
+    <string name="txtPublishYear">Publication Year</string>
+    <string name="txtHolderId">Holder Id</string>
+    <string name="txtStatus">Status</string>
+    <string name="txtIsbn">ISBN</string>
+    <string name="txtDescription">Description</string>
+    <string name="txtOwnerNote">Owner Note</string>
+    //Update Account layout
+    <string name="yxyUpdateAccInfo">Update account infomation</string>
+
+    <string name="btnUpdate">Update</string>
+    //Side menu layout
+
 </resources>

@@ -22,9 +22,9 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
             android:background="@drawable/menu"
-            app:backgroundTint="#FFFFFF" />
+            app:backgroundTint="#FFFFFF"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/txtAppTitle"
@@ -32,7 +32,7 @@
             android:layout_height="57dp"
             android:background="#523A28"
             android:gravity="center_horizontal|center_vertical"
-            android:text="BOOKA"
+            android:text="@string/txtAppTitle"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -52,19 +52,18 @@
             android:layout_width="41dp"
             android:layout_height="38dp"
             android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/arrow"
-            app:backgroundTint="#523A28" />
+            app:backgroundTint="#523A28"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/txtMainMenu"
             android:layout_width="338dp"
             android:layout_height="37dp"
             android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="Borrow menu"
+            android:text="@string/txtBorrowMenu"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -100,40 +99,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Book Available Nearby"
+                android:text="@string/txtBookNearby"
                 android:textAlignment="center"
                 android:textColor="#523A28"
                 android:textSize="16sp" />
 
-            <CheckBox
+            <TextView
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Book1" />
+                android:textSize="20sp"
+                android:text="@string/txtBook1" />
 
-            <CheckBox
+            <TextView
                 android:id="@+id/checkBox2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Book2" />
+                android:textSize="20sp"
+                android:text="@string/txtBook2" />
 
-            <CheckBox
+            <TextView
                 android:id="@+id/checkBox3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Book3" />
+                android:textSize="20sp"
+                android:text="@string/txtBook3" />
 
-            <CheckBox
+            <TextView
                 android:id="@+id/checkBox4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Book4" />
+                android:textSize="20sp"
+                android:text="@string/txtBook4" />
 
-            <CheckBox
+            <TextView
                 android:id="@+id/checkBox5"
                 android:layout_width="match_parent"
+                android:textSize="20sp"
                 android:layout_height="wrap_content"
-                android:text="Book5" />
+                android:text="@string/txtBook5" />
 
         </LinearLayout>
 
@@ -147,7 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Contact Infomation"
+                android:text="@string/txtContactInfo"
                 android:textAlignment="center"
                 android:textColor="#523A28"
                 android:textSize="16sp" />
@@ -156,15 +160,17 @@
                 android:id="@+id/txtContactName"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:text="Name" />
+                android:text="@string/txtContactName" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName3"
                 android:layout_width="match_parent"
                 android:layout_height="184dp"
                 android:ems="10"
-                android:hint="Message"
-                android:inputType="textPersonName" />
+                android:hint="@string/txtMessage"
+                android:inputType="textPersonName"
+                tools:ignore="TextContrastCheck"
+                android:importantForAutofill="no" />
 
             <Button
                 android:id="@+id/btnFind3"
@@ -172,19 +178,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Request"
+                android:text="@string/btnRequest"
                 android:textColor="#523A28"
                 android:textSize="20sp" />
 
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="414dp"
-        android:layout_height="147dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="-3dp"
-        tools:layout_editor_absoluteY="456dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

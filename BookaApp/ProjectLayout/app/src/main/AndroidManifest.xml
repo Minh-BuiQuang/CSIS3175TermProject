@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectLayout">
         <activity
+            android:name=".SideMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UpdateAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="false" />
+        <activity
             android:name=".BorrowRequestActivity"
             android:exported="false" />
         <activity

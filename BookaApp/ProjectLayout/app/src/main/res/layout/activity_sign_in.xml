@@ -124,5 +124,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="42dp"
         android:contentDescription="@string/signImg"
-        app:srcCompat="@drawable/welcomeImg" />
+        app:srcCompat="@drawable/welcome_img" />
 </RelativeLayout>

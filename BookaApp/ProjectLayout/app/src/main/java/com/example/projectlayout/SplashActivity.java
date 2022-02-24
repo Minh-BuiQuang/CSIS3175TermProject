@@ -2,7 +2,12 @@ package com.example.projectlayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+
+import java.sql.Time;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -10,5 +15,15 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        TimerTask initializeTask = new TimerTask() {
+            @Override
+            public void run() {
+                Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                finish();
+                startActivity(i);
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(initializeTask, 2000);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.projectlayout;
+package com.csis3175group6.bookapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,12 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+
+        //Setup database
+
+
+        //Start next activity task
         TimerTask initializeTask = new TimerTask() {
             @Override
             public void run() {
@@ -21,6 +27,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(i);
             }
         };
+        //Fixed delay before starting the next activity after initialization finished
         Timer timer = new Timer();
         timer.schedule(initializeTask, 2000);
     }

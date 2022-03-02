@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.projectlayout">
+    package="com.csis3175group6.bookapp">
 
     <application
         android:allowBackup="true"
@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectLayout">
         <activity
-            android:name=".SideMenuActivity"
+            android:name="com.csis3175group6.bookapp.SideMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".UpdateAccountActivity"
+            android:name="com.csis3175group6.bookapp.UpdateAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name="com.csis3175group6.bookapp.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,31 +25,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BorrowRequestActivity"
+            android:name="com.csis3175group6.bookapp.BorrowRequestActivity"
             android:exported="false" />
         <activity
-            android:name=".TrackingActivity"
+            android:name="com.csis3175group6.bookapp.TrackingActivity"
             android:exported="false" />
         <activity
-            android:name=".AddActivity"
+            android:name="com.csis3175group6.bookapp.AddActivity"
             android:exported="false" />
         <activity
-            android:name=".UpdateActivity"
+            android:name="com.csis3175group6.bookapp.UpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".BorrowActivity"
+            android:name="com.csis3175group6.bookapp.BorrowActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name="com.csis3175group6.bookapp.MainMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".SingUpActivity"
+            android:name="com.csis3175group6.bookapp.SingUpActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name="com.csis3175group6.bookapp.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.csis3175group6.bookapp.MainActivity"
             android:exported="false"/>
 
         <meta-data

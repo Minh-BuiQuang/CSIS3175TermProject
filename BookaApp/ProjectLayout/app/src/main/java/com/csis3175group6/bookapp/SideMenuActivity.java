@@ -1,4 +1,4 @@
-package com.example.projectlayout;
+package com.csis3175group6.bookapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 

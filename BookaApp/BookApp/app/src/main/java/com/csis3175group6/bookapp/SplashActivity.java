@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,7 +17,6 @@ public class SplashActivity extends AppCompatActivity {
 
 
         //Setup database
-
 
         //Start next activity task
         TimerTask initializeTask = new TimerTask() {

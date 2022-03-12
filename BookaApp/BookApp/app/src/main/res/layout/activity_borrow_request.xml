@@ -1,51 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".BorrowRequestActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="411dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#523A28"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/btnMenu"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/menu"
-            app:backgroundTint="#FFFFFF"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/txtAppTitle"
-            android:layout_width="320dp"
-            android:layout_height="57dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="#523A28"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/txtAppTitle"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
+            android:padding="10dp"
             android:textStyle="bold" />
-
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="411dp"
-        android:layout_height="57dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnEditUserInfoBack"
@@ -55,7 +42,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/arrow"
             app:backgroundTint="#523A28"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/txtMainMenu"
@@ -63,127 +50,107 @@
             android:layout_height="37dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="@string/txtBorrowMenu"
+            android:text="@string/txtMainMenu"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
+
     <View
         android:id="@+id/viewMainMenu"
         android:layout_width="389dp"
         android:layout_height="5dp"
         android:layout_marginStart="11dp"
         android:layout_marginEnd="11dp"
-        android:background="#523A28"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        android:background="#523A28"/>
 
     <LinearLayout
-        android:id="@+id/ContactInfo"
-        android:layout_width="412dp"
-        android:layout_height="320dp"
-        android:layout_marginBottom="140dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="2">
 
-        <LinearLayout
-            android:layout_width="204dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtBookAvailable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/txtBookNearby"
-                android:textAlignment="center"
-                android:textColor="#523A28"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/checkBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="@string/txtBook1" />
-
-            <TextView
-                android:id="@+id/checkBox2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="@string/txtBook2" />
-
-            <TextView
-                android:id="@+id/checkBox3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="@string/txtBook3" />
-
-            <TextView
-                android:id="@+id/checkBox4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="@string/txtBook4" />
-
-            <TextView
-                android:id="@+id/checkBox5"
-                android:layout_width="match_parent"
-                android:textSize="20sp"
-                android:layout_height="wrap_content"
-                android:text="@string/txtBook5" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/txtBookAvailableTitle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:text="@string/txtBookNearby"
+            android:textAlignment="center"
+            android:textColor="#523A28"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txtContactInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/txtContactInfo"
-                android:textAlignment="center"
-                android:textColor="#523A28"
-                android:textSize="16sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtListBookItem"/>
 
-            <TextView
-                android:id="@+id/txtContactName"
-                android:layout_width="match_parent"
-                android:layout_height="29dp"
-                android:text="@string/txtContactName" />
-
-            <EditText
-                android:id="@+id/editTextTextPersonName3"
-                android:layout_width="match_parent"
-                android:layout_height="184dp"
-                android:ems="10"
-                android:hint="@string/txtMessage"
-                android:inputType="textPersonName"
-                tools:ignore="TextContrastCheck"
-                android:importantForAutofill="no" />
-
-            <Button
-                android:id="@+id/btnFind3"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/btnRequest"
-                android:textColor="#523A28"
-                android:textSize="20sp" />
-
-        </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1.5"
+        android:weightSum="3">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/txtContactInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtContactInfo"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="#523A28"
+            android:textSize="26sp" />
+
+        <EditText
+            android:id="@+id/txtContactName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="0.2"
+            android:padding="10dp"
+            android:background="@drawable/update_box_layout"
+            android:hint="@string/txtContactName"
+            tools:ignore="TextContrastCheck"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/txtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:maxLines="50"
+            android:layout_margin="10dp"
+            android:layout_weight="2"
+            android:importantForAutofill="no"
+            android:padding="10dp"
+            android:background="@drawable/update_box_layout"
+            android:inputType="textMultiLine"
+            android:gravity="top"
+            android:text="@string/txtMessage"
+            tools:ignore="LabelFor" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSubmitUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#523A28"
+        android:text="@string/btnSubmit" />
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+

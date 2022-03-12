@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,16 +10,12 @@
     android:orientation="vertical"
     tools:context=".SignInActivity">
 
-
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="31dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/txtWelcome"
         android:textColor="#523A28"
@@ -28,13 +25,8 @@
         android:id="@+id/edtUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
         android:ems="18"
         android:hint="@string/txtUserName"
         android:inputType="textPersonName"
@@ -46,11 +38,8 @@
         android:id="@+id/edtPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="144dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:ems="18"
         android:hint="@string/txtPassword"
         android:inputType="textPassword"
@@ -60,69 +49,62 @@
 
     <Button
         android:id="@+id/btnUpdateAccount"
-        style="@style/Widget.Material3.Button"
-        android:layout_width="254dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="196dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#A47551"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/txtLogin"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/txtNewUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtNewUsers"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:textColor="#D0B49F"
+            android:textSize="20sp"
+            tools:ignore="TextContrastCheck" />
+
+        <Button
+            android:id="@+id/btnSignUp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/txtSignUp"
+            android:textColor="#D0B49F"
+            android:textSize="16sp"
+            tools:ignore="TextContrastCheck" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnForgotPw"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="112dp"
-        android:layout_marginBottom="294dp"
         android:backgroundTintMode="multiply"
+        android:layout_gravity="center"
         android:text="@string/txtForgotPassword"
         android:textColor="#D0B49F"
         android:textSize="16sp"
         tools:ignore="TextContrastCheck" />
 
-    <Button
-        android:id="@+id/btnSignUp"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="214dp"
-        android:layout_marginBottom="237dp"
-        android:text="@string/txtSignUp"
-        android:textColor="#D0B49F"
-        android:textSize="16sp"
-        tools:ignore="TextContrastCheck" />
-
-    <TextView
-        android:id="@+id/txtNewUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="96dp"
-        android:layout_marginBottom="249dp"
-        android:text="@string/txtNewUsers"
-        android:textColor="#D0B49F"
-        android:textSize="20sp"
-        tools:ignore="TextContrastCheck" />
-
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="265dp"
-        android:layout_height="167dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="42dp"
         android:contentDescription="@string/signImg"
         app:srcCompat="@drawable/welcome_img" />
-</RelativeLayout>
+</LinearLayout>

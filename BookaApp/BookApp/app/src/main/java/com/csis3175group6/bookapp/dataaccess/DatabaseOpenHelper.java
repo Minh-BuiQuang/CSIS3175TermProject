@@ -25,6 +25,8 @@ public class DatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.createTable(connectionSource, User.class);
             TableUtils.createTable(connectionSource, Book.class);
+            TableUtils.createTable(connectionSource, ReadHistory.class);
+            TableUtils.createTable(connectionSource, Message.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,8 +35,10 @@ public class DatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
-            TableUtils.dropTable(connectionSource, User.class, true);
+            TableUtils.dropTable(connectionSource, Message.class, true);
+            TableUtils.dropTable(connectionSource, ReadHistory.class, true);
             TableUtils.dropTable(connectionSource, Book.class, true);
+            TableUtils.dropTable(connectionSource, User.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             e.printStackTrace();

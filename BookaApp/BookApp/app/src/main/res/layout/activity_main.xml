@@ -6,249 +6,259 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="411dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="3dp"
-        android:background="#523A28"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linearLayout"-->
+<!--        android:layout_width="411dp"-->
+<!--        android:layout_height="58dp"-->
+<!--        android:layout_marginTop="3dp"-->
+<!--        android:background="#523A28"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-        <Button
-            android:id="@+id/btnMenu"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/menu"
-            app:backgroundTint="#FFFFFF"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+<!--        <Button-->
+<!--            android:id="@+id/btnMenu"-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:background="@drawable/menu"-->
+<!--            app:backgroundTint="#FFFFFF"-->
+<!--            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />-->
 
-        <TextView
-            android:id="@+id/txtAppTitle"
-            android:layout_width="320dp"
-            android:layout_height="57dp"
-            android:background="#523A28"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/txtAppTitle"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+<!--        <TextView-->
+<!--            android:id="@+id/txtAppTitle"-->
+<!--            android:layout_width="320dp"-->
+<!--            android:layout_height="57dp"-->
+<!--            android:background="#523A28"-->
+<!--            android:gravity="center_horizontal|center_vertical"-->
+<!--            android:text="@string/txtAppTitle"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="30sp"-->
+<!--            android:textStyle="bold" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
-    <ScrollView
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="70dp"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="386dp"-->
+<!--                android:layout_height="110dp"-->
+<!--                android:layout_gravity="center|center_horizontal"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:background="@drawable/add_bg"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="3dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtAdd"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:fontFamily="@font/roboto_medium"-->
+<!--                        android:text="@string/txtAdd"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="24sp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtAddDetails"-->
+<!--                        android:layout_width="249dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:fontFamily="@font/roboto_medium"-->
+<!--                        android:text="@string/txtAddSlogan"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </LinearLayout>-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgAdd"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    app:srcCompat="@drawable/add_img"-->
+<!--                    tools:ignore="ImageContrastCheck"-->
+<!--                    android:contentDescription="@string/addImg" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="386dp"-->
+<!--                android:layout_height="110dp"-->
+<!--                android:layout_gravity="center|center_horizontal"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:background="@drawable/update_bg"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="3dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtUpdate"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:fontFamily="@font/roboto_medium"-->
+<!--                        android:text="@string/txtUpdate"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="24sp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtUpdateDetail"-->
+<!--                        android:layout_width="249dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:fontFamily="@font/roboto_medium"-->
+<!--                        android:text="@string/txtUpdateSlogan"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </LinearLayout>-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgUpdate"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    app:srcCompat="@drawable/update_img"-->
+<!--                    tools:ignore="ImageContrastCheck"-->
+<!--                    android:contentDescription="@string/updateImg" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="386dp"-->
+<!--                android:layout_height="110dp"-->
+<!--                android:layout_gravity="center|center_horizontal"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:background="@drawable/borrow_bg"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="3dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtBorrow"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:fontFamily="@font/roboto_medium"-->
+<!--                        android:text="@string/txtBorrow"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="24sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        tools:ignore="TextContrastCheck" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtBorrowDetails"-->
+<!--                        android:layout_width="249dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:fontFamily="@font/roboto_medium"-->
+<!--                        android:text="@string/txtBorrowSlogan"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        tools:ignore="TextContrastCheck" />-->
+<!--                </LinearLayout>-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgBorrow"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    app:srcCompat="@drawable/borrow_img1"-->
+<!--                    tools:ignore="ImageContrastCheck"-->
+<!--                    android:contentDescription="@string/borrowImg" />-->
+<!--            </LinearLayout>-->
+
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="386dp"-->
+<!--                android:layout_height="110dp"-->
+<!--                android:layout_gravity="center|center_horizontal"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:background="@drawable/tracker_bg"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="3dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtTracker"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:fontFamily="@font/roboto_medium"-->
+<!--                        android:text="@string/txtTrack"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="24sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        tools:ignore="TextContrastCheck" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txtTrackerDetails"-->
+<!--                        android:layout_width="249dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:fontFamily="@font/roboto_medium"-->
+<!--                        android:text="@string/txtTrackSlogan"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        tools:ignore="TextContrastCheck" />-->
+<!--                </LinearLayout>-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgTracker"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    app:srcCompat="@drawable/track_img"-->
+<!--                    android:contentDescription="@string/trackImg" />-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
+<!--    </ScrollView>-->
+
+
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="386dp"
-                android:layout_height="110dp"
-                android:layout_gravity="center|center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/add_bg"
-                android:orientation="horizontal"
-                android:padding="3dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtAdd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/txtAdd"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txtAddDetails"
-                        android:layout_width="249dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="15dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/txtAddSlogan"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imgAdd"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/add_img"
-                    tools:ignore="ImageContrastCheck"
-                    android:contentDescription="@string/addImg" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="386dp"
-                android:layout_height="110dp"
-                android:layout_gravity="center|center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/update_bg"
-                android:orientation="horizontal"
-                android:padding="3dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtUpdate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/txtUpdate"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txtUpdateDetail"
-                        android:layout_width="249dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="15dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/txtUpdateSlogan"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imgUpdate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/update_img"
-                    tools:ignore="ImageContrastCheck"
-                    android:contentDescription="@string/updateImg" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="386dp"
-                android:layout_height="110dp"
-                android:layout_gravity="center|center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/borrow_bg"
-                android:orientation="horizontal"
-                android:padding="3dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtBorrow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/txtBorrow"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:ignore="TextContrastCheck" />
-
-                    <TextView
-                        android:id="@+id/txtBorrowDetails"
-                        android:layout_width="249dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="15dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/txtBorrowSlogan"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:ignore="TextContrastCheck" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imgBorrow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/borrow_img1"
-                    tools:ignore="ImageContrastCheck"
-                    android:contentDescription="@string/borrowImg" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="386dp"
-                android:layout_height="110dp"
-                android:layout_gravity="center|center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/tracker_bg"
-                android:orientation="horizontal"
-                android:padding="3dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtTracker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/txtTrack"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:ignore="TextContrastCheck" />
-
-                    <TextView
-                        android:id="@+id/txtTrackerDetails"
-                        android:layout_width="249dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="15dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/txtTrackSlogan"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:ignore="TextContrastCheck" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imgTracker"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/track_img"
-                    android:contentDescription="@string/trackImg" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="4dp" />
 </RelativeLayout>

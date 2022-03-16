@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,6 +18,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.csis3175group6.bookapp.entities.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -85,6 +90,35 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.option_menu, menu);
+
+        //Hide admin options if user is not an admin
+        if(App.getInstance().User.Role == User.UserRole.User) {
+            MenuItem item = menu.findItem(R.id.itemUserList);
+            item.setVisible(false);
+        }
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.itemUserInfo:
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                intent.putExtra(getString(R.string.stringUserId), App.getInstance().User.Id);
+                startActivity(intent);
+                break;
+            case R.id.itemLogOut:
+                //Set user to null and how login screen
+                App.getInstance().User = null;
+                finish();
+                startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        }
+        return true;
     }
 
     class MyAdapter extends ArrayAdapter<String> {

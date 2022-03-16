@@ -118,6 +118,10 @@
     <string name="txtPhone">Phone</string>
     <string name="txtZipCode">Zip Code</string>
     <string name="txtEmail">Email</string>
+    <string name="txtUserInfo">User Info</string>
+    <string name="txtLogOut">Log Out</string>
+    <string name="txtUserList">User List</string>
+    <string name="stringUserId">userId</string>
     //Side menu layout
 
 </resources>

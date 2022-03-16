@@ -99,7 +99,7 @@
 
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
@@ -111,9 +111,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="20dp"
-        android:orientation="horizontal">
+        android:layout_margin="30dp"
+        android:orientation="vertical"
+        android:gravity="center">
         <TextView
             android:id="@+id/bllHasAccount"
             android:layout_width="wrap_content"
@@ -121,11 +121,12 @@
             android:text="@string/txtHadAccount"
             android:layout_weight="1"
             android:textColor="#A47551"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+/>
 
         <Button
             android:id="@+id/btnLogIn"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#A47551"
             android:layout_weight="1"

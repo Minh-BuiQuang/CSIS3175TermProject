@@ -44,7 +44,7 @@
             android:name="com.csis3175group6.bookapp.MainMenuActivity"
             android:exported="false" />
         <activity
-            android:name="com.csis3175group6.bookapp.SingUpActivity"
+            android:name="com.csis3175group6.bookapp.SignUpActivity"
             android:exported="false" />
         <activity
             android:name="com.csis3175group6.bookapp.SignInActivity"

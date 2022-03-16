@@ -28,6 +28,19 @@
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <EditText
+            android:id="@+id/txtPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="18"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:hint="@string/txtPassword"
+            android:importantForAutofill="no"
+            android:inputType="numberPassword"
+            android:textColorHint="#A47551"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+        <EditText
             android:id="@+id/txtSignUpAddress"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -37,37 +50,53 @@
             android:layout_gravity="center"
             android:hint="@string/txtAddress"
             android:importantForAutofill="no"
-            android:inputType="textPersonName"
+            android:inputType="textPostalAddress"
+            android:textColorHint="#A47551"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/txtZipCode"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:ems="18"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:hint="@string/txtZipCode"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColorHint="#A47551"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/txtPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:ems="18"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:hint="@string/txtPhone"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textColorHint="#A47551"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/txtEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:ems="18"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:hint="@string/txtEmail"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
             android:textColorHint="#A47551"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:padding="20dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/lblGenre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txtInterestedGenre"
-            android:layout_weight="1"
-            android:textColor="#A47551"
-            android:textSize="18sp"
-            tools:ignore="TextContrastCheck" />
-
-        <Spinner
-            android:id="@+id/spGenre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/groups"
-            android:scrollbarSize="6dp"
-            tools:ignore="TouchTargetSizeCheck" />
-    </LinearLayout>
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="wrap_content"

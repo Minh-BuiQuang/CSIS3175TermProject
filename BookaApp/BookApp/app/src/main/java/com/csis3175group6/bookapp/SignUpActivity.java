@@ -3,6 +3,17 @@ package com.csis3175group6.bookapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.Toast;
+
+import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
+import com.csis3175group6.bookapp.entities.User;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.support.DatabaseConnection;
+
+import java.sql.SQLException;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -10,5 +21,44 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        UserNameEditText = findViewById(R.id.txtSignUpName);
+        PasswordEditText = findViewById(R.id.txtPassword);
+        AddressEditText = findViewById(R.id.txtSignUpAddress);
+        ZipCodeEditText = findViewById(R.id.txtZipCode);
+        PhoneEditText = findViewById(R.id.txtPhone);
+        EmailEditText = findViewById(R.id.txtEmail);
+        SignUpButton = findViewById(R.id.btnSignUp);
+        SignInButton = findViewById(R.id.btnLogIn);
+
+        SignInButton.setOnClickListener(view -> {
+            finish();
+        });
+
+        SignUpButton.setOnClickListener(view -> {
+            String userName = UserNameEditText.getText().toString();
+            String password = PasswordEditText.getText().toString();
+            String address = AddressEditText.getText().toString();
+            String zipCode = ZipCodeEditText.getText().toString();
+            String phone = PhoneEditText.getText().toString();
+            String email = EmailEditText.getText().toString();
+            if(userName.equals("") || password.equals("") || address.equals("") ||
+            zipCode.equals("") || phone.equals("") || email.equals("")) {
+                Toast.makeText(this, "Please complete the required fields", Toast.LENGTH_LONG).show();
+                return;
+            }
+            DatabaseOpenHelper db = new DatabaseOpenHelper(this);
+            try {
+                Dao<User, Long> userDao = db.getDao(User.class);
+                int affectedRows = userDao.create(new User(userName, User.UserRole.User, password, address, zipCode, phone, email ));
+                if(affectedRows > 0) {
+                    Toast.makeText(this, "New user created!", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
+    EditText UserNameEditText, PasswordEditText, AddressEditText, ZipCodeEditText, PhoneEditText, EmailEditText;
+    Button SignUpButton, SignInButton;
 }

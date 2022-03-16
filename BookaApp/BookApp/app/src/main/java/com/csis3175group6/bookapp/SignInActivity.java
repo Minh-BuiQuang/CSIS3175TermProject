@@ -12,8 +12,6 @@ import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.User;
 import com.j256.ormlite.dao.Dao;
 
-import java.sql.SQLException;
-
 public class SignInActivity extends AppCompatActivity {
 
     @Override
@@ -22,6 +20,7 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         SignInButton = findViewById(R.id.btnSignIn);
+        SignUpButton = findViewById(R.id.btnSignUp);
         UserNameEditText = findViewById(R.id.edtUserName);
         PasswordEditText = findViewById(R.id.edtPassword);
 
@@ -48,8 +47,12 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(this, "Invalid user name or password", Toast.LENGTH_LONG).show();
             }
         });
+
+        SignUpButton.setOnClickListener(view -> {
+            startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
+        });
     }
 
-    Button SignInButton;
+    Button SignInButton, SignUpButton;
     EditText UserNameEditText, PasswordEditText;
 }

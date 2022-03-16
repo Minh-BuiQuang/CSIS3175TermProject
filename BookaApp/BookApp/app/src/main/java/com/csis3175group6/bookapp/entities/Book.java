@@ -16,14 +16,14 @@ public class Book{
     @DatabaseField(canBeNull = false, foreign = true)
     public User Holder;
     @DatabaseField()
-    public Long Isbn;
+    public String Isbn;
     @DatabaseField()
     public String Author;
     @DatabaseField()
-    public int PublicationYear;
+    public String PublicationYear;
     @DatabaseField()
     public String Description;
-    @DatabaseField()
+    @DatabaseField(canBeNull = false)
     public int PageCount;
     @DatabaseField()
     public BookStatus Status;

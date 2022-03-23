@@ -1,6 +1,7 @@
 package com.csis3175group6.bookapp.dataaccess;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -124,6 +125,26 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             return true;
         else
             return false;
+    }
+
+    //check if user exist or not
+    public boolean checkUser(String name, String pincode) {
+        // array of columns to fetch user data
+        String[] columns = {T1COL1};
+        SQLiteDatabase db = this.getReadableDatabase();
+        // user name and password selection
+        String selection = T1COL2 + " = ?" + " AND " + T1COL3 + " = ?";
+        // selection arguments
+        String[] selectionArgs = {name, pincode};
+        // query user table with conditions
+        Cursor cursor = db.query(TABLE1_Name, columns, selection, selectionArgs, null, null, null);
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+        if (cursorCount > 0) {
+            return true;
+        }
+        return false;
     }
 //    final static String DATABASE_NAME = "BookManagement.db";
 //    final static int VERSION = 1;

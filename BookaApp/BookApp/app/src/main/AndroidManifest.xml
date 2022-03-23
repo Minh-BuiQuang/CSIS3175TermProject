@@ -11,9 +11,6 @@
         android:name="App"
         android:theme="@style/Theme.ProjectLayout">
         <activity
-            android:name="com.csis3175group6.bookapp.SideMenuActivity"
-            android:exported="false" />
-        <activity
             android:name="com.csis3175group6.bookapp.UpdateAccountActivity"
             android:exported="false" />
         <activity
@@ -39,9 +36,6 @@
             android:exported="false" />
         <activity
             android:name="com.csis3175group6.bookapp.BorrowActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.csis3175group6.bookapp.MainMenuActivity"
             android:exported="false" />
         <activity
             android:name="com.csis3175group6.bookapp.SignUpActivity"

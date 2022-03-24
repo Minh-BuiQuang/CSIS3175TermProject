@@ -17,43 +17,54 @@ import java.util.List;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     final static String DATABASE_NAME = "BookManagement.db";
-    final static int DATABASE_VERSION = 2;
-    final static String TABLE1_Name = "User";
-    final static String T1COL1 = "Id";
-    final static String T1COL2 = "Name";
-    final static String T1COL3 = "Pincode";
+    final static int DATABASE_VERSION = 4;
+    final static String TABLE_USER = "User";
+    final static String USER_ID = "UserId";
+    final static String USER_NAME = "Name";
+    final static String USER_PINCODE = "Pincode";
     //    final static String T1COL4 = "Role";
-    final static String T1COL4 = "Address";
-    final static String T1COL5 = "ZipCode";
-    final static String T1COL6 = "Phone";
-    final static String T1COL7 = "Email";
+    final static String USER_ADDRESS = "Address";
+    final static String USER_ZIPCODE = "ZipCode";
+    final static String USER_PHONE = "Phone";
+    final static String USER_EMAIL = "Email";
 
-    final static String TABLE2_Name = "Book";
-    final static String T2COL1 = "Id";
-    final static String T2COL2 = "Title";
-    final static String T2COL3 = "Owner";
-    final static String T2COL4 = "Holder";
-    final static String T2COL5 = "Isbn";
-    final static String T2COL6 = "Author";
-    final static String T2COL7 = "PublicationYear";
-    final static String T2COL8 = "Description";
-    final static String T2COL9 = "PageCount";
-    final static String T2COL10 = "Status";
+    final static String TABLE_BOOK = "Book";
+    final static String BOOK_ID = "BookId";
+    final static String BOOK_TITLE = "Title";
+    final static String BOOK_OWNER = "Owner";
+    final static String BOOK_HOLDER = "Holder";
+    final static String BOOK_ISBN = "Isbn";
+    final static String BOOK_AUTHOR = "Author";
+    final static String BOOK_PUBLISH_YEAR = "PublicationYear";
+    final static String BOOK_DESCRIPTION = "Description";
+    final static String BOOK_PAGE_COUNT = "PageCount";
+    final static String BOOK_STATUS = "Status";
+    final static String BOOK_RENT_PRICE = "RentPrice";
+    final static String BOOK_RENT_DURATION = "RentDuration";
+    final static String BOOK_RENTED_TIME = "RentedTime";
+    final static String BOOK_RENT_INFO = "RentInformation";
 
-    final static String TABLE3_Name = "Message";
-    final static String T3COL1 = "Id";
-    final static String T3COL2 = "Sender";
-    final static String T3COL3 = "Receiver";
-    final static String T3COL4 = "Content";
-    final static String T3COL5 = "TimeStamp";
+    final static String TABLE_MESSAGE = "Message";
+    final static String MESSAGE_ID = "MessageId";
+    final static String MESSAGE_SENDER = "Sender";
+    final static String MESSAGE_RECEIVER = "Receiver";
+    final static String MESSAGE_CONTENT = "Content";
+    final static String MESSAGE_TIMESTAMP = "MessageTimeStamp";
 
-    final static String TABLE4_Name = "ReadHistory";
-    final static String T4COL1 = "Id";
-    final static String T4COL2 = "Book";
-    final static String T4COL3 = "Reader";
-    final static String T4COL4 = "StartTime";
-    final static String T4COL5 = "EndTime";
-    final static String T4COL6 = "CurrentPage";
+    final static String TABLE_HISTORY = "ReadHistory";
+    final static String HISTORY_ID = "HistoryId";
+    final static String HISTORY_BOOK = "Book";
+    final static String HISTORY_READER = "Reader";
+    final static String HISTORY_START = "StartTime";
+    final static String HISTORY_END = "EndTime";
+    final static String HISTORY_CURRENT_PAGE = "CurrentPage";
+
+    final static String TABLE_REQUEST = "Request";
+    final static String REQUEST_ID = "RequestId";
+    final static String REQUESTER_ID = "RequesterId";
+    final static String REQUEST_TIMESTAMP = "RequestTimestamp";
+    final static String HAS_COMPLETED = "IsCompleted";
+
 
     public DatabaseOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -62,82 +73,116 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sQuery = "CREATE TABLE " + TABLE1_Name + "(" + T1COL1 + " INTEGER PRIMARY KEY," +
-                T1COL2 + " Text," + T1COL3 + " TEXT," + T1COL4 + " Text," + T1COL5 +
-                " Text," + T1COL6 + " Text," + T1COL7 + " Text)" ;
+        String sQuery = "CREATE TABLE " + TABLE_USER + "(" + USER_ID + " INTEGER PRIMARY KEY," +
+                USER_NAME + " TEXT," + USER_PINCODE + " TEXT," + USER_ADDRESS + " TEXT," + USER_ZIPCODE +
+                " TEXT," + USER_PHONE + " TEXT," + USER_EMAIL + " TEXT)" ;
         db.execSQL(sQuery);
 
-        String bQuery = "CREATE TABLE " + TABLE2_Name + "(" + T2COL1 + " INTEGER PRIMARY KEY," +
-                T2COL2 + " Text," + T2COL3 + " TEXT," + T2COL4 + " Text," + T2COL5 +
-                " Text," + T2COL6 + " Text," + T2COL7 + " Text," + T2COL8 +
-                " Text," + T2COL9 + " Text," + T2COL10 + " Text)";
+        String bQuery = "CREATE TABLE " + TABLE_BOOK + "(" + BOOK_ID + " INTEGER PRIMARY KEY," +
+                BOOK_TITLE + " TEXT," + BOOK_OWNER + " TEXT," + BOOK_HOLDER + " TEXT," + BOOK_ISBN +
+                " TEXT," + BOOK_AUTHOR + " TEXT," + BOOK_PUBLISH_YEAR + " TEXT," + BOOK_DESCRIPTION +
+                " TEXT," + BOOK_PAGE_COUNT + " INTEGER," + BOOK_STATUS + " TEXT," + BOOK_RENT_PRICE +
+                " NUMBER," + BOOK_RENT_DURATION + " INTEGER," + BOOK_RENTED_TIME + " TEXT," + BOOK_RENT_INFO + " TEXT)";
         db.execSQL(bQuery);
 
-        String mQuery = "CREATE TABLE " + TABLE3_Name + "(" + T3COL1 + " INTEGER PRIMARY KEY," +
-                T3COL2 + " Text," + T3COL3 + " Text," + T3COL4 + " Text," + T3COL5 +
-                " Text)";
+        String mQuery = "CREATE TABLE " + TABLE_MESSAGE + "(" + MESSAGE_ID + " INTEGER PRIMARY KEY," +
+                MESSAGE_SENDER + " TEXT," + MESSAGE_RECEIVER + " TEXT," + MESSAGE_CONTENT + " TEXT," + MESSAGE_TIMESTAMP +
+                " TEXT)";
         db.execSQL(mQuery);
 
-        String hQuery = "CREATE TABLE " + TABLE4_Name + "(" + T4COL1 + " INTEGER PRIMARY KEY," +
-                T4COL2 + " Text," + T4COL3 + " Text," + T4COL4 + " Text," + T4COL5 + " Text," + T4COL6 +
-                " Text)";
+        String hQuery = "CREATE TABLE " + TABLE_HISTORY + "(" + HISTORY_ID + " INTEGER PRIMARY KEY," +
+                HISTORY_BOOK + " TEXT," + HISTORY_READER + " TEXT," + HISTORY_START + " TEXT," + HISTORY_END + " TEXT," + HISTORY_CURRENT_PAGE +
+                " INTEGER)";
         db.execSQL(hQuery);
+
+        String rQuery = "CREATE TABLE " + TABLE_REQUEST + "(" + REQUEST_ID + " INTEGER PRIMARY KEY," + BOOK_ID + " INTEGER," + REQUESTER_ID +
+                " INTEGER," + REQUEST_TIMESTAMP + " TEXT," + HAS_COMPLETED + " BOOLEAN," + "FOREIGN KEY(" + BOOK_ID + ")" + " REFERENCES " +
+                TABLE_BOOK + "(" + BOOK_ID + ")" + ")";
+        db.execSQL(rQuery);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE1_Name);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE2_Name);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE3_Name);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE4_Name);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BOOK);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MESSAGE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HISTORY);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_REQUEST);
         onCreate(db);
     }
 
     public boolean addUserRecord(String n,String pin,String address, String zipcode, String phone, String email){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues value = new ContentValues();
-        value.put(T1COL2,n);
-        value.put(T1COL3,pin);
-        value.put(T1COL4,address);
-        value.put(T1COL5,zipcode);
-        value.put(T1COL6,phone);
-        value.put(T1COL7,email);
+        value.put(USER_NAME,n);
+        value.put(USER_PINCODE,pin);
+        value.put(USER_ADDRESS,address);
+        value.put(USER_ZIPCODE,zipcode);
+        value.put(USER_PHONE,phone);
+        value.put(USER_EMAIL,email);
 
-        long r = sqLiteDatabase.insert(TABLE1_Name,null,value);
-        if(r>0)
-            return true;
-        else
-            return false;
+        long r = sqLiteDatabase.insert(TABLE_USER,null,value);
+        return  r>0;
     }
-
+    //OWNER AND HOLDER == USER_ID, iNsert update, delete tra ve boolean
     public boolean addBookRecord(String title, String isbn, String author, String publishYear, String description, String pageCount){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues value = new ContentValues();
-        value.put(T2COL2,title);
-        value.put(T2COL5,isbn);
-        value.put(T2COL6,author);
-        value.put(T2COL7,publishYear);
-        value.put(T2COL8,description);
-        value.put(T2COL9,pageCount);
+        value.put(BOOK_TITLE,title);
+        value.put(BOOK_ISBN,isbn);
+        value.put(BOOK_AUTHOR,author);
+        value.put(BOOK_PUBLISH_YEAR,publishYear);
+        value.put(BOOK_DESCRIPTION,description);
+        value.put(BOOK_PAGE_COUNT,pageCount);
 
-        long r = sqLiteDatabase.insert(TABLE2_Name,null,value);
+        long r = sqLiteDatabase.insert(TABLE_BOOK,null,value);
         if(r>0)
             return true;
         else
             return false;
     }
 
+    //tra ve object
+    public Cursor viewUserRecord(){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_BOOK;
+        Cursor c =sqLiteDatabase.rawQuery(query,null);
+        return c;
+    }
+
+    public boolean updateUserRec(String name, String pass, String address, String zipcode, String phone, String email){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(USER_NAME,name);
+        values.put(USER_PINCODE,pass);
+        values.put(USER_ADDRESS,address);
+        values.put(USER_ZIPCODE,zipcode);
+        values.put(USER_PHONE,phone);
+        values.put(USER_EMAIL,email);
+
+        Cursor cursor = sqLiteDatabase.rawQuery("Select * from " + TABLE_USER + " where " + USER_NAME + " = ?", new String[]{name});
+        if (cursor.getCount() > 0) {
+            long result = sqLiteDatabase.update(TABLE_USER, values, "name=?", new String[]{name});
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
     //check if user exist or not
     public boolean checkUser(String name, String pincode) {
         // array of columns to fetch user data
-        String[] columns = {T1COL1};
+        String[] columns = {USER_ID};
         SQLiteDatabase db = this.getReadableDatabase();
         // user name and password selection
-        String selection = T1COL2 + " = ?" + " AND " + T1COL3 + " = ?";
+        String selection = USER_NAME + " = ?" + " AND " + USER_PINCODE + " = ?";
         // selection arguments
         String[] selectionArgs = {name, pincode};
         // query user table with conditions
-        Cursor cursor = db.query(TABLE1_Name, columns, selection, selectionArgs, null, null, null);
+        Cursor cursor = db.query(TABLE_USER, columns, selection, selectionArgs, null, null, null);
         int cursorCount = cursor.getCount();
         cursor.close();
         db.close();

@@ -17,7 +17,7 @@ import java.util.List;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     final static String DATABASE_NAME = "BookManagement.db";
-    final static int DATABASE_VERSION = 4;
+    final static int DATABASE_VERSION = 5;
     final static String TABLE_USER = "User";
     final static String USER_ID = "UserId";
     final static String USER_NAME = "Name";
@@ -31,8 +31,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     final static String TABLE_BOOK = "Book";
     final static String BOOK_ID = "BookId";
     final static String BOOK_TITLE = "Title";
-    final static String BOOK_OWNER = "Owner";
-    final static String BOOK_HOLDER = "Holder";
+    final static String BOOK_OWNER_ID = "OwnerId";
+    final static String BOOK_HOLDER_ID = "HolderId";
     final static String BOOK_ISBN = "Isbn";
     final static String BOOK_AUTHOR = "Author";
     final static String BOOK_PUBLISH_YEAR = "PublicationYear";
@@ -46,15 +46,15 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     final static String TABLE_MESSAGE = "Message";
     final static String MESSAGE_ID = "MessageId";
-    final static String MESSAGE_SENDER = "Sender";
-    final static String MESSAGE_RECEIVER = "Receiver";
+    final static String MESSAGE_SENDER_ID = "SenderId";
+    final static String MESSAGE_RECEIVER_ID = "ReceiverId";
     final static String MESSAGE_CONTENT = "Content";
     final static String MESSAGE_TIMESTAMP = "MessageTimeStamp";
 
     final static String TABLE_HISTORY = "ReadHistory";
     final static String HISTORY_ID = "HistoryId";
-    final static String HISTORY_BOOK = "Book";
-    final static String HISTORY_READER = "Reader";
+    final static String HISTORY_BOOK_ID = "BookId";
+    final static String HISTORY_READER_ID = "ReaderId";
     final static String HISTORY_START = "StartTime";
     final static String HISTORY_END = "EndTime";
     final static String HISTORY_CURRENT_PAGE = "CurrentPage";
@@ -62,8 +62,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     final static String TABLE_REQUEST = "Request";
     final static String REQUEST_ID = "RequestId";
     final static String REQUESTER_ID = "RequesterId";
+    final static String REQUEST_BOOK_ID = "BookId";
     final static String REQUEST_TIMESTAMP = "RequestTimestamp";
-    final static String HAS_COMPLETED = "IsCompleted";
+    final static String HAS_COMPLETED = "HasCompleted";
 
 
     public DatabaseOpenHelper(Context context) {
@@ -79,24 +80,28 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.execSQL(sQuery);
 
         String bQuery = "CREATE TABLE " + TABLE_BOOK + "(" + BOOK_ID + " INTEGER PRIMARY KEY," +
-                BOOK_TITLE + " TEXT," + BOOK_OWNER + " TEXT," + BOOK_HOLDER + " TEXT," + BOOK_ISBN +
+                BOOK_TITLE + " TEXT," + BOOK_OWNER_ID + " INTEGER," + BOOK_HOLDER_ID + " INTEGER," + BOOK_ISBN +
                 " TEXT," + BOOK_AUTHOR + " TEXT," + BOOK_PUBLISH_YEAR + " TEXT," + BOOK_DESCRIPTION +
                 " TEXT," + BOOK_PAGE_COUNT + " INTEGER," + BOOK_STATUS + " TEXT," + BOOK_RENT_PRICE +
-                " NUMBER," + BOOK_RENT_DURATION + " INTEGER," + BOOK_RENTED_TIME + " TEXT," + BOOK_RENT_INFO + " TEXT)";
+                " NUMBER," + BOOK_RENT_DURATION + " INTEGER," + BOOK_RENTED_TIME + " TEXT," + BOOK_RENT_INFO + " TEXT,"
+                + "FOREIGN KEY(" + BOOK_OWNER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")," +
+                "FOREIGN KEY(" + BOOK_HOLDER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")" ;
         db.execSQL(bQuery);
 
         String mQuery = "CREATE TABLE " + TABLE_MESSAGE + "(" + MESSAGE_ID + " INTEGER PRIMARY KEY," +
-                MESSAGE_SENDER + " TEXT," + MESSAGE_RECEIVER + " TEXT," + MESSAGE_CONTENT + " TEXT," + MESSAGE_TIMESTAMP +
-                " TEXT)";
+                MESSAGE_SENDER_ID + " INTEGER," + MESSAGE_RECEIVER_ID + " INTEGER," + MESSAGE_CONTENT + " TEXT," + MESSAGE_TIMESTAMP +
+                " TEXT," + "FOREIGN KEY(" + MESSAGE_SENDER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")," +
+                "FOREIGN KEY(" + MESSAGE_RECEIVER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")";
         db.execSQL(mQuery);
 
         String hQuery = "CREATE TABLE " + TABLE_HISTORY + "(" + HISTORY_ID + " INTEGER PRIMARY KEY," +
-                HISTORY_BOOK + " TEXT," + HISTORY_READER + " TEXT," + HISTORY_START + " TEXT," + HISTORY_END + " TEXT," + HISTORY_CURRENT_PAGE +
-                " INTEGER)";
+                HISTORY_BOOK_ID + " TEXT," + HISTORY_READER_ID + " TEXT," + HISTORY_START + " TEXT," + HISTORY_END + " TEXT," + HISTORY_CURRENT_PAGE +
+                " INTEGER," + "FOREIGN KEY(" + HISTORY_BOOK_ID +")" + " REFERENCES " + TABLE_BOOK + "(" + BOOK_ID + ")," +
+                "FOREIGN KEY(" + HISTORY_READER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")";
         db.execSQL(hQuery);
 
-        String rQuery = "CREATE TABLE " + TABLE_REQUEST + "(" + REQUEST_ID + " INTEGER PRIMARY KEY," + BOOK_ID + " INTEGER," + REQUESTER_ID +
-                " INTEGER," + REQUEST_TIMESTAMP + " TEXT," + HAS_COMPLETED + " BOOLEAN," + "FOREIGN KEY(" + BOOK_ID + ")" + " REFERENCES " +
+        String rQuery = "CREATE TABLE " + TABLE_REQUEST + "(" + REQUEST_ID + " INTEGER PRIMARY KEY," + REQUEST_BOOK_ID + " INTEGER," + REQUESTER_ID +
+                " INTEGER," + REQUEST_TIMESTAMP + " TEXT," + HAS_COMPLETED + " BOOLEAN," + "FOREIGN KEY(" + REQUEST_BOOK_ID + ")" + " REFERENCES " +
                 TABLE_BOOK + "(" + BOOK_ID + ")" + ")";
         db.execSQL(rQuery);
     }

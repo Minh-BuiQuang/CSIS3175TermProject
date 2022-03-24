@@ -6,11 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,16 +16,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.csis3175group6.bookapp.entities.User;
-
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
 
-    String mTitle[] = {"ADD A BOOK", "UPDATE BOOK", "BORROW BOOK", "TRACKING BOOK"};
-    String mDescription[] = {"Add your favourite books to library", "Update book information",
+    String mTitle[] = {"ADD A BOOK", "MY BOOK", "UPDATE BOOK", "BORROW BOOK", "TRACKING BOOK"};
+    String mDescription[] = {"Add your favourite books to library", "View book list", "Update book information",
                             "Let's broaden your horizon", "Tracking your activities"};
-    int images[] = {R.drawable.add_img, R.drawable.update_img, R.drawable.borrow_img1, R.drawable.track_img};
+    int images[] = {R.drawable.add_img, R.drawable.view_img, R.drawable.update_img, R.drawable.borrow_img1, R.drawable.track_img};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +44,14 @@ public class MainActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putInt("image", images[0]);
                     intent.putExtras(bundle);
-                    // now put title and description to another activity
                     intent.putExtra("title", mTitle[0]);
                     intent.putExtra("description", mDescription[0]);
-                    // also put position
                     intent.putExtra("position", ""+0);
                     startActivity(intent);
 
-
                 }
                 if (position == 1) {
-                    Intent intent = new Intent(getApplicationContext(), UpdateActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ViewBookActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt("image", images[1]);
                     intent.putExtras(bundle);
@@ -68,8 +60,9 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("position", ""+1);
                     startActivity(intent);
                 }
+
                 if (position == 2) {
-                    Intent intent = new Intent(getApplicationContext(), BorrowActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), UpdateActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt("image", images[2]);
                     intent.putExtras(bundle);
@@ -78,14 +71,26 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("position", ""+2);
                     startActivity(intent);
                 }
+                
                 if (position == 3) {
-                    Intent intent = new Intent(getApplicationContext(), TrackingActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), BorrowActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt("image", images[3]);
                     intent.putExtras(bundle);
                     intent.putExtra("title", mTitle[3]);
                     intent.putExtra("description", mDescription[3]);
                     intent.putExtra("position", ""+3);
+                    startActivity(intent);
+                }
+
+                if (position == 4) {
+                    Intent intent = new Intent(getApplicationContext(), TrackingActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("image", images[4]);
+                    intent.putExtras(bundle);
+                    intent.putExtra("title", mTitle[4]);
+                    intent.putExtra("description", mDescription[4]);
+                    intent.putExtra("position", ""+4);
                     startActivity(intent);
                 }
             }

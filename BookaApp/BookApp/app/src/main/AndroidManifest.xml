@@ -14,6 +14,9 @@
             android:name="com.csis3175group6.bookapp.UpdateAccountActivity"
             android:exported="false" />
         <activity
+            android:name="com.csis3175group6.bookapp.ViewBookActivity"
+            android:exported="false" />
+        <activity
             android:name="com.csis3175group6.bookapp.SplashActivity"
             android:exported="true">
             <intent-filter>

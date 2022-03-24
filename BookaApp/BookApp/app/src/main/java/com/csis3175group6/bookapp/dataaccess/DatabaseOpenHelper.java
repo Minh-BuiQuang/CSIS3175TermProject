@@ -17,7 +17,7 @@ import java.util.List;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     final static String DATABASE_NAME = "BookManagement.db";
-    final static int DATABASE_VERSION = 5;
+    final static int DATABASE_VERSION = 6;
     final static String TABLE_USER = "User";
     final static String USER_ID = "UserId";
     final static String USER_NAME = "Name";
@@ -95,13 +95,13 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.execSQL(mQuery);
 
         String hQuery = "CREATE TABLE " + TABLE_HISTORY + "(" + HISTORY_ID + " INTEGER PRIMARY KEY," +
-                HISTORY_BOOK_ID + " TEXT," + HISTORY_READER_ID + " TEXT," + HISTORY_START + " TEXT," + HISTORY_END + " TEXT," + HISTORY_CURRENT_PAGE +
+                HISTORY_BOOK_ID + " INTEGER," + HISTORY_READER_ID + " INTEGER," + HISTORY_START + " TEXT," + HISTORY_END + " TEXT," + HISTORY_CURRENT_PAGE +
                 " INTEGER," + "FOREIGN KEY(" + HISTORY_BOOK_ID +")" + " REFERENCES " + TABLE_BOOK + "(" + BOOK_ID + ")," +
                 "FOREIGN KEY(" + HISTORY_READER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")";
         db.execSQL(hQuery);
 
         String rQuery = "CREATE TABLE " + TABLE_REQUEST + "(" + REQUEST_ID + " INTEGER PRIMARY KEY," + REQUEST_BOOK_ID + " INTEGER," + REQUESTER_ID +
-                " INTEGER," + REQUEST_TIMESTAMP + " TEXT," + HAS_COMPLETED + " BOOLEAN," + "FOREIGN KEY(" + REQUEST_BOOK_ID + ")" + " REFERENCES " +
+                " INTEGER REFERENCES " + TABLE_USER + "(" + USER_ID + ")," + REQUEST_TIMESTAMP + " TEXT," + HAS_COMPLETED + " BOOLEAN," + "FOREIGN KEY(" + REQUEST_BOOK_ID + ")" + " REFERENCES " +
                 TABLE_BOOK + "(" + BOOK_ID + ")" + ")";
         db.execSQL(rQuery);
     }
@@ -116,7 +116,13 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addUserRecord(String n,String pin,String address, String zipcode, String phone, String email){
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+
+    public boolean addUserRecord(String n, String pin, String address, String zipcode, String phone, String email){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues value = new ContentValues();
         value.put(USER_NAME,n);

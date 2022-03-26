@@ -69,7 +69,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     final static String REQUEST_TIMESTAMP = "RequestTimestamp";
     final static String HAS_COMPLETED = "HasCompleted";
 
-
     public DatabaseOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         SQLiteDatabase db = this.getWritableDatabase();
@@ -107,6 +106,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 " INTEGER REFERENCES " + TABLE_USER + "(" + USER_ID + ")," + REQUEST_TIMESTAMP + " TEXT," + HAS_COMPLETED + " BOOLEAN," + "FOREIGN KEY(" + REQUEST_BOOK_ID + ")" + " REFERENCES " +
                 TABLE_BOOK + "(" + BOOK_ID + ")" + ")";
         db.execSQL(rQuery);
+        PopulateData(db);
     }
 
     @Override
@@ -126,7 +126,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     public boolean addUserRecord(User user) {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return addUserRecord(user, null);
+    }
+    public boolean addUserRecord(User user, SQLiteDatabase sqLiteDatabase) {
+        if(sqLiteDatabase == null) sqLiteDatabase = this.getWritableDatabase();
         ContentValues value = new ContentValues();
         value.put(USER_NAME, user.Name);
         value.put(USER_PINCODE, user.PinCode);
@@ -140,22 +143,23 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return r > 0;
     }
 
-    //OWNER AND HOLDER == USER_ID, iNsert update, delete tra ve boolean
-    public boolean addBookRecord(String title, String isbn, String author, String publishYear, String description, String pageCount) {
+    //OWNER AND HOLDER == USER_ID, insert update, delete tra ve boolean
+    public boolean addBookRecord(Book book) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(BOOK_TITLE, title);
-        values.put(BOOK_ISBN, isbn);
-        values.put(BOOK_AUTHOR, author);
-        values.put(BOOK_PUBLISH_YEAR, publishYear);
-        values.put(BOOK_DESCRIPTION, description);
-        values.put(BOOK_PAGE_COUNT, pageCount);
+        values.put(BOOK_TITLE, book.Title);
+        values.put(BOOK_OWNER_ID, book.OwnerId);
+        values.put(BOOK_HOLDER_ID, book.HolderId);
+        values.put(BOOK_ISBN, book.Isbn);
+        values.put(BOOK_AUTHOR, book.Author);
+        values.put(BOOK_PUBLISH_YEAR, book.PublicationYear);
+        values.put(BOOK_DESCRIPTION, book.Description);
+        values.put(BOOK_PAGE_COUNT, book.PageCount);
+        values.put(BOOK_STATUS, book.Status);
 
         long r = sqLiteDatabase.insert(TABLE_BOOK, null, values);
-        if (r > 0)
-            return true;
-        else
-            return false;
+        sqLiteDatabase.close();
+        return r > 0;
     }
 
     //tra ve object
@@ -178,6 +182,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         values.put(USER_PHONE, user.Phone);
         values.put(USER_EMAIL, user.Email);
         long result = sqLiteDatabase.update(TABLE_USER, values, USER_ID + "=?", new String[]{user.Id.toString()});
+        sqLiteDatabase.close();
         return result > 0;
     }
 
@@ -214,7 +219,20 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return user;
+    }
 
+    public User[] getUsers() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + TABLE_USER, null);
+        User[] users = new User[cursor.getCount()];
+        int index = 0;
+        while(cursor.moveToNext())
+        {
+            users[index++] = ToUser(cursor);
+        }
+        cursor.close();
+        db.close();
+        return users;
     }
 
     @SuppressLint("Range")
@@ -229,6 +247,12 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         user.Phone = c.getString(c.getColumnIndex(USER_PHONE));
         user.Email = c.getString(c.getColumnIndex(USER_EMAIL));
         return user;
+    }
+    private void PopulateData(SQLiteDatabase db) {
+        addUserRecord(new User(0l,"Admin", User.ROLE_ADMIN, "1111", "02 Crest Line Point","a3gr5d","7784561235","ccamelli0@wufoo.com"), db);
+        addUserRecord(new User(0l, "Bruce", User.ROLE_USER, "1234","36851 Sunbrook Center", "a5dy1f", "778465151", "cdunhill1@blinklist.com"), db);
+        addUserRecord(new User(0l, "Edward", User.ROLE_USER, "1234","425 Orin Circle", "r4xe4d", "6041114567", "lshoemark2@furl.net"), db);
+        addUserRecord(new User(0l, "Barbara", User.ROLE_USER, "1234","5 Havey Road", "e5ga6r", "6045451133", "ldebischop3@xinhuanet.com"), db);
     }
 //    final static String DATABASE_NAME = "BookManagement.db";
 //    final static int VERSION = 1;

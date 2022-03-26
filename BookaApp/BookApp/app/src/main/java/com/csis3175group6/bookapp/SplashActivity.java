@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.csis3175group6.bookapp.dataaccess.DataPopulationHelper;
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 
 import java.util.Timer;
@@ -22,7 +21,6 @@ public class SplashActivity extends AppCompatActivity {
         //Setup database
         DatabaseOpenHelper dbHelper = new DatabaseOpenHelper(this);
         dbHelper.getWritableDatabase();
-        DataPopulationHelper.populateUser(this);
 
         //Start next activity task
         TimerTask initializeTask = new TimerTask() {

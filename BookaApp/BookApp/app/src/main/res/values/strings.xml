@@ -122,6 +122,7 @@
     <string name="txtLogOut">Log Out</string>
     <string name="txtUserList">User List</string>
     <string name="stringUserId">userId</string>
+    <string name="edit_txt">Edit</string>
     //Side menu layout
 
 </resources>

@@ -121,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(getString(R.string.stringUserId), App.getInstance().User.Id);
                 startActivity(intent);
                 break;
+            case R.id.itemUserList:
+                startActivity(new Intent(MainActivity.this, UserActivity.class));
+                break;
             case R.id.itemLogOut:
                 //Set user to null and how login screen
                 App.getInstance().User = null;

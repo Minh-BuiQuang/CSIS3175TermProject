@@ -3,38 +3,28 @@ package com.csis3175group6.bookapp.entities;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable
 public class User {
-    @DatabaseField(generatedId = true)
     public Long Id;
-    @DatabaseField(canBeNull = false, unique = true)
     public String Name;
-    @DatabaseField(canBeNull = false)
     public String PinCode;
-    @DatabaseField(canBeNull = false)
-    public UserRole Role;
-    @DatabaseField(canBeNull = false)
+    public String Role;
     public String Address;
-    @DatabaseField(canBeNull = false)
     public String ZipCode;
-    @DatabaseField
     public String Phone;
-    @DatabaseField
     public String Email;
 
-    public enum UserRole {
-        User,
-        Admin
-    }
+    public static final String ROLE_USER = "user";
+    public static final String ROLE_ADMIN = "admin";
 
     public User(){}
 
-    public User (String name, UserRole role, String pinCode, String address, String zipCode, String phone, String email) {
+    public User(Long id, String name, String role, String pinCode, String address, String zipcode, String phone, String email) {
+        Id = id;
         Name = name;
         Role = role;
         PinCode = pinCode;
         Address = address;
-        ZipCode = zipCode;
+        ZipCode = zipcode;
         Phone = phone;
         Email = email;
     }

@@ -10,6 +10,13 @@ import java.sql.SQLException;
 public class DataPopulationHelper {
 
     public static void populateUser(Context context) {
+        DatabaseOpenHelper db = new DatabaseOpenHelper(context);
+        db.addUserRecord(new User(0l,"Admin", User.ROLE_ADMIN, "1111", "02 Crest Line Point","a3gr5d","7784561235","ccamelli0@wufoo.com"));
+        db.addUserRecord(new User(0l, "Bruce", User.ROLE_USER, "1234","36851 Sunbrook Center", "a5dy1f", "778465151", "cdunhill1@blinklist.com"));
+        db.addUserRecord(new User(0l, "Edward", User.ROLE_USER, "1234","425 Orin Circle", "r4xe4d", "6041114567", "lshoemark2@furl.net"));
+        db.addUserRecord(new User(0l, "Barbara", User.ROLE_USER, "1234","5 Havey Road", "e5ga6r", "6045451133", "ldebischop3@xinhuanet.com"));
+
+
 //        try {
 //            DatabaseOpenHelper db = new DatabaseOpenHelper(context);
 //            Dao<User, Long> UserDao = db.getDao(User.class);

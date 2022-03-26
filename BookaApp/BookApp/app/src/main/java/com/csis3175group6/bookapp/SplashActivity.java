@@ -20,9 +20,9 @@ public class SplashActivity extends AppCompatActivity {
 
 
         //Setup database
-        /*DatabaseOpenHelper dbHelper = new DatabaseOpenHelper(this);
+        DatabaseOpenHelper dbHelper = new DatabaseOpenHelper(this);
         dbHelper.getWritableDatabase();
-        DataPopulationHelper.populateUser(this);*/
+        DataPopulationHelper.populateUser(this);
 
         //Start next activity task
         TimerTask initializeTask = new TimerTask() {

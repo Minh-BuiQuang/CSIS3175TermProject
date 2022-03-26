@@ -1,4 +1,5 @@
 package com.csis3175group6.bookapp.dataaccess;
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -17,12 +18,12 @@ import java.util.List;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     final static String DATABASE_NAME = "BookManagement.db";
-    final static int DATABASE_VERSION = 6;
+    final static int DATABASE_VERSION = 7;
     final static String TABLE_USER = "User";
     final static String USER_ID = "UserId";
     final static String USER_NAME = "Name";
     final static String USER_PINCODE = "Pincode";
-    //    final static String T1COL4 = "Role";
+    final static String USER_ROLE = "Role";
     final static String USER_ADDRESS = "Address";
     final static String USER_ZIPCODE = "ZipCode";
     final static String USER_PHONE = "Phone";
@@ -75,14 +76,14 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sQuery = "CREATE TABLE " + TABLE_USER + "(" + USER_ID + " INTEGER PRIMARY KEY," +
-                USER_NAME + " TEXT," + USER_PINCODE + " TEXT," + USER_ADDRESS + " TEXT," + USER_ZIPCODE +
+                USER_NAME + " TEXT," + USER_ROLE + " TEXT," + USER_PINCODE + " TEXT," + USER_ADDRESS + " TEXT," + USER_ZIPCODE +
                 " TEXT," + USER_PHONE + " TEXT," + USER_EMAIL + " TEXT)" ;
         db.execSQL(sQuery);
 
         String bQuery = "CREATE TABLE " + TABLE_BOOK + "(" + BOOK_ID + " INTEGER PRIMARY KEY," +
                 BOOK_TITLE + " TEXT," + BOOK_OWNER_ID + " INTEGER," + BOOK_HOLDER_ID + " INTEGER," + BOOK_ISBN +
                 " TEXT," + BOOK_AUTHOR + " TEXT," + BOOK_PUBLISH_YEAR + " TEXT," + BOOK_DESCRIPTION +
-                " TEXT," + BOOK_PAGE_COUNT + " INTEGER," + BOOK_STATUS + " TEXT," + BOOK_RENT_PRICE +
+                " TEXT," + BOOK_PAGE_COUNT + " INTEGER," + BOOK_STATUS + " INTEGER," + BOOK_RENT_PRICE +
                 " NUMBER," + BOOK_RENT_DURATION + " INTEGER," + BOOK_RENTED_TIME + " TEXT," + BOOK_RENT_INFO + " TEXT,"
                 + "FOREIGN KEY(" + BOOK_OWNER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")," +
                 "FOREIGN KEY(" + BOOK_HOLDER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")" ;
@@ -122,15 +123,16 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.setForeignKeyConstraintsEnabled(true);
     }
 
-    public boolean addUserRecord(String n, String pin, String address, String zipcode, String phone, String email){
+    public boolean addUserRecord(User user){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues value = new ContentValues();
-        value.put(USER_NAME,n);
-        value.put(USER_PINCODE,pin);
-        value.put(USER_ADDRESS,address);
-        value.put(USER_ZIPCODE,zipcode);
-        value.put(USER_PHONE,phone);
-        value.put(USER_EMAIL,email);
+        value.put(USER_NAME,user.Name);
+        value.put(USER_PINCODE,user.PinCode);
+        value.put(USER_ROLE, user.ROLE_USER);
+        value.put(USER_ADDRESS,user.Address);
+        value.put(USER_ZIPCODE,user.ZipCode);
+        value.put(USER_PHONE,user.Phone);
+        value.put(USER_EMAIL,user.Email);
 
         long r = sqLiteDatabase.insert(TABLE_USER,null,value);
         return  r>0;
@@ -184,23 +186,36 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         }
     }
     //check if user exist or not
-    public boolean checkUser(String name, String pincode) {
+    public User getUser(String name, String pincode) {
         // array of columns to fetch user data
-        String[] columns = {USER_ID};
         SQLiteDatabase db = this.getReadableDatabase();
-        // user name and password selection
-        String selection = USER_NAME + " = ?" + " AND " + USER_PINCODE + " = ?";
         // selection arguments
-        String[] selectionArgs = {name, pincode};
+        String[] selectionArgs = {name,pincode};
         // query user table with conditions
-        Cursor cursor = db.query(TABLE_USER, columns, selection, selectionArgs, null, null, null);
-        int cursorCount = cursor.getCount();
+        Cursor cursor = db.rawQuery("select * from " + TABLE_USER + " where name = ? AND pincode = ?", selectionArgs);
+        User user = null;
+        if(cursor.getCount() > 0)
+        {
+            cursor.moveToNext();
+            user = ToUser(cursor);
+        }
         cursor.close();
         db.close();
-        if (cursorCount > 0) {
-            return true;
-        }
-        return false;
+        return user;
+    }
+
+    @SuppressLint("Range")
+    private User ToUser(Cursor c) {
+        User user = new User();
+        user.Id = c.getLong(c.getColumnIndex(USER_ID));
+        user.Name = c.getString(c.getColumnIndex(USER_NAME));
+        user.Role = c.getString(c.getColumnIndex(USER_ROLE));
+        user.PinCode = c.getString(c.getColumnIndex(USER_PINCODE));
+        user.Address = c.getString(c.getColumnIndex(USER_ADDRESS));
+        user.ZipCode = c.getString(c.getColumnIndex(USER_ZIPCODE));
+        user.Phone = c.getString(c.getColumnIndex(USER_PHONE));
+        user.Email = c.getString(c.getColumnIndex(USER_EMAIL));
+        return user;
     }
 //    final static String DATABASE_NAME = "BookManagement.db";
 //    final static int VERSION = 1;

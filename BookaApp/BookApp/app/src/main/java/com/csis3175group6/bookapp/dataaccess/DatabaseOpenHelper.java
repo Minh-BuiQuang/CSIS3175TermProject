@@ -1,4 +1,5 @@
 package com.csis3175group6.bookapp.dataaccess;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,6 +13,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -77,7 +79,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sQuery = "CREATE TABLE " + TABLE_USER + "(" + USER_ID + " INTEGER PRIMARY KEY," +
                 USER_NAME + " TEXT," + USER_ROLE + " TEXT," + USER_PINCODE + " TEXT," + USER_ADDRESS + " TEXT," + USER_ZIPCODE +
-                " TEXT," + USER_PHONE + " TEXT," + USER_EMAIL + " TEXT)" ;
+                " TEXT," + USER_PHONE + " TEXT," + USER_EMAIL + " TEXT)";
         db.execSQL(sQuery);
 
         String bQuery = "CREATE TABLE " + TABLE_BOOK + "(" + BOOK_ID + " INTEGER PRIMARY KEY," +
@@ -85,20 +87,20 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 " TEXT," + BOOK_AUTHOR + " TEXT," + BOOK_PUBLISH_YEAR + " TEXT," + BOOK_DESCRIPTION +
                 " TEXT," + BOOK_PAGE_COUNT + " INTEGER," + BOOK_STATUS + " INTEGER," + BOOK_RENT_PRICE +
                 " NUMBER," + BOOK_RENT_DURATION + " INTEGER," + BOOK_RENTED_TIME + " TEXT," + BOOK_RENT_INFO + " TEXT,"
-                + "FOREIGN KEY(" + BOOK_OWNER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")," +
-                "FOREIGN KEY(" + BOOK_HOLDER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")" ;
+                + "FOREIGN KEY(" + BOOK_OWNER_ID + ")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")," +
+                "FOREIGN KEY(" + BOOK_HOLDER_ID + ")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")";
         db.execSQL(bQuery);
 
         String mQuery = "CREATE TABLE " + TABLE_MESSAGE + "(" + MESSAGE_ID + " INTEGER PRIMARY KEY," +
                 MESSAGE_SENDER_ID + " INTEGER," + MESSAGE_RECEIVER_ID + " INTEGER," + MESSAGE_CONTENT + " TEXT," + MESSAGE_TIMESTAMP +
-                " TEXT," + "FOREIGN KEY(" + MESSAGE_SENDER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")," +
-                "FOREIGN KEY(" + MESSAGE_RECEIVER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")";
+                " TEXT," + "FOREIGN KEY(" + MESSAGE_SENDER_ID + ")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")," +
+                "FOREIGN KEY(" + MESSAGE_RECEIVER_ID + ")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")";
         db.execSQL(mQuery);
 
         String hQuery = "CREATE TABLE " + TABLE_HISTORY + "(" + HISTORY_ID + " INTEGER PRIMARY KEY," +
                 HISTORY_BOOK_ID + " INTEGER," + HISTORY_READER_ID + " INTEGER," + HISTORY_START + " TEXT," + HISTORY_END + " TEXT," + HISTORY_CURRENT_PAGE +
-                " INTEGER," + "FOREIGN KEY(" + HISTORY_BOOK_ID +")" + " REFERENCES " + TABLE_BOOK + "(" + BOOK_ID + ")," +
-                "FOREIGN KEY(" + HISTORY_READER_ID +")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")";
+                " INTEGER," + "FOREIGN KEY(" + HISTORY_BOOK_ID + ")" + " REFERENCES " + TABLE_BOOK + "(" + BOOK_ID + ")," +
+                "FOREIGN KEY(" + HISTORY_READER_ID + ")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")";
         db.execSQL(hQuery);
 
         String rQuery = "CREATE TABLE " + TABLE_REQUEST + "(" + REQUEST_ID + " INTEGER PRIMARY KEY," + REQUEST_BOOK_ID + " INTEGER," + REQUESTER_ID +
@@ -123,85 +125,96 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.setForeignKeyConstraintsEnabled(true);
     }
 
-    public boolean addUserRecord(User user){
+    public boolean addUserRecord(User user) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues value = new ContentValues();
-        value.put(USER_NAME,user.Name);
-        value.put(USER_PINCODE,user.PinCode);
-        value.put(USER_ROLE, user.ROLE_USER);
-        value.put(USER_ADDRESS,user.Address);
-        value.put(USER_ZIPCODE,user.ZipCode);
-        value.put(USER_PHONE,user.Phone);
-        value.put(USER_EMAIL,user.Email);
+        value.put(USER_NAME, user.Name);
+        value.put(USER_PINCODE, user.PinCode);
+        value.put(USER_ROLE, user.Role);
+        value.put(USER_ADDRESS, user.Address);
+        value.put(USER_ZIPCODE, user.ZipCode);
+        value.put(USER_PHONE, user.Phone);
+        value.put(USER_EMAIL, user.Email);
 
-        long r = sqLiteDatabase.insert(TABLE_USER,null,value);
-        return  r>0;
+        long r = sqLiteDatabase.insert(TABLE_USER, null, value);
+        return r > 0;
     }
-    //OWNER AND HOLDER == USER_ID, iNsert update, delete tra ve boolean
-    public boolean addBookRecord(String title, String isbn, String author, String publishYear, String description, String pageCount){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        ContentValues value = new ContentValues();
-        value.put(BOOK_TITLE,title);
-        value.put(BOOK_ISBN,isbn);
-        value.put(BOOK_AUTHOR,author);
-        value.put(BOOK_PUBLISH_YEAR,publishYear);
-        value.put(BOOK_DESCRIPTION,description);
-        value.put(BOOK_PAGE_COUNT,pageCount);
 
-        long r = sqLiteDatabase.insert(TABLE_BOOK,null,value);
-        if(r>0)
+    //OWNER AND HOLDER == USER_ID, iNsert update, delete tra ve boolean
+    public boolean addBookRecord(String title, String isbn, String author, String publishYear, String description, String pageCount) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(BOOK_TITLE, title);
+        values.put(BOOK_ISBN, isbn);
+        values.put(BOOK_AUTHOR, author);
+        values.put(BOOK_PUBLISH_YEAR, publishYear);
+        values.put(BOOK_DESCRIPTION, description);
+        values.put(BOOK_PAGE_COUNT, pageCount);
+
+        long r = sqLiteDatabase.insert(TABLE_BOOK, null, values);
+        if (r > 0)
             return true;
         else
             return false;
     }
 
     //tra ve object
-    public Cursor viewUserRecord(){
+    public Cursor viewUserRecord() {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_BOOK;
-        Cursor c =sqLiteDatabase.rawQuery(query,null);
+        Cursor c = sqLiteDatabase.rawQuery(query, null);
         return c;
     }
 
-    public boolean updateUserRec(String name, String pass, String address, String zipcode, String phone, String email){
+    public boolean updateUserRec(User user) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(USER_NAME,name);
-        values.put(USER_PINCODE,pass);
-        values.put(USER_ADDRESS,address);
-        values.put(USER_ZIPCODE,zipcode);
-        values.put(USER_PHONE,phone);
-        values.put(USER_EMAIL,email);
-
-        Cursor cursor = sqLiteDatabase.rawQuery("Select * from " + TABLE_USER + " where " + USER_NAME + " = ?", new String[]{name});
-        if (cursor.getCount() > 0) {
-            long result = sqLiteDatabase.update(TABLE_USER, values, "name=?", new String[]{name});
-            if (result == -1) {
-                return false;
-            } else {
-                return true;
-            }
-        } else {
-            return false;
-        }
+        values.put(USER_ID, user.Id);
+        values.put(USER_NAME, user.Name);
+        values.put(USER_PINCODE, user.PinCode);
+        values.put(USER_ROLE, user.Role);
+        values.put(USER_ADDRESS, user.Address);
+        values.put(USER_ZIPCODE, user.ZipCode);
+        values.put(USER_PHONE, user.Phone);
+        values.put(USER_EMAIL, user.Email);
+        long result = sqLiteDatabase.update(TABLE_USER, values, USER_ID + "=?", new String[]{user.Id.toString()});
+        return result > 0;
     }
+
     //check if user exist or not
     public User getUser(String name, String pincode) {
         // array of columns to fetch user data
         SQLiteDatabase db = this.getReadableDatabase();
         // selection arguments
-        String[] selectionArgs = {name,pincode};
+        String[] selectionArgs = {name, pincode};
         // query user table with conditions
-        Cursor cursor = db.rawQuery("select * from " + TABLE_USER + " where name = ? AND pincode = ?", selectionArgs);
+        Cursor cursor = db.rawQuery("select * from " + TABLE_USER + " where " + USER_NAME + " = ? AND " + USER_PINCODE + " = ?", selectionArgs);
         User user = null;
-        if(cursor.getCount() > 0)
-        {
+        if (cursor.getCount() > 0) {
             cursor.moveToNext();
             user = ToUser(cursor);
         }
         cursor.close();
         db.close();
         return user;
+    }
+
+    public User getUser(Long id) {
+        // array of columns to fetch user data
+        SQLiteDatabase db = this.getReadableDatabase();
+        // selection arguments
+        String[] selectionArgs = {id.toString()};
+        // query user table with conditions
+        Cursor cursor = db.rawQuery("select * from " + TABLE_USER + " where " + USER_ID + " =?", selectionArgs);
+        User user = null;
+        if (cursor.getCount() > 0) {
+            cursor.moveToNext();
+            user = ToUser(cursor);
+        }
+        cursor.close();
+        db.close();
+        return user;
+
     }
 
     @SuppressLint("Range")

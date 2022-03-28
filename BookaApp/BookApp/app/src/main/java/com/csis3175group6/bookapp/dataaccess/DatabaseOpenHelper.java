@@ -235,6 +235,13 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return users;
     }
 
+    public Cursor viewBook(){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_BOOK;
+        Cursor c =sqLiteDatabase.rawQuery(query,null);
+        return c;
+    }
+
     @SuppressLint("Range")
     private User ToUser(Cursor c) {
         User user = new User();

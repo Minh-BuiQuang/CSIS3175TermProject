@@ -133,10 +133,12 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         long r = sqLiteDatabase.insert(TABLE_USER, null, value);
         return r > 0;
     }
-
-    //OWNER AND HOLDER == USER_ID, insert update, delete return boolean
     public boolean addBookRecord(Book book) {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return addBookRecord(book, null);
+    }
+    //OWNER AND HOLDER == USER_ID, insert update, delete return boolean
+    public boolean addBookRecord(Book book, SQLiteDatabase sqLiteDatabase) {
+        if(sqLiteDatabase == null) sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(BOOK_TITLE, book.Title);
         values.put(BOOK_OWNER_ID, book.OwnerId);
@@ -149,7 +151,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         values.put(BOOK_STATUS, book.Status);
 
         long r = sqLiteDatabase.insert(TABLE_BOOK, null, values);
-        sqLiteDatabase.close();
         return r > 0;
     }
 
@@ -298,6 +299,12 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         addUserRecord(new User(0l, "Bruce", User.ROLE_USER, "1234","36851 Sunbrook Center", "a5dy1f", "778465151", "cdunhill1@blinklist.com"), db);
         addUserRecord(new User(0l, "Edward", User.ROLE_USER, "1234","425 Orin Circle", "r4xe4d", "6041114567", "lshoemark2@furl.net"), db);
         addUserRecord(new User(0l, "Barbara", User.ROLE_USER, "1234","5 Havey Road", "e5ga6r", "6045451133", "ldebischop3@xinhuanet.com"), db);
+
+        addBookRecord(new Book(0l,"The Great Gatsby", 1l,1l,"12343264","F. Scott Fitzgerald", "1925","The Great Gatsby is a 1925 novel by American writer F. Scott Fitzgerald. Set in the Jazz Age on Long Island, near New York City, the novel depicts first-person narrator Nick Carraway's interactions with mysterious millionaire Jay Gatsby and Gatsby's obsession to reunite with his former lover, Daisy Buchanan.", 328, Book.STATUS_ACTIVE), db);
+        addBookRecord(new Book(0l,"Pride and Prejudice", 1l,1l,"44654512365","Jane Austen", "1832","The Pride of Jane Austen! The story is set in England in the late 18th century.", 210, Book.STATUS_ACTIVE), db);
+        addBookRecord(new Book(0l,"Lord of the Flies", 1l,1l,"122213213","William Golding", "1954","Lord of the Flies is a 1954 debut novel by Nobel Prize-winning British author William Golding.", 254, Book.STATUS_ACTIVE), db);
+        addBookRecord(new Book(0l,"Fahrenheit 451", 1l,1l,"12354543","Ray Bradbury", "1953","Fahrenheit 451 is a 1953 dystopian novel by American writer Ray Bradbury. Often regarded as one of his best works, the novel presents a future American society where books are outlawed and \"firemen\" burn any that are found.", 256, Book.STATUS_ACTIVE), db);
+        addBookRecord(new Book(0l,"The Count of Monte Cristo", 1l,1l,"98656532","Alexandre Dumas", "1844","The Count of Monte Cristo is an adventure novel written by French author Alexandre Dumas completed in 1844.", 421, Book.STATUS_ACTIVE), db);
     }
 //    final static String DATABASE_NAME = "BookManagement.db";
 //    final static int VERSION = 1;

@@ -33,5 +33,19 @@ public class Book{
     public static final String STATUS_OVERDUE = "Overdue"; //Book is overdue to be returned. Once book is past due date, status become Overdue. Once owner confirm that book is returned, overdue fee will be calculated based on RentDuration and RentPrice
     public static final String STATUS_INACTIVE = "Inactive"; //Book no longer shown in owner book list. Still can be seen in read tracker.
 
-    public Book () {}
+    public Book(){}
+
+    public Book (Long id, String title, Long ownerId, Long holderId, String isbn, String author, String publicationYear, String description, int pageCount, String status) {
+
+        Id = id;
+        Title = title;
+        OwnerId = ownerId;
+        HolderId = holderId;
+        Isbn = isbn;
+        Author = author;
+        PublicationYear = publicationYear;
+        Description = description;
+        PageCount = pageCount;
+        Status = status;
+    }
 }

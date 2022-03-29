@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,11 +18,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
+import com.csis3175group6.bookapp.entities.Book;
 import com.csis3175group6.bookapp.entities.User;
 
 public class MainActivity extends AppCompatActivity {
-
+    DatabaseOpenHelper db;
     ListView listView;
 
     String mTitle[] = {"ADD A BOOK", "MY BOOK", "UPDATE BOOK", "BORROW BOOK", "TRACKING BOOK"};
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         MyAdapter adapter = new MyAdapter(this, mTitle, mDescription, images);
         listView.setAdapter(adapter);
-
+        db = new DatabaseOpenHelper(this);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -59,6 +63,29 @@ public class MainActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putInt("image", images[1]);
                     intent.putExtras(bundle);
+                   long ownerId = App.getInstance().User.Id;
+                    Cursor c = db.getBookById(ownerId);
+                    if(c != null) {
+                        String[] myBooks = new String[c.getCount()];
+                        int index = 0;
+                        while (c.moveToNext()) {
+                            String bName = "Title: " + c.getString(1);
+                            String bAuthor = "Author: " + c.getString(5);
+                            String bYear = "Publication year: " + c.getString(6);
+                            String bStatus = "Status: " + c.getString(9);
+                            String bIsnb = "Isbn: " + c.getString(4);
+                            String bDesctiption = "Description: " + c.getString(7);
+                            String bPageCount = "Page count: " + c.getString(8);
+                            myBooks[index] = bName + "\n" + bAuthor + "\n" + bYear + "\n" + bStatus + "\n" + bIsnb + "\n" + bDesctiption + "\n" + bPageCount + "\n";
+                            index++;
+                        }
+                        intent.putExtra("book-array", myBooks);
+                        //startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this,
+                                "nothing to read", Toast.LENGTH_SHORT).show();
+                    }
                     intent.putExtra("title", mTitle[1]);
                     intent.putExtra("description", mDescription[1]);
                     intent.putExtra("position", ""+1);

@@ -6,16 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.csis3175group6.bookapp.R;
 import com.csis3175group6.bookapp.entities.*;
-import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.support.ConnectionSource;
-import com.j256.ormlite.table.TableUtils;
-
-import java.sql.SQLException;
-import java.util.List;
 
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
@@ -143,7 +134,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return r > 0;
     }
 
-    //OWNER AND HOLDER == USER_ID, insert update, delete tra ve boolean
+    //OWNER AND HOLDER == USER_ID, insert update, delete return boolean
     public boolean addBookRecord(Book book) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -241,7 +232,40 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         Cursor c =sqLiteDatabase.rawQuery(query,null);
         return c;
     }
+        public Cursor getBookById(Long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+            String[] selectionArgs = {id.toString()};
+        String query = "Select * from Book where Book.OwnerId =?";
+        Cursor cursor = db.rawQuery(query,selectionArgs);
 
+        return cursor;
+    }
+
+//    public Cursor getBookById(Long id) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        String[] selectionArgs = {id.toString()};
+//        String query = "Select * from Book where Book.OwnerId =User.UserId";
+//        Cursor cursor = db.rawQuery(query,selectionArgs);
+//
+//        return cursor;
+//    }
+
+//    public Book getBookById(Long id) {
+//        // array of columns to fetch user data
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        // selection arguments
+//        String[] selectionArgs = {id.toString()};
+//        // query user table with conditions
+//        Cursor cursor = db.rawQuery("select * from " + TABLE_USER + " inner join " + TABLE_USER + " on Book.OwnerId =?", selectionArgs);
+//        Book book = null;
+//        if (cursor.getCount() > 0) {
+//            cursor.moveToNext();
+//            book = ToBook(cursor);
+//        }
+//        cursor.close();
+//        db.close();
+//        return book;
+//    }
     @SuppressLint("Range")
     private User ToUser(Cursor c) {
         User user = new User();
@@ -255,6 +279,20 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         user.Email = c.getString(c.getColumnIndex(USER_EMAIL));
         return user;
     }
+
+    @SuppressLint("Range")
+    private Book ToBook(Cursor c) {
+        Book book = new Book();
+        book.Id = c.getLong(c.getColumnIndex(BOOK_ID));
+        book.Title = c.getString(c.getColumnIndex(BOOK_TITLE));
+        book.Isbn = c.getString(c.getColumnIndex(BOOK_ISBN));
+        book.Author = c.getString(c.getColumnIndex(BOOK_AUTHOR));
+        book.PublicationYear = c.getString(c.getColumnIndex(BOOK_PUBLISH_YEAR));
+        book.Description = c.getString(c.getColumnIndex(BOOK_DESCRIPTION));
+        book.PageCount = c.getInt(c.getColumnIndex(BOOK_PAGE_COUNT));
+        return book;
+    }
+
     private void PopulateData(SQLiteDatabase db) {
         addUserRecord(new User(0l,"Admin", User.ROLE_ADMIN, "1111", "02 Crest Line Point","a3gr5d","7784561235","ccamelli0@wufoo.com"), db);
         addUserRecord(new User(0l, "Bruce", User.ROLE_USER, "1234","36851 Sunbrook Center", "a5dy1f", "778465151", "cdunhill1@blinklist.com"), db);

@@ -61,7 +61,7 @@ public class BorrowRequestActivity extends AppCompatActivity {
             allBooks = db.getBooks();*/
             books = db.getBooks();
             recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-            adapter = new BookAdapter(this, books, BookAdapter.Mode.SHARE);
+            adapter = new BookAdapter(this, books, BookAdapter.Mode.BORROW);
             recyclerView.setAdapter(adapter);
         }
 

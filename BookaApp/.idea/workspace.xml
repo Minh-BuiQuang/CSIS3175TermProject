@@ -4,103 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e68f1e1b-4c7e-4dab-9b29-7d088790b905" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/dataaccess/BookDatabaseHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/entities/Book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/raw/ormlite_config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/.idea/render.experimental.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/.idea/render.experimental.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/proguard-rules.pro" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/proguard-rules.pro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/androidTest/java/com/csis3175group6/bookapp/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/androidTest/java/com/csis3175group6/bookapp/ExampleInstrumentedTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/ic_launcher-playstore.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/ic_launcher-playstore.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/java/com/csis3175group6/bookapp/AddActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/AddActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/java/com/csis3175group6/bookapp/BorrowActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/BorrowActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/java/com/csis3175group6/bookapp/BorrowRequestActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/BorrowRequestActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/java/com/csis3175group6/bookapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/java/com/csis3175group6/bookapp/MainMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/MainMenuActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/java/com/csis3175group6/bookapp/SideMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/SideMenuActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/java/com/csis3175group6/bookapp/SignInActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/SignInActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/java/com/csis3175group6/bookapp/SingUpActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/SingUpActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/java/com/csis3175group6/bookapp/SplashActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/SplashActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/java/com/csis3175group6/bookapp/TrackingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/TrackingActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/java/com/csis3175group6/bookapp/UpdateAccountActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/UpdateAccountActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/java/com/csis3175group6/bookapp/UpdateActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/java/com/csis3175group6/bookapp/UpdateActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable-v24/add_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable-v24/add_img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable-v24/arrow.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable-v24/arrow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable-v24/borrow_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable-v24/borrow_img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable-v24/borrow_img1.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable-v24/borrow_img1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable-v24/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable-v24/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable-v24/menu.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable-v24/menu.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable-v24/splash_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable-v24/splash_img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable-v24/track_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable-v24/track_img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable-v24/update_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable-v24/update_img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable-v24/welcome_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable-v24/welcome_img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable/add_bg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable/add_bg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable/borrow_bg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable/borrow_bg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable/tracker_bg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable/tracker_bg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/drawable/update_bg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/drawable/update_bg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/font/cabin_medium.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/font/cabin_medium.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/font/roboto.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/font/roboto.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/font/roboto_medium.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/font/roboto_medium.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/font/space_mono.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/font/space_mono.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/layout/activity_add.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/layout/activity_add.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/layout/activity_borrow.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/layout/activity_borrow.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/layout/activity_borrow_request.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/layout/activity_borrow_request.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/layout/activity_side_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/layout/activity_side_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/layout/activity_sign_in.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/layout/activity_sign_in.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/layout/activity_sing_up.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/layout/activity_sing_up.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/layout/activity_splash.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/layout/activity_splash.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/layout/activity_tracking.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/layout/activity_tracking.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/layout/activity_traking_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/layout/activity_traking_history.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/layout/activity_update.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/layout/activity_update.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/layout/activity_update_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/layout/activity_update_account.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/values-land/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/values-land/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/values-night/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/values-w1240dp/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/values-w1240dp/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/values-w600dp/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/values-w600dp/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/values/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/values/font_certs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/values/font_certs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/values/preloaded_fonts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/values/preloaded_fonts.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/main/res/values/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/app/src/test/java/com/csis3175group6/bookapp/ExampleUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/app/src/test/java/com/csis3175group6/bookapp/ExampleUnitTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLayout/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/settings.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="e68f1e1b-4c7e-4dab-9b29-7d088790b905" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -118,7 +22,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -130,5 +34,16 @@
       <updated>1646192560834</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

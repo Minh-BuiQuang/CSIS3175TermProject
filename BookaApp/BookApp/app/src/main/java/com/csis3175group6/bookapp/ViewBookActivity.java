@@ -37,7 +37,7 @@ public class ViewBookActivity extends AppCompatActivity implements BookAdapter.I
         DatabaseOpenHelper db = new DatabaseOpenHelper(this);
         books = db.getBooks();
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        adapter = new BookAdapter(this, books);
+        adapter = new BookAdapter(this, books, BookAdapter.Mode.SHARE);
         adapter.setShareButtonClickListener(this);
         recyclerView.setAdapter(adapter);
     }

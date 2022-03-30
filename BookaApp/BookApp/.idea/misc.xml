@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/300302010/Desktop/CSIS3175TermProject/BookaApp/BookApp/app/src/main/res/layout/activity_borrow.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/300302010/Desktop/CSIS3175TermProject/BookaApp/BookApp/app/src/main/res/layout/activity_borrow_request.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/300302010/Desktop/CSIS3175TermProject/BookaApp/BookApp/app/src/main/res/layout/activity_view_book.xml" value="0.31203703703703706" />
+        <entry key="..\:/Users/300302010/Desktop/CSIS3175TermProject/BookaApp/BookApp/app/src/main/res/layout/customized_layout.xml" value="0.31203703703703706" />
+        <entry key="..\:/Users/300302010/Desktop/CSIS3175TermProject/BookaApp/BookApp/app/src/main/res/layout/user_recycler_view_item.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/add_bg.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/borrow_bg.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2359375" />

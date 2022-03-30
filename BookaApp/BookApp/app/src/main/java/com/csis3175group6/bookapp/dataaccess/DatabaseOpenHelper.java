@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.csis3175group6.bookapp.entities.*;
 
+import java.sql.Timestamp;
+
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     final static String DATABASE_NAME = "BookManagement.db";
@@ -299,12 +301,18 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     private Book ToBook(Cursor c) {
         Book book = new Book();
         book.Id = c.getLong(c.getColumnIndex(BOOK_ID));
+        book.OwnerId = c.getLong(c.getColumnIndex(BOOK_OWNER_ID));
+        book.HolderId = c.getLong(c.getColumnIndex(BOOK_HOLDER_ID));
         book.Title = c.getString(c.getColumnIndex(BOOK_TITLE));
         book.Isbn = c.getString(c.getColumnIndex(BOOK_ISBN));
         book.Author = c.getString(c.getColumnIndex(BOOK_AUTHOR));
         book.PublicationYear = c.getString(c.getColumnIndex(BOOK_PUBLISH_YEAR));
         book.Description = c.getString(c.getColumnIndex(BOOK_DESCRIPTION));
-        book.PageCount = c.getInt(c.getColumnIndex(BOOK_PAGE_COUNT));
+//        book.PageCount = c.getInt(c.getColumnIndex(BOOK_PAGE_COUNT));
+        book.Status = c.getString(c.getColumnIndex(BOOK_STATUS));
+//        book.RentDuration = c.getInt(c.getColumnIndex(BOOK_RENT_DURATION));
+//        book.RentedTime = c.getInt(c.getColumnIndex(BOOK_RENTED_TIME));
+        book.RentInformation = c.getString(c.getColumnIndex(BOOK_RENT_INFO));
         return book;
     }
 

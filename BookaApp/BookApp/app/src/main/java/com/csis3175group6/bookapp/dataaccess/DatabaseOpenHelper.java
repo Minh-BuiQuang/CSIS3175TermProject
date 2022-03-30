@@ -227,6 +227,20 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return users;
     }
 
+    public Book[] getBooks() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + TABLE_BOOK, null);
+        Book[] books = new Book[cursor.getCount()];
+        int index = 0;
+        while(cursor.moveToNext())
+        {
+            books[index++] = ToBook(cursor);
+        }
+        cursor.close();
+        db.close();
+        return books;
+    }
+
     public Cursor viewBook(){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_BOOK;

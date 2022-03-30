@@ -123,6 +123,7 @@
     <string name="txtUserList">User List</string>
     <string name="stringUserId">userId</string>
     <string name="edit_txt">Edit</string>
+    <string name="share_txt">Share</string>
     //Side menu layout
 
 </resources>

@@ -36,7 +36,7 @@ public class BorrowRequestActivity extends AppCompatActivity {
                     bookList.add(hm);
             }
                 String[] from = {"txt"};
-                int[] to = {R.id.item};
+                int[] to = {R.id.title};
 
                 SimpleAdapter adapter = new SimpleAdapter(getBaseContext(),
                         bookList, R.layout.customized_layout, from, to);

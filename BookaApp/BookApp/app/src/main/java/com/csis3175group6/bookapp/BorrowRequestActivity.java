@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Book;
@@ -20,10 +22,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class BorrowRequestActivity extends AppCompatActivity {
+public class BorrowRequestActivity extends AppCompatActivity implements BookAdapter.ItemClickListener {
 
     Book[] books;
+    Book book;
+    User user;
     BookAdapter adapter;
+    TextView receiverName, senderName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +67,20 @@ public class BorrowRequestActivity extends AppCompatActivity {
             books = db.getBooks();
             recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             adapter = new BookAdapter(this, books, BookAdapter.Mode.BORROW);
+            adapter.setItemClickListener(this);
             recyclerView.setAdapter(adapter);
         }
 
 
+    @Override
+    public void onItemClick(View view, int position) {
+          receiverName = findViewById(R.id.txtReceiver);
+          senderName = findViewById(R.id.txtSender);
+          book = adapter.getItem(position);
+          DatabaseOpenHelper db = new DatabaseOpenHelper(this);
+          user = db.getUser(book.OwnerId);
+          receiverName.setText(user.Name);
+          senderName.setText(App.getInstance().User.Name);
+        //Toast.makeText(BorrowRequestActivity.this, user.Name , Toast.LENGTH_SHORT).show();
+    }
 }

@@ -23,6 +23,9 @@ public class BookAdapter extends RecyclerView.Adapter {
     private LayoutInflater inflater;
     private Mode mode;
     private Context context;
+    private ItemClickListener itemClickListener;
+
+
     public enum Mode{
         SHARE,
         EDIT,
@@ -49,11 +52,16 @@ public class BookAdapter extends RecyclerView.Adapter {
         BookAdapter.ViewHolder viewHolder = (BookAdapter.ViewHolder)holder;
         viewHolder.TitleTextView.setText(books[position].Title);
         DatabaseOpenHelper db = new DatabaseOpenHelper(context);
-        user = db.getUser(books[position].OwnerId);
-        viewHolder.OwnerNameTextView.setText(user.Name);
+
         switch (mode){
             case BORROW:
-            viewHolder.ShareButton.setVisibility(View.INVISIBLE);
+                viewHolder.ShareButton.setVisibility(View.INVISIBLE);
+                user = db.getUser(books[position].OwnerId);
+                viewHolder.OwnerNameTextView.setText(user.Name);
+                viewHolder.AuthorTextView.setText(books[position].Author);
+                viewHolder.YearTextView.setText(books[position].PublicationYear);
+                viewHolder.StatusTextView.setText(books[position].Status);
+
             break;
         }
     }
@@ -61,6 +69,14 @@ public class BookAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return books.length;
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener){
+        this.itemClickListener = itemClickListener;
+    }
+
+    public Book getItem(int id){
+        return books[id];
     }
 
     public void setShareButtonClickListener(IShareButtonClickListener shareButtonClickListener) {
@@ -71,23 +87,36 @@ public class BookAdapter extends RecyclerView.Adapter {
         void onShareButtonClickListener(View view, int position);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder  implements View
+            .OnClickListener{
         Button ShareButton;
-        TextView TitleTextView;
-        TextView OwnerNameTextView;
+        TextView TitleTextView, OwnerNameTextView, AuthorTextView, YearTextView, StatusTextView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ShareButton = itemView.findViewById(R.id.share_btn);
             TitleTextView = itemView.findViewById(R.id.title_textview);
             OwnerNameTextView = itemView.findViewById(R.id.owner_name_textview);
-
+            AuthorTextView = itemView.findViewById(R.id.author_textview);
+            YearTextView = itemView.findViewById(R.id.year_textview);
+            StatusTextView = itemView.findViewById(R.id.status_textview);
             TitleTextView.setOnClickListener(view -> {
                 if(shareButtonClickListener != null) {
                     shareButtonClickListener.onShareButtonClickListener(view, getAdapterPosition());
                 }
             });
-
+            itemView.setOnClickListener(this);
 
         }
+        @Override
+        public void onClick(View v) {
+            if(itemClickListener!=null)
+                itemClickListener.onItemClick(v, getAdapterPosition());
+        }
+    }
+
+
+
+    public interface ItemClickListener{
+        void onItemClick(View view, int position);
     }
 }

@@ -39,6 +39,8 @@
     <string name="txtBook3">Book3</string>
     <string name="txtBook4">Book4</string>
     <string name="txtBook5">Book5</string>
+    <string name="txtSenderName">Sender:</string>
+    <string name="txtReceiverName">Receiver:</string>
     //Main menu layout
     <string name="txtBorrow">BORROW BOOK</string>
     <string name="txtBorrowSlogan">Let\'s broaden your horizon</string>

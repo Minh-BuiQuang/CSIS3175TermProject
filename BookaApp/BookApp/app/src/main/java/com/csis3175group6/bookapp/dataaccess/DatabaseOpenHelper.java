@@ -99,6 +99,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 " INTEGER REFERENCES " + TABLE_USER + "(" + USER_ID + ")," + REQUEST_TIMESTAMP + " TEXT," + HAS_COMPLETED + " BOOLEAN," + "FOREIGN KEY(" + REQUEST_BOOK_ID + ")" + " REFERENCES " +
                 TABLE_BOOK + "(" + BOOK_ID + ")" + ")";
         db.execSQL(rQuery);
+
         PopulateData(db);
     }
 
@@ -153,6 +154,18 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         values.put(BOOK_STATUS, book.Status);
 
         long r = sqLiteDatabase.insert(TABLE_BOOK, null, values);
+        return r > 0;
+    }
+
+    public boolean addShareRecord(Request request, SQLiteDatabase sqLiteDatabase) {
+        if(sqLiteDatabase == null) sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(REQUESTER_ID, request.RequesterId);
+        values.put(REQUEST_BOOK_ID, request.BookId);
+        values.put(REQUEST_TIMESTAMP, String.valueOf(request.RequestTimeStamp));
+        values.put(HAS_COMPLETED, request.HasCompleted);
+
+        long r = sqLiteDatabase.insert(TABLE_REQUEST, null, values);
         return r > 0;
     }
 
@@ -243,6 +256,33 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return books;
     }
 
+    public Request getRequest(Long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] selectionArgs = {id.toString()};
+        Cursor cursor = db.rawQuery("select * from " + TABLE_REQUEST + " where " + REQUEST_ID + " =?", selectionArgs);
+        Request request = null;
+        if (cursor.getCount() > 0) {
+            cursor.moveToNext();
+            request = ToRequest(cursor);
+        }
+        cursor.close();
+        db.close();
+        return request;
+    }
+
+    public Request[] getRequests() {
+       SQLiteDatabase db = this.getReadableDatabase();
+       Cursor cursor = db.rawQuery("select * from " + TABLE_REQUEST, null);
+       Request[] requests = new Request[cursor.getCount()];
+       int index = 0;
+       while(cursor.moveToNext()) {
+           requests[index++] = ToRequest(cursor);
+       }
+       cursor.close();
+       db.close();
+       return requests;
+    }
+
     public Cursor viewBook(){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_BOOK;
@@ -315,6 +355,18 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         book.RentInformation = c.getString(c.getColumnIndex(BOOK_RENT_INFO));
         return book;
     }
+
+    @SuppressLint("Range")
+    private Request ToRequest(Cursor c) {
+        Request request = new Request();
+        request.Id = c.getLong(c.getColumnIndex(REQUEST_ID));
+        request.RequesterId = c.getLong(c.getColumnIndex(REQUESTER_ID));
+        request.BookId = c.getLong(c.getColumnIndex(BOOK_ID));
+//        request.RequestTimeStamp
+        request.HasCompleted = Boolean.valueOf(c.getString(c.getColumnIndex(HAS_COMPLETED)));
+        return request;
+    }
+
 
     private void PopulateData(SQLiteDatabase db) {
         addUserRecord(new User(0l,"Admin", User.ROLE_ADMIN, "1111", "02 Crest Line Point","a3gr5d","7784561235","ccamelli0@wufoo.com"), db);

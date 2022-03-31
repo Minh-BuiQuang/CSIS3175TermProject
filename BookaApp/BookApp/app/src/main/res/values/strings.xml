@@ -126,4 +126,14 @@
     <string name="share_txt">Share</string>
     //Side menu layout
 
+    //Share activity
+    <string name="txtShare">Share A Book</string>
+    <string name="inputDate">Enter Date</string>
+    <string name="inputNote">Note</string>
+    <string name="txtCancel">Cancel</string>
+    <string name="optShare">Share</string>
+    <string name="optRent">For Rent</string>
+    <string name="optGiveAway">Give away</string>
+    <string name="inputPrice">Please input price</string>
+
 </resources>

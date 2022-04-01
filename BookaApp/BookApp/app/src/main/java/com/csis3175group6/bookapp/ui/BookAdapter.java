@@ -56,13 +56,19 @@ public class BookAdapter extends RecyclerView.Adapter {
         switch (mode){
             case BORROW:
                 viewHolder.ShareButton.setVisibility(View.INVISIBLE);
+                viewHolder.TitleTextView.setText(books[position].Title);
                 user = db.getUser(books[position].OwnerId);
-                viewHolder.OwnerNameTextView.setText(user.Name);
-                viewHolder.AuthorTextView.setText(books[position].Author);
-                viewHolder.YearTextView.setText(books[position].PublicationYear);
-                viewHolder.StatusTextView.setText(books[position].Status);
-
+                viewHolder.OwnerNameTextView.setText("Owner: " + user.Name);
+                viewHolder.AuthorTextView.setText("Author: " + books[position].Author);
+                viewHolder.YearTextView.setText("Publication year: " + books[position].PublicationYear);
+                viewHolder.StatusTextView.setText("Status: " + books[position].Status);
             break;
+            case SHARE:
+                viewHolder.TitleTextView.setText(books[position].Title);
+                viewHolder.AuthorTextView.setText("Author: " + books[position].Author);
+                viewHolder.YearTextView.setText("Publication year: " + books[position].PublicationYear);
+                viewHolder.StatusTextView.setText("Status: " + books[position].Status);
+                break;
         }
     }
 

@@ -29,14 +29,12 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
     User user;
     BookAdapter adapter;
     TextView receiverName, senderName;
+    Button btnRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_borrow_request);
 
-
-        /*View b = findViewById(R.id.share_btn);
-        b.setVisibility(View.INVISIBLE);*/
         Button backToMain = findViewById(R.id.btnEditUserInfoBack);
         backToMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,22 +42,6 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
                 startActivity(new Intent(BorrowRequestActivity.this, MainActivity.class));
             }
         });
-        //get book array from borrow activity and parse to list view
-        /*Intent intent = getIntent();
-        String [] bookData = intent.getStringArrayExtra("book-array");
-        List<HashMap<String, String>> bookList = new ArrayList<HashMap<String, String>>();
-        if (intent != null) {
-            for (String book : bookData) {
-                    HashMap<String, String> hm = new HashMap<String, String>();
-                    hm.put("txt", book);
-                    bookList.add(hm);
-            }
-                String[] from = {"txt"};
-                int[] to = {R.id.title_textview};*/
-
-//                BookAdapter adapter = new BookAdapter(getBaseContext(),
-//                        bookList, R.layout.customized_layout, from, to);
-
             RecyclerView recyclerView = findViewById(R.id.book_recyclerview);
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
             /*ArrayList<Book> allBooks = new ArrayList<>();
@@ -69,7 +51,15 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
             adapter = new BookAdapter(this, books, BookAdapter.Mode.BORROW);
             adapter.setItemClickListener(this);
             recyclerView.setAdapter(adapter);
-        }
+
+            btnRequest = findViewById(R.id.btnRequest);
+            btnRequest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(BorrowRequestActivity.this, "Hi", Toast.LENGTH_SHORT).show();
+                }
+            });
+            }
 
 
     @Override
@@ -81,6 +71,6 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
           user = db.getUser(book.OwnerId);
           receiverName.setText(user.Name);
           senderName.setText(App.getInstance().User.Name);
-        //Toast.makeText(BorrowRequestActivity.this, user.Name , Toast.LENGTH_SHORT).show();
+
     }
 }

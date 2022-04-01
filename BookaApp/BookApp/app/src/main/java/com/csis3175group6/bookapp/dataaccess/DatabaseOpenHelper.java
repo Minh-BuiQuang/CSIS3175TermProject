@@ -256,6 +256,22 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return books;
     }
 
+    public Book[] getBooksByOwnerId(Long id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] selectionArgs = {id.toString()};
+        //Cursor c = db.rawQuery("select * from " + TABLE_BOOK + " inner join " + TABLE_USER + " on Book.OwnerId =?", selectionArgs);
+        Cursor c = db.rawQuery("Select * from Book where Book.OwnerId =?",selectionArgs);
+        Book[] books = new Book[c.getCount()];
+        int index = 0;
+        while(c.moveToNext())
+        {
+            books[index++] = ToBook(c);
+        }
+        c.close();
+        db.close();
+        return books;
+    }
+
     public Request getRequest(Long id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] selectionArgs = {id.toString()};
@@ -283,12 +299,12 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
        return requests;
     }
 
-    public Cursor viewBook(){
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_BOOK;
-        Cursor c =sqLiteDatabase.rawQuery(query,null);
-        return c;
-    }
+//    public Cursor viewBook(){
+//        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+//        String query = "SELECT * FROM " + TABLE_BOOK;
+//        Cursor c =sqLiteDatabase.rawQuery(query,null);
+//        return c;
+//    }
         public Cursor getBookById(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
             String[] selectionArgs = {id.toString()};
@@ -377,8 +393,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         addBookRecord(new Book(0l,"The Great Gatsby", 1l,1l,"12343264","F. Scott Fitzgerald", "1925","The Great Gatsby is a 1925 novel by American writer F. Scott Fitzgerald. Set in the Jazz Age on Long Island, near New York City, the novel depicts first-person narrator Nick Carraway's interactions with mysterious millionaire Jay Gatsby and Gatsby's obsession to reunite with his former lover, Daisy Buchanan.", 328, Book.STATUS_ACTIVE), db);
         addBookRecord(new Book(0l,"Pride and Prejudice", 1l,1l,"44654512365","Jane Austen", "1832","The Pride of Jane Austen! The story is set in England in the late 18th century.", 210, Book.STATUS_ACTIVE), db);
         addBookRecord(new Book(0l,"Lord of the Flies", 1l,1l,"122213213","William Golding", "1954","Lord of the Flies is a 1954 debut novel by Nobel Prize-winning British author William Golding.", 254, Book.STATUS_ACTIVE), db);
-        addBookRecord(new Book(0l,"Fahrenheit 451", 1l,1l,"12354543","Ray Bradbury", "1953","Fahrenheit 451 is a 1953 dystopian novel by American writer Ray Bradbury. Often regarded as one of his best works, the novel presents a future American society where books are outlawed and \"firemen\" burn any that are found.", 256, Book.STATUS_ACTIVE), db);
-        addBookRecord(new Book(0l,"The Count of Monte Cristo", 1l,1l,"98656532","Alexandre Dumas", "1844","The Count of Monte Cristo is an adventure novel written by French author Alexandre Dumas completed in 1844.", 421, Book.STATUS_ACTIVE), db);
+        addBookRecord(new Book(0l,"Fahrenheit 451", 2l,2l,"12354543","Ray Bradbury", "1953","Fahrenheit 451 is a 1953 dystopian novel by American writer Ray Bradbury. Often regarded as one of his best works, the novel presents a future American society where books are outlawed and \"firemen\" burn any that are found.", 256, Book.STATUS_FOR_RENT), db);
+        addBookRecord(new Book(0l,"The Count of Monte Cristo", 2l,2l,"98656532","Alexandre Dumas", "1844","The Count of Monte Cristo is an adventure novel written by French author Alexandre Dumas completed in 1844.", 421, Book.STATUS_FOR_RENT), db);
+
     }
 //    final static String DATABASE_NAME = "BookManagement.db";
 //    final static int VERSION = 1;

@@ -106,15 +106,38 @@
             android:orientation="horizontal">
             <TextView
                 android:layout_width="100dp"
+                android:textSize="20dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtReceiverName"
+                android:text="@string/txtReceiverName"/>
+            <TextView
+                android:id="@+id/txtReceiver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:background="@drawable/update_box_layout"
+                android:hint="@string/txtContactName"
+                tools:ignore="TextContrastCheck"
+                android:importantForAutofill="no" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtSenderName"
-                android:text="@string/txtSenderName"/>
+                android:text="@string/txtReceiverEmail"/>
 
-            <EditText
-                android:id="@+id/txtSender"
+            <TextView
+                android:id="@+id/txtReceiverEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -130,23 +153,23 @@
             android:orientation="horizontal">
             <TextView
                 android:layout_width="100dp"
-                android:textSize="20dp"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
+                android:textSize="20dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtReceiverName"
-                android:text="@string/txtReceiverName"/>
-            <EditText
-                android:id="@+id/txtReceiver"
+                android:id="@+id/txtRe"
+                android:text="@string/txtReceiverPhone"/>
+
+            <TextView
+                android:id="@+id/txtReceiverPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:padding="5dp"
                 android:background="@drawable/update_box_layout"
                 android:hint="@string/txtContactName"
-                tools:ignore="TextContrastCheck"
-                android:importantForAutofill="no" />
-
+                android:importantForAutofill="no"
+                android:padding="5dp"
+                tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
         </LinearLayout>
         <EditText
             android:id="@+id/txtDescription"

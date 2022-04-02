@@ -23,7 +23,7 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
     Book book;
     User user;
     BookAdapter adapter;
-    TextView receiverName, senderName;
+    TextView receiverName, receiverEmail, receiverPhone;
     Button btnRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +58,13 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
     @Override
     public void onItemClick(View view, int position) {
           receiverName = findViewById(R.id.txtReceiver);
-          senderName = findViewById(R.id.txtSender);
+          receiverEmail = findViewById(R.id.txtReceiverEmail);
+          receiverPhone = findViewById(R.id.txtReceiverPhone);
           book = adapter.getItem(position);
           DatabaseOpenHelper db = new DatabaseOpenHelper(this);
           user = db.getUser(book.OwnerId);
           receiverName.setText(user.Name);
-          senderName.setText(App.getInstance().User.Name);
-
+          receiverEmail.setText(user.Email);
+          receiverPhone.setText(user.Phone);
     }
 }

@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.csis3175group6.bookapp.entities.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
@@ -232,7 +234,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    public User[] getUsers() {
+    public ArrayList<User> getUsers() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from " + TABLE_USER, null);
         User[] users = new User[cursor.getCount()];
@@ -243,10 +245,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         db.close();
-        return users;
+        return new ArrayList<User>(Arrays.asList(users));
     }
 
-    public Book[] getBooks() {
+    public ArrayList<Book> getBooks() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from " + TABLE_BOOK, null);
         Book[] books = new Book[cursor.getCount()];
@@ -257,10 +259,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         db.close();
-        return books;
+        return new ArrayList<Book>(Arrays.asList(books));
     }
 
-    public Book[] getBooksByOwnerId(Long id){
+    public ArrayList<Book> getBooksByOwnerId(Long id){
         SQLiteDatabase db = this.getReadableDatabase();
         String[] selectionArgs = {id.toString()};
         //Cursor c = db.rawQuery("select * from " + TABLE_BOOK + " inner join " + TABLE_USER + " on Book.OwnerId =?", selectionArgs);
@@ -273,7 +275,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         }
         c.close();
         db.close();
-        return books;
+        return new ArrayList<Book>(Arrays.asList(books));
     }
 
     public Request getRequest(Long id) {
@@ -290,7 +292,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return request;
     }
 
-    public Request[] getRequests() {
+    public ArrayList<Request> getRequests() {
        SQLiteDatabase db = this.getReadableDatabase();
        Cursor cursor = db.rawQuery("select * from " + TABLE_REQUEST, null);
        Request[] requests = new Request[cursor.getCount()];
@@ -300,15 +302,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
        }
        cursor.close();
        db.close();
-       return requests;
+       return new ArrayList<Request>(Arrays.asList(requests));
     }
 
-//    public Cursor viewBook(){
-//        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-//        String query = "SELECT * FROM " + TABLE_BOOK;
-//        Cursor c =sqLiteDatabase.rawQuery(query,null);
-//        return c;
-//    }
         public Cursor getBookById(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
             String[] selectionArgs = {id.toString()};
@@ -317,32 +313,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
         return cursor;
     }
-
-//    public Cursor getBookById(Long id) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        String[] selectionArgs = {id.toString()};
-//        String query = "Select * from Book where Book.OwnerId =User.UserId";
-//        Cursor cursor = db.rawQuery(query,selectionArgs);
-//
-//        return cursor;
-//    }
-
-//    public Book getBookById(Long id) {
-//        // array of columns to fetch user data
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        // selection arguments
-//        String[] selectionArgs = {id.toString()};
-//        // query user table with conditions
-//        Cursor cursor = db.rawQuery("select * from " + TABLE_USER + " inner join " + TABLE_USER + " on Book.OwnerId =?", selectionArgs);
-//        Book book = null;
-//        if (cursor.getCount() > 0) {
-//            cursor.moveToNext();
-//            book = ToBook(cursor);
-//        }
-//        cursor.close();
-//        db.close();
-//        return book;
-//    }
     @SuppressLint("Range")
     private User ToUser(Cursor c) {
         User user = new User();
@@ -387,7 +357,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return request;
     }
 
-
     private void PopulateData(SQLiteDatabase db) {
         addUserRecord(new User(0l,"Admin", User.ROLE_ADMIN, "1111", "02 Crest Line Point","a3gr5d","7784561235","ccamelli0@wufoo.com"), db);
         addUserRecord(new User(0l, "Bruce", User.ROLE_USER, "1234","36851 Sunbrook Center", "a5dy1f", "778465151", "cdunhill1@blinklist.com"), db);
@@ -399,114 +368,5 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         addBookRecord(new Book(0l,"Lord of the Flies", 1l,1l,"122213213","William Golding", "1954","Lord of the Flies is a 1954 debut novel by Nobel Prize-winning British author William Golding.", 254, Book.STATUS_ACTIVE), db);
         addBookRecord(new Book(0l,"Fahrenheit 451", 2l,2l,"12354543","Ray Bradbury", "1953","Fahrenheit 451 is a 1953 dystopian novel by American writer Ray Bradbury. Often regarded as one of his best works, the novel presents a future American society where books are outlawed and \"firemen\" burn any that are found.", 256, Book.STATUS_FOR_RENT), db);
         addBookRecord(new Book(0l,"The Count of Monte Cristo", 2l,2l,"98656532","Alexandre Dumas", "1844","The Count of Monte Cristo is an adventure novel written by French author Alexandre Dumas completed in 1844.", 421, Book.STATUS_FOR_RENT), db);
-
     }
-//    final static String DATABASE_NAME = "BookManagement.db";
-//    final static int VERSION = 1;
-//
-//    public DatabaseOpenHelper(Context context) {
-//        super(context, DATABASE_NAME, null, VERSION, R.raw.ormlite_config2);
-//    }
-//
-//    @Override
-//    public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
-//        try {
-//            TableUtils.createTable(connectionSource, User.class);
-//            TableUtils.createTable(connectionSource, Book.class);
-//            TableUtils.createTable(connectionSource, ReadHistory.class);
-//            TableUtils.createTable(connectionSource, Message.class);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @Override
-//    public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-//        try {
-//            TableUtils.dropTable(connectionSource, Message.class, true);
-//            TableUtils.dropTable(connectionSource, ReadHistory.class, true);
-//            TableUtils.dropTable(connectionSource, Book.class, true);
-//            TableUtils.dropTable(connectionSource, User.class, true);
-//            onCreate(database, connectionSource);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public boolean insertBook(Book book){
-//        try {
-//            Dao<Book, Long> bookDao = getDao(Book.class);
-//            int affectedRows = bookDao.create(book);
-//            return affectedRows > 0;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
-//
-//    public boolean updateBook(Book book) {
-//
-//        try {
-//            Dao<Book, Long> bookDao = getDao(Book.class);
-//            int affectedRows = bookDao.update(book);
-//            return affectedRows > 0;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
-//
-//    public List<Book> getBooksByOwnerId(Long ownerId){
-//        try {
-//            Dao<Book, Long> bookDao = getDao(Book.class);
-//            List<Book> books = bookDao.queryBuilder().where().eq("ownerId", ownerId).query();
-//            return books;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-//
-//    public List<Book> getBooksByHolderId(Long holderId){
-//        try {
-//            Dao<Book, Long> bookDao = getDao(Book.class);
-//            List<Book> books = bookDao.queryBuilder().where().eq("holderId", holderId).query();
-//            return books;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-//
-//    public List<User> getUsers() {
-//        try {
-//            Dao<User, Long> userDao = getDao(User.class);
-//            return userDao.queryForAll();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-//
-//    public User getUserByCredential(String name, String pinCode) {
-//        try {
-//            Dao<User, Long> userDao = getDao(User.class);
-//            User user = userDao.queryBuilder().where().eq("Name", name).and().eq("pinCode", pinCode).queryForFirst();
-//            return user;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-//
-//    public boolean updateUser(User user){
-//        try {
-//            Dao<User, Long> userDao = getDao(User.class);
-//            int affectedRows = userDao.update(user);
-//            return affectedRows > 0;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
 }

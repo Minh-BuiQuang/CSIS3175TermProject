@@ -15,9 +15,11 @@ import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Book;
 import com.csis3175group6.bookapp.entities.User;
 
+import java.util.ArrayList;
+
 public class BorrowRequestActivity extends AppCompatActivity implements BookAdapter.ItemClickListener {
 
-    Book[] books;
+    ArrayList<Book> books;
     Book book;
     User user;
     BookAdapter adapter;

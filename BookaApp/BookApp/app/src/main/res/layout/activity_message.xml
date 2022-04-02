@@ -17,11 +17,21 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:hint="@string/txtMessage"
             android:background="@drawable/round_edittext"
             android:layout_margin="5dp"
             android:padding="5dp"
             android:inputType="text"
             android:id="@+id/message_edittext"/>
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            app:icon="@android:drawable/ic_menu_send"
+            app:iconGravity="top"
+            app:iconPadding="0dp"
+            android:layout_marginRight="5dp"
+            android:id="@+id/send_btn"/>
     </LinearLayout>
 </LinearLayout>

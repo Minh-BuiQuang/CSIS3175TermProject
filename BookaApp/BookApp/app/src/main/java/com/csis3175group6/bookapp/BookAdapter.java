@@ -14,10 +14,12 @@ import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Book;
 import com.csis3175group6.bookapp.entities.User;
 
+import java.util.ArrayList;
+
 public class BookAdapter extends RecyclerView.Adapter {
 
-    private Book[] books;
-    private User[] users;
+    private ArrayList<Book> books;
+    private ArrayList<User> users;
     private User user;
     private LayoutInflater inflater;
     private Mode mode;
@@ -32,7 +34,7 @@ public class BookAdapter extends RecyclerView.Adapter {
         TRACK
     }
     IShareButtonClickListener shareButtonClickListener;
-    public BookAdapter (Context context, Book[] books, Mode mode) {
+    public BookAdapter (Context context, ArrayList<Book> books, Mode mode) {
         inflater = LayoutInflater.from(context);
         this.books = books;
         this.mode = mode;
@@ -49,31 +51,31 @@ public class BookAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         BookAdapter.ViewHolder viewHolder = (BookAdapter.ViewHolder)holder;
-        viewHolder.TitleTextView.setText(books[position].Title);
+        viewHolder.TitleTextView.setText(books.get(position).Title);
         DatabaseOpenHelper db = new DatabaseOpenHelper(context);
 
         switch (mode){
             case BORROW:
                 viewHolder.ShareButton.setVisibility(View.INVISIBLE);
-                viewHolder.TitleTextView.setText(books[position].Title);
-                user = db.getUser(books[position].OwnerId);
+                viewHolder.TitleTextView.setText(books.get(position).Title);
+                user = db.getUser(books.get(position).OwnerId);
                 viewHolder.OwnerNameTextView.setText("Owner: " + user.Name);
-                viewHolder.AuthorTextView.setText("Author: " + books[position].Author);
-                viewHolder.YearTextView.setText("Publication year: " + books[position].PublicationYear);
-                viewHolder.StatusTextView.setText("Status: " + books[position].Status);
+                viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
+                viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
+                viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
             break;
             case SHARE:
-                viewHolder.TitleTextView.setText(books[position].Title);
-                viewHolder.AuthorTextView.setText("Author: " + books[position].Author);
-                viewHolder.YearTextView.setText("Publication year: " + books[position].PublicationYear);
-                viewHolder.StatusTextView.setText("Status: " + books[position].Status);
+                viewHolder.TitleTextView.setText(books.get(position).Title);
+                viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
+                viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
+                viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
                 break;
         }
     }
 
     @Override
     public int getItemCount() {
-        return books.length;
+        return books.size();
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener){
@@ -81,7 +83,7 @@ public class BookAdapter extends RecyclerView.Adapter {
     }
 
     public Book getItem(int id){
-        return books[id];
+        return books.get(id);
     }
 
     public void setShareButtonClickListener(IShareButtonClickListener shareButtonClickListener) {

@@ -73,19 +73,8 @@ public class AddActivity extends AppCompatActivity {
             }
             try {
                 //Create new book with entered information. Owner and Holder is current user who created this book
-                Book book = new Book();
-                book.Title = title;
-                book.Author = author;
-                book.PublicationYear = publicationYear;
-                book.Isbn = isbn;
-                book.Description = description;
-                book.PageCount = pageCount;
-                book.OwnerId = App.getInstance().User.Id;
-                book.HolderId = App.getInstance().User.Id;
-                book.Status = Book.STATUS_ACTIVE;
-
+                Book book = new Book(0l, title,App.getInstance().User.Id, App.getInstance().User.Id, isbn, author, publicationYear, description, pageCount, Book.STATUS_ACTIVE);
                 //Add newly created book to database
-
                 DatabaseOpenHelper db = new DatabaseOpenHelper(this);
                 boolean success = db.addBookRecord(book);
                 if(success) {

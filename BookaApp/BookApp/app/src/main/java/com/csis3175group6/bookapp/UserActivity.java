@@ -11,8 +11,10 @@ import android.view.View;
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.User;
 
+import java.util.ArrayList;
+
 public class UserActivity extends AppCompatActivity implements UserAdapter.IClickEvents {
-    User[] users;
+    ArrayList<User> users;
     UserAdapter adapter;
 
     @Override
@@ -36,14 +38,14 @@ public class UserActivity extends AppCompatActivity implements UserAdapter.IClic
     @Override
     public void onItemEditButtonClick(View view, int position) {
         Intent intent = new Intent(UserActivity.this, SignUpActivity.class);
-        intent.putExtra("userId", users[position].Id);
+        intent.putExtra("userId", users.get(position).Id);
         startActivity(intent);
     }
 
     @Override
     public void onItemMessageButtonClick(View view, int position) {
         Intent intent = new Intent(UserActivity.this, MessageActivity.class);
-        intent.putExtra("userId", users[position].Id);
+        intent.putExtra("userId", users.get(position).Id);
         startActivity(intent);
     }
 }

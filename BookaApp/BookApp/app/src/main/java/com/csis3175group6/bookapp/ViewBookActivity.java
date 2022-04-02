@@ -11,8 +11,10 @@ import android.widget.Toast;
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Book;
 
+import java.util.ArrayList;
+
 public class ViewBookActivity extends AppCompatActivity implements BookAdapter.IShareButtonClickListener{
-    Book[] books;
+    ArrayList<Book> books;
     BookAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,6 @@ public class ViewBookActivity extends AppCompatActivity implements BookAdapter.I
 
     @Override
     public void onShareButtonClickListener(View view, int position) {
-        Toast.makeText(this, "Clicked on book: " + books[position].Title, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Clicked on book: " + books.get(position).Title, Toast.LENGTH_SHORT).show();
     }
 }

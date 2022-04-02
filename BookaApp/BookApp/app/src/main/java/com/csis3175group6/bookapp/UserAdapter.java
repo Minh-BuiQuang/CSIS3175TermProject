@@ -12,11 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.csis3175group6.bookapp.entities.User;
 
+import java.util.ArrayList;
+
 public class UserAdapter extends RecyclerView.Adapter {
-    private User[] users;
+    private  ArrayList<User> users;
     private LayoutInflater inflater;
     private IClickEvents iClickEvents;
-    public UserAdapter (Context context, User[] users) {
+    public UserAdapter (Context context, ArrayList<User> users) {
         inflater = LayoutInflater.from(context);
         this.users = users;
     }
@@ -35,14 +37,14 @@ public class UserAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder)holder;
-        viewHolder.NameTextView.setText(users[position].Name);
-        viewHolder.PhoneTextView.setText(users[position].Phone);
-        viewHolder.AddressTextView.setText(users[position].Address);
+        viewHolder.NameTextView.setText(users.get(position).Name);
+        viewHolder.PhoneTextView.setText(users.get(position).Phone);
+        viewHolder.AddressTextView.setText(users.get(position).Address);
     }
 
     @Override
     public int getItemCount() {
-        return users.length;
+        return users.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

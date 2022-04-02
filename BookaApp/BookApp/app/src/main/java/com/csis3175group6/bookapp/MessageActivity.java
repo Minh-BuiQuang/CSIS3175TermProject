@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
@@ -31,6 +32,10 @@ public class MessageActivity extends AppCompatActivity {
             finish();
         }
         actionBar.setTitle("Conversation: " + Receiver.Name);
+        //Load current message;
+
+        SendButton.setOnClickListener(view -> {
+        });
     }
 
     //Implement go back event for Back button on action bar
@@ -45,4 +50,5 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     User Receiver;
+    Button SendButton;
 }

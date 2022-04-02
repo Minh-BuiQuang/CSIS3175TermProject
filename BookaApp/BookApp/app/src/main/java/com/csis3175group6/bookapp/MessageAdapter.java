@@ -70,8 +70,10 @@ public class MessageAdapter extends RecyclerView.Adapter {
         }
         //Format Sent message
         else if(message.SenderId == user.Id) {
-            viewHolder.MessageLayout.setGravity(Gravity.RIGHT);
-            viewHolder.MessageLayout.setBackgroundColor(Color.parseColor("#00FF00"));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            params.gravity = Gravity.RIGHT;
+            viewHolder.MessageLayout.setLayoutParams(params);
+            viewHolder.MessageLayout.setBackground(Context.getDrawable(R.drawable.round_edittext_green));
         }
         //Format Received message
         else if(message.ReceiverId == user.Id) {

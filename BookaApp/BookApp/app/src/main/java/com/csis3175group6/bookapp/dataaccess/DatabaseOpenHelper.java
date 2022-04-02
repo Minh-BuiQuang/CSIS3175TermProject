@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.csis3175group6.bookapp.entities.*;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -305,14 +306,42 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
        return new ArrayList<Request>(Arrays.asList(requests));
     }
 
-        public Cursor getBookById(Long id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-            String[] selectionArgs = {id.toString()};
-        String query = "Select * from Book where Book.OwnerId =?";
-        Cursor cursor = db.rawQuery(query,selectionArgs);
+    public Cursor getBookById(Long id) {
+    SQLiteDatabase db = this.getWritableDatabase();
+        String[] selectionArgs = {id.toString()};
+    String query = "Select * from Book where Book.OwnerId =?";
+    Cursor cursor = db.rawQuery(query,selectionArgs);
 
-        return cursor;
+    return cursor;
     }
+
+    public boolean AddMessage(Message message) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(MESSAGE_ID, message.Id);
+        values.put(MESSAGE_CONTENT, message.Content);
+        values.put(MESSAGE_SENDER_ID, message.SenderId);
+        values.put(MESSAGE_RECEIVER_ID, message.ReceiverId);
+        values.put(MESSAGE_TIMESTAMP, message.TimeStamp.getTime());
+        values.put(MESSAGE_FROM_SYSTEM, message.FromSystem);
+        long result = sqLiteDatabase.insert(TABLE_MESSAGE,null, values);
+        sqLiteDatabase.close();
+        return result > 0;
+
+    }
+
+    public ArrayList<Message> GetMessage(Long senderId, Long receiverId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + TABLE_MESSAGE +
+                " where " + MESSAGE_SENDER_ID + "=? and " + MESSAGE_RECEIVER_ID + "=?",
+                new String[]{senderId.toString(),receiverId.toString()});
+        ArrayList<Message> messages = new ArrayList<>();
+        while(cursor.moveToNext()) messages.add(ToMessage(cursor));
+        cursor.close();
+        db.close();
+        return messages;
+    }
+
     @SuppressLint("Range")
     private User ToUser(Cursor c) {
         User user = new User();
@@ -355,6 +384,18 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         request.RequestTimeStamp = new Timestamp(c.getLong(c.getColumnIndex(REQUEST_TIMESTAMP)));
         request.HasCompleted = Boolean.valueOf(c.getString(c.getColumnIndex(HAS_COMPLETED)));
         return request;
+    }
+
+    @SuppressLint("Range")
+    private Message ToMessage(Cursor c) {
+        Message message = new Message();
+        message.Id = c.getLong(c.getColumnIndex(MESSAGE_ID));
+        message.SenderId = c.getLong(c.getColumnIndex(MESSAGE_SENDER_ID));
+        message.ReceiverId = c.getLong(c.getColumnIndex(MESSAGE_RECEIVER_ID));
+        message.FromSystem = c.getInt(c.getColumnIndex(MESSAGE_FROM_SYSTEM))!=0;
+        message.Content = c.getString(c.getColumnIndex(MESSAGE_CONTENT));
+        message.TimeStamp = new Timestamp(c.getLong(c.getColumnIndex(MESSAGE_TIMESTAMP)));
+        return message;
     }
 
     private void PopulateData(SQLiteDatabase db) {

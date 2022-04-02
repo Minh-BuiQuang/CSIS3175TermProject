@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectLayout">
         <activity
+            android:name=".MessageActivity"
+            android:exported="false" />
+        <activity
             android:name=".ShareBookActivity"
             android:exported="false" />
         <activity
@@ -51,6 +54,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserActivity"
             android:exported="false" />
 
         <meta-data

@@ -15,7 +15,7 @@ import com.csis3175group6.bookapp.entities.User;
 public class UserAdapter extends RecyclerView.Adapter {
     private User[] users;
     private LayoutInflater inflater;
-    private IEditButtonClickListener buttonClickListener;
+    private IClickEvents iClickEvents;
     public UserAdapter (Context context, User[] users) {
         inflater = LayoutInflater.from(context);
         this.users = users;
@@ -28,8 +28,8 @@ public class UserAdapter extends RecyclerView.Adapter {
         return viewHolder;
     }
 
-    void setButtonClickListener(IEditButtonClickListener buttonClickListener) {
-        this.buttonClickListener = buttonClickListener;
+    void setClickEvents(IClickEvents iClickEvents) {
+        this.iClickEvents = iClickEvents;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class UserAdapter extends RecyclerView.Adapter {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        Button EditButton;
+        Button EditButton, MessageButton;
         TextView NameTextView, PhoneTextView, AddressTextView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,16 +54,24 @@ public class UserAdapter extends RecyclerView.Adapter {
             PhoneTextView = itemView.findViewById(R.id.textview_phone);
             AddressTextView = itemView.findViewById(R.id.textview_address);
             EditButton = itemView.findViewById(R.id.edit_btn);
+            MessageButton = itemView.findViewById(R.id.message_btn);
 
             EditButton.setOnClickListener(view -> {
-                if(buttonClickListener != null) {
-                    buttonClickListener.onItemEditButtonClick(view, getAdapterPosition());
+                if(iClickEvents != null) {
+                    iClickEvents.onItemEditButtonClick(view, getAdapterPosition());
+                }
+            });
+
+            MessageButton.setOnClickListener(view -> {
+                if(iClickEvents != null) {
+                    iClickEvents.onItemMessageButtonClick(view, getAdapterPosition());
                 }
             });
         }
     }
 
-    public interface IEditButtonClickListener {
+    public interface IClickEvents {
         void onItemEditButtonClick(View view, int position);
+        void onItemMessageButtonClick(View view, int position);
     }
 }

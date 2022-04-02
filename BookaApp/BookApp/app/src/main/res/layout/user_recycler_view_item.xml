@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:contentPadding="5dp"
     app:cardElevation="3dp"
     app:cardCornerRadius="3dp"
     app:cardUseCompatPadding="true"
@@ -11,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:weightSum="10">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -69,24 +68,28 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center">
+
             <Button
-                android:layout_width="30dp"
-                android:layout_height="40dp"
+                android:id="@+id/edit_btn"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
                 android:contentDescription="@string/edit_txt"
                 app:icon="@android:drawable/ic_menu_edit"
-                app:iconSize="15dp"
-                app:iconPadding="0dp"
                 app:iconGravity="textStart"
-                android:id="@+id/edit_btn"/>
+                app:iconPadding="0dp"
+                app:iconSize="15dp"
+                app:iconTint="@color/white" />
+
             <Button
-                android:layout_width="30dp"
-                android:layout_height="40dp"
+                android:id="@+id/message_btn"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
                 android:contentDescription="@string/edit_txt"
                 app:icon="@android:drawable/stat_notify_chat"
-                app:iconSize="15dp"
-                app:iconPadding="0dp"
                 app:iconGravity="textStart"
-                android:id="@+id/message_btn"/>
+                app:iconPadding="0dp"
+                app:iconSize="15dp"
+                app:iconTint="@color/purple_200" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView >

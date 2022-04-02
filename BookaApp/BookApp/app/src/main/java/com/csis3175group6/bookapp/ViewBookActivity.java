@@ -4,22 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Book;
-import com.csis3175group6.bookapp.entities.User;
-import com.csis3175group6.bookapp.ui.BookAdapter;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class ViewBookActivity extends AppCompatActivity implements BookAdapter.IShareButtonClickListener{
     Book[] books;

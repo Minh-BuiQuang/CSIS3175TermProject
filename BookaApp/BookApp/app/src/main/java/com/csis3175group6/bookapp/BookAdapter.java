@@ -1,4 +1,4 @@
-package com.csis3175group6.bookapp.ui;
+package com.csis3175group6.bookapp;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.csis3175group6.bookapp.R;
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Book;
 import com.csis3175group6.bookapp.entities.User;

@@ -4,6 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MessageActivity">
-
+    tools:context=".MessageActivity"
+    android:orientation="vertical">
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#523A28">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/txtMessage"
+            android:background="@drawable/round_edittext"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:inputType="text"
+            android:id="@+id/message_edittext"/>
+    </LinearLayout>
 </LinearLayout>

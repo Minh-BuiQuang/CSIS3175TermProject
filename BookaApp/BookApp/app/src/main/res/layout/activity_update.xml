@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:text="@string/txtTitle"
+                android:hint="@string/txtTitle"
                 tools:ignore="LabelFor,TouchTargetSizeCheck" />
 
             <EditText
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:text="@string/txtHolderId"
+                android:hint="@string/txtHolderId"
                 tools:ignore="LabelFor,TouchTargetSizeCheck"
                 />
 
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:text="@string/txtAuthor"
+                android:hint="@string/txtAuthor"
                 tools:ignore="LabelFor,TouchTargetSizeCheck" />
 
             <EditText
@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:text="@string/txtPublishYear"
+                android:hint="@string/txtPublishYear"
                 tools:ignore="LabelFor,TouchTargetSizeCheck" />
 
         </LinearLayout>
@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:text="@string/txtStatus"
+                android:hint="@string/txtStatus"
                 tools:ignore="LabelFor,TouchTargetSizeCheck" />
 
             <EditText
@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:text="@string/txtRentPrice"
+                android:hint="@string/txtRentPrice"
                 tools:ignore="LabelFor,TouchTargetSizeCheck" />
 
             <EditText
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:text="@string/txtPageCount"
+                android:hint="@string/txtPageCount"
                 tools:ignore="LabelFor,TouchTargetSizeCheck" />
 
             <EditText
@@ -164,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:text="@string/txtIsbn"
+                android:hint="@string/txtIsbn"
                 tools:ignore="LabelFor,TouchTargetSizeCheck" />
 
         </LinearLayout>
@@ -172,33 +172,17 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/txtOwnerNote"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:importantForAutofill="no"
-        android:padding="10dp"
-        android:background="@drawable/update_box_layout"
-        android:maxLines="20"
-        android:layout_margin="10dp"
-        android:inputType="textMultiLine"
-        android:gravity="top"
-        android:text="@string/txtNote"
-        tools:ignore="LabelFor,TouchTargetSizeCheck" />
-
-    <EditText
         android:id="@+id/txtDescription"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="100dp"
         android:maxLines="50"
         android:layout_margin="10dp"
-        android:layout_weight="3"
         android:importantForAutofill="no"
         android:padding="10dp"
         android:background="@drawable/update_box_layout"
         android:inputType="textMultiLine"
         android:gravity="top"
-        android:text="@string/txtDescription"
+        android:hint="@string/txtDescription"
         tools:ignore="LabelFor" />
 
     <Button
@@ -210,3 +194,4 @@
         android:text="@string/btnSubmit" />
 
 </LinearLayout>
+

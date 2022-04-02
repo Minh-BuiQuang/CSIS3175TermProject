@@ -1,6 +1,8 @@
 package com.csis3175group6.bookapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +33,8 @@ public class BookAdapter extends RecyclerView.Adapter {
         SHARE,
         EDIT,
         BORROW,
-        TRACK
+        TRACK,
+        UPDATE
     }
     IShareButtonClickListener shareButtonClickListener;
     public BookAdapter (Context context, ArrayList<Book> books, Mode mode) {
@@ -49,7 +52,7 @@ public class BookAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         BookAdapter.ViewHolder viewHolder = (BookAdapter.ViewHolder)holder;
         viewHolder.TitleTextView.setText(books.get(position).Title);
         DatabaseOpenHelper db = new DatabaseOpenHelper(context);
@@ -64,12 +67,37 @@ public class BookAdapter extends RecyclerView.Adapter {
                 viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
                 viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
             break;
+//            case SHARE:
+//                viewHolder.TitleTextView.setText(books.get(position).Title);
+//                viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
+//                viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
+//                viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
+//                break;
             case SHARE:
                 viewHolder.TitleTextView.setText(books.get(position).Title);
                 viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
                 viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
                 viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
+                viewHolder.ShareButton.setText("Update");
+                viewHolder .ShareButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(context, UpdateActivity.class);
+                        i.putExtra("bookid", books.get(position).Id);
+                        i.putExtra("title", books.get(position).Title);
+                        i.putExtra("holderid", books.get(position).HolderId);
+                        i.putExtra("author", books.get(position).Author);
+                        i.putExtra("year", books.get(position).PublicationYear);
+                        i.putExtra("status", books.get(position).Status);
+                        i.putExtra("rentprice", books.get(position).RentPrice);
+                        i.putExtra("pagecount", books.get(position).PageCount);
+                        i.putExtra("isbn", books.get(position).Isbn);
+                        context.startActivity(i);
+                    }
+                });
                 break;
+
+
         }
     }
 

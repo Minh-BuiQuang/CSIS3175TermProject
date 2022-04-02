@@ -39,8 +39,6 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
         });
             RecyclerView recyclerView = findViewById(R.id.book_recyclerview);
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
-            /*ArrayList<Book> allBooks = new ArrayList<>();
-            allBooks = db.getBooks();*/
             books = db.getBooks();
             recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             adapter = new BookAdapter(this, books, BookAdapter.Mode.BORROW);

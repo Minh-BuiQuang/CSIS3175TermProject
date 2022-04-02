@@ -162,6 +162,22 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         long r = sqLiteDatabase.insert(TABLE_BOOK, null, values);
         return r > 0;
     }
+    public boolean updateBookRecord(Book book){
+    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+    ContentValues value = new ContentValues();
+        value.put(BOOK_ID, book.Id);
+        value.put(BOOK_TITLE, book.Title);
+        //value.put(BOOK_HOLDER_ID, book.HolderId);
+        value.put(BOOK_AUTHOR, book.Author);
+        value.put(BOOK_PUBLISH_YEAR, book.PublicationYear);
+        //value.put(BOOK_PAGE_COUNT, book.PageCount);
+        value.put(BOOK_RENT_PRICE, book.RentPrice);
+        value.put(BOOK_DESCRIPTION, book.Description);
+        value.put(BOOK_STATUS, book.Status);
+        value.put(BOOK_ISBN, book.Isbn);
+        long r = sqLiteDatabase.update(TABLE_BOOK, value, BOOK_ID + "=?", new String[]{book.Id.toString()});
+        return  r > 0;
+}
 
     public boolean addShareRecord(Request request, SQLiteDatabase sqLiteDatabase) {
         if(sqLiteDatabase == null) sqLiteDatabase = this.getWritableDatabase();

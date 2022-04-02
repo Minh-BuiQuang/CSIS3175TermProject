@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (position == 2) {
-                    Intent intent = new Intent(getApplicationContext(), ViewBookActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), UpdateBookViewActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt("image", images[2]);
                     intent.putExtras(bundle);

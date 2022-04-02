@@ -20,9 +20,6 @@
             android:name=".ShareBookActivity"
             android:exported="false" />
         <activity
-            android:name=".UpdateAccountActivity"
-            android:exported="false" />
-        <activity
             android:name=".ViewBookActivity"
             android:exported="false" />
         <activity

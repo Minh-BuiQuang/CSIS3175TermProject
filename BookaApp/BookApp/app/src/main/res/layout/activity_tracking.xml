@@ -20,67 +20,67 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="411dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="3dp"
-        android:background="#523A28"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linearLayout"-->
+<!--        android:layout_width="411dp"-->
+<!--        android:layout_height="58dp"-->
+<!--        android:layout_marginTop="3dp"-->
+<!--        android:background="#523A28"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-        <Button
-            android:id="@+id/btnMenu"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/menu"
-            app:backgroundTint="#FFFFFF"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+<!--        <Button-->
+<!--            android:id="@+id/btnMenu"-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:background="@drawable/menu"-->
+<!--            app:backgroundTint="#FFFFFF"-->
+<!--            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />-->
 
-        <TextView
-            android:id="@+id/txtAppTitle"
-            android:layout_width="320dp"
-            android:layout_height="57dp"
-            android:background="#523A28"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/txtAppTitle"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+<!--        <TextView-->
+<!--            android:id="@+id/txtAppTitle"-->
+<!--            android:layout_width="320dp"-->
+<!--            android:layout_height="57dp"-->
+<!--            android:background="#523A28"-->
+<!--            android:gravity="center_horizontal|center_vertical"-->
+<!--            android:text="@string/txtAppTitle"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="30sp"-->
+<!--            android:textStyle="bold" />-->
 
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="411dp"
-        android:layout_height="57dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+<!--    </LinearLayout>-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linearLayout2"-->
+<!--        android:layout_width="411dp"-->
+<!--        android:layout_height="57dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/linearLayout">-->
 
-        <Button
-            android:id="@+id/btnEditUserInfoBack"
-            android:layout_width="41dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/arrow"
-            app:backgroundTint="#523A28"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+<!--        <Button-->
+<!--            android:id="@+id/btnEditUserInfoBack"-->
+<!--            android:layout_width="41dp"-->
+<!--            android:layout_height="38dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:background="@drawable/arrow"-->
+<!--            app:backgroundTint="#523A28"-->
+<!--            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />-->
 
-        <TextView
-            android:id="@+id/txtMainMenu"
-            android:layout_width="338dp"
-            android:layout_height="37dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/txtReport"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/txtMainMenu"-->
+<!--            android:layout_width="338dp"-->
+<!--            android:layout_height="37dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:text="@string/txtReport"-->
+<!--            android:textSize="24sp"-->
+<!--            android:textStyle="bold" />-->
+<!--    </LinearLayout>-->
     <View
         android:id="@+id/viewMainMenu"
         android:layout_width="389dp"
@@ -90,7 +90,7 @@
         android:background="#523A28"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"

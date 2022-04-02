@@ -1,8 +1,11 @@
 package com.csis3175group6.bookapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +32,9 @@ public class AddActivity extends AppCompatActivity {
         DescriptionEditText = findViewById(R.id.txtDescription);
         PageCountEditText = findViewById(R.id.txtPageCount);
         AddButton = findViewById(R.id.btnAdd);
+        //Enable back button on action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 //        AddButton.setOnClickListener(new View.OnClickListener() {
 //            String title, isbn, author, publishYear, description, pageCount;
@@ -88,6 +94,16 @@ public class AddActivity extends AppCompatActivity {
                 Toast.makeText(this, "Add book error!", Toast.LENGTH_LONG).show();
             }
         });
+    }
+    //Implement go back event for Back button on action bar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     EditText TitleEditText, AuthorEditText, PublicationYearEditText, IsbnEditText, DescriptionEditText, PageCountEditText;
     Button AddButton;

@@ -1,11 +1,14 @@
 package com.csis3175group6.bookapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +40,10 @@ public class SignUpActivity extends AppCompatActivity {
         SignUpButton = findViewById(R.id.btnSignUp);
         SignInButton = findViewById(R.id.btnLogIn);
         InfoTextView = findViewById(R.id.bllHasAccount);
+
+        //Enable back button on action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         SignInButton.setOnClickListener(view -> {
             finish();
@@ -107,6 +114,16 @@ public class SignUpActivity extends AppCompatActivity {
                 EmailEditText.setText(EdittingUser.Email);
             }
         }
+    }
+    //Implement go back event for Back button on action bar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     EditText UserNameEditText, PasswordEditText, AddressEditText, ZipCodeEditText, PhoneEditText, EmailEditText;
     TextView InfoTextView;

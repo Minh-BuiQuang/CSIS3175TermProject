@@ -8,58 +8,58 @@
     android:orientation="vertical"
     tools:context=".BorrowRequestActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#523A28"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linearLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#523A28"-->
+<!--        android:orientation="horizontal">-->
 
-        <TextView
-            android:id="@+id/txtAppTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#523A28"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/txtAppTitle"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:padding="5dp"
-            android:textStyle="bold" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/txtAppTitle"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="#523A28"-->
+<!--            android:gravity="center_horizontal|center_vertical"-->
+<!--            android:text="@string/txtAppTitle"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="20sp"-->
+<!--            android:padding="5dp"-->
+<!--            android:textStyle="bold" />-->
+<!--    </LinearLayout>-->
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linearLayout2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
 
-        <Button
-            android:id="@+id/btnEditUserInfoBack"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/arrow"
-            app:backgroundTint="#523A28"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+<!--        <Button-->
+<!--            android:id="@+id/btnEditUserInfoBack"-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:background="@drawable/arrow"-->
+<!--            app:backgroundTint="#523A28"-->
+<!--            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />-->
 
-        <TextView
-            android:id="@+id/txtMainMenu"
-            android:layout_width="320dp"
-            android:layout_height="37dp"
-            android:layout_marginStart="10dp"
-            android:text="@string/txtMainMenu"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/txtMainMenu"-->
+<!--            android:layout_width="320dp"-->
+<!--            android:layout_height="37dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:text="@string/txtMainMenu"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textStyle="bold" />-->
+<!--    </LinearLayout>-->
 
-    <View
-        android:id="@+id/viewMainMenu"
-        android:layout_width="389dp"
-        android:layout_height="5dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="11dp"
-        android:background="#523A28"/>
+<!--    <View-->
+<!--        android:id="@+id/viewMainMenu"-->
+<!--        android:layout_width="389dp"-->
+<!--        android:layout_height="5dp"-->
+<!--        android:layout_marginStart="11dp"-->
+<!--        android:layout_marginEnd="11dp"-->
+<!--        android:background="#523A28"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,11 +1,14 @@
 package com.csis3175group6.bookapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,36 +28,41 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
     BookAdapter adapter;
     TextView receiverName, receiverEmail, receiverPhone;
     Button btnRequest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_borrow_request);
 
-        Button backToMain = findViewById(R.id.btnEditUserInfoBack);
-        backToMain.setOnClickListener(new View.OnClickListener() {
+        //Enable back button on action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        RecyclerView recyclerView = findViewById(R.id.book_recyclerview);
+        DatabaseOpenHelper db = new DatabaseOpenHelper(this);
+        books = db.getBooks();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        adapter = new BookAdapter(this, books, BookAdapter.Mode.BORROW);
+        adapter.setItemClickListener(this);
+        recyclerView.setAdapter(adapter);
+        btnRequest = findViewById(R.id.btnRequest);
+        btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BorrowRequestActivity.this, MainActivity.class));
+                Toast.makeText(BorrowRequestActivity.this, "Hi", Toast.LENGTH_SHORT).show();
             }
         });
-            RecyclerView recyclerView = findViewById(R.id.book_recyclerview);
-            DatabaseOpenHelper db = new DatabaseOpenHelper(this);
-            books = db.getBooks();
-            recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-            adapter = new BookAdapter(this, books, BookAdapter.Mode.BORROW);
-            adapter.setItemClickListener(this);
-            recyclerView.setAdapter(adapter);
+    }
 
-            btnRequest = findViewById(R.id.btnRequest);
-            btnRequest.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(BorrowRequestActivity.this, "Hi", Toast.LENGTH_SHORT).show();
-                }
-            });
-            }
-
-
+    //Implement go back event for Back button on action bar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public void onItemClick(View view, int position) {
           receiverName = findViewById(R.id.txtReceiver);

@@ -67,13 +67,13 @@ public class BookAdapter extends RecyclerView.Adapter {
                 viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
                 viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
             break;
-//            case SHARE:
-//                viewHolder.TitleTextView.setText(books.get(position).Title);
-//                viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
-//                viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
-//                viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
-//                break;
             case SHARE:
+                viewHolder.TitleTextView.setText(books.get(position).Title);
+                viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
+                viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
+                viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
+                break;
+            case UPDATE:
                 viewHolder.TitleTextView.setText(books.get(position).Title);
                 viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
                 viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
@@ -96,8 +96,6 @@ public class BookAdapter extends RecyclerView.Adapter {
                     }
                 });
                 break;
-
-
         }
     }
 

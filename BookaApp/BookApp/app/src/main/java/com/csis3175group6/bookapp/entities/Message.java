@@ -8,15 +8,11 @@ import java.sql.Timestamp;
 
 @DatabaseTable
 public class Message {
-    @DatabaseField(generatedId = true)
     public Long Id;
-    @DatabaseField(canBeNull = false, foreign = true)
-    public User Sender;
-    @DatabaseField(canBeNull = false, foreign = true)
-    public User Receiver;
-    @DatabaseField(canBeNull = false)
+    public Long SenderId;
+    public Long ReceiverId;
     public String Content;
-    @DatabaseField(canBeNull = false)
     public Timestamp TimeStamp;
+    public boolean FromSystem;
     public Message () {}
 }

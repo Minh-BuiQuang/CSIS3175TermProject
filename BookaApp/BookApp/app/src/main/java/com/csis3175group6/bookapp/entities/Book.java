@@ -47,5 +47,9 @@ public class Book{
         Description = description;
         PageCount = pageCount;
         Status = status;
+        //Default values for renting information;
+        RentPrice = -1;
+        RentDuration = -1;
+        RentedTime = new Timestamp(0);
     }
 }

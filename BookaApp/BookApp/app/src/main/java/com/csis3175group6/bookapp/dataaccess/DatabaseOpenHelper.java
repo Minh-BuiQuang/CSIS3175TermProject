@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     final static String DATABASE_NAME = "BookManagement.db";
-    final static int DATABASE_VERSION = 7;
+    final static int DATABASE_VERSION = 9;
     final static String TABLE_USER = "User";
     final static String USER_ID = "UserId";
     final static String USER_NAME = "Name";
@@ -45,6 +45,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     final static String MESSAGE_SENDER_ID = "SenderId";
     final static String MESSAGE_RECEIVER_ID = "ReceiverId";
     final static String MESSAGE_CONTENT = "Content";
+    final static String MESSAGE_FROM_SYSTEM = "FromSystem";
     final static String MESSAGE_TIMESTAMP = "MessageTimeStamp";
 
     final static String TABLE_HISTORY = "ReadHistory";
@@ -78,14 +79,14 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 BOOK_TITLE + " TEXT," + BOOK_OWNER_ID + " INTEGER," + BOOK_HOLDER_ID + " INTEGER," + BOOK_ISBN +
                 " TEXT," + BOOK_AUTHOR + " TEXT," + BOOK_PUBLISH_YEAR + " TEXT," + BOOK_DESCRIPTION +
                 " TEXT," + BOOK_PAGE_COUNT + " INTEGER," + BOOK_STATUS + " INTEGER," + BOOK_RENT_PRICE +
-                " NUMBER," + BOOK_RENT_DURATION + " INTEGER," + BOOK_RENTED_TIME + " TEXT," + BOOK_RENT_INFO + " TEXT,"
+                " NUMBER," + BOOK_RENT_DURATION + " INTEGER," + BOOK_RENTED_TIME + " TIMESTAMP," + BOOK_RENT_INFO + " TEXT,"
                 + "FOREIGN KEY(" + BOOK_OWNER_ID + ")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")," +
                 "FOREIGN KEY(" + BOOK_HOLDER_ID + ")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")";
         db.execSQL(bQuery);
 
         String mQuery = "CREATE TABLE " + TABLE_MESSAGE + "(" + MESSAGE_ID + " INTEGER PRIMARY KEY," +
                 MESSAGE_SENDER_ID + " INTEGER," + MESSAGE_RECEIVER_ID + " INTEGER," + MESSAGE_CONTENT + " TEXT," + MESSAGE_TIMESTAMP +
-                " TEXT," + "FOREIGN KEY(" + MESSAGE_SENDER_ID + ")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")," +
+                " TIMESTAMP," + MESSAGE_FROM_SYSTEM + " BOOLEAN, " + "FOREIGN KEY(" + MESSAGE_SENDER_ID + ")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")," +
                 "FOREIGN KEY(" + MESSAGE_RECEIVER_ID + ")" + " REFERENCES " + TABLE_USER + "(" + USER_ID + ")" + ")";
         db.execSQL(mQuery);
 
@@ -96,7 +97,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.execSQL(hQuery);
 
         String rQuery = "CREATE TABLE " + TABLE_REQUEST + "(" + REQUEST_ID + " INTEGER PRIMARY KEY," + REQUEST_BOOK_ID + " INTEGER," + REQUESTER_ID +
-                " INTEGER REFERENCES " + TABLE_USER + "(" + USER_ID + ")," + REQUEST_TIMESTAMP + " TEXT," + HAS_COMPLETED + " BOOLEAN," + "FOREIGN KEY(" + REQUEST_BOOK_ID + ")" + " REFERENCES " +
+                " INTEGER REFERENCES " + TABLE_USER + "(" + USER_ID + ")," + REQUEST_TIMESTAMP + " TIMESTAMP," + HAS_COMPLETED + " BOOLEAN," + "FOREIGN KEY(" + REQUEST_BOOK_ID + ")" + " REFERENCES " +
                 TABLE_BOOK + "(" + BOOK_ID + ")" + ")";
         db.execSQL(rQuery);
 
@@ -105,11 +106,11 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BOOK);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MESSAGE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_HISTORY);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_REQUEST);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BOOK);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
         onCreate(db);
     }
 
@@ -152,6 +153,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         values.put(BOOK_DESCRIPTION, book.Description);
         values.put(BOOK_PAGE_COUNT, book.PageCount);
         values.put(BOOK_STATUS, book.Status);
+        values.put(BOOK_RENT_DURATION, book.RentDuration);
+        values.put(BOOK_RENT_PRICE, book.RentPrice);
+        values.put(BOOK_RENTED_TIME, book.RentedTime.getTime());
 
         long r = sqLiteDatabase.insert(TABLE_BOOK, null, values);
         return r > 0;
@@ -162,7 +166,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(REQUESTER_ID, request.RequesterId);
         values.put(REQUEST_BOOK_ID, request.BookId);
-        values.put(REQUEST_TIMESTAMP, String.valueOf(request.RequestTimeStamp));
+        values.put(REQUEST_TIMESTAMP, request.RequestTimeStamp.getTime());
         values.put(HAS_COMPLETED, request.HasCompleted);
 
         long r = sqLiteDatabase.insert(TABLE_REQUEST, null, values);
@@ -364,10 +368,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         book.Author = c.getString(c.getColumnIndex(BOOK_AUTHOR));
         book.PublicationYear = c.getString(c.getColumnIndex(BOOK_PUBLISH_YEAR));
         book.Description = c.getString(c.getColumnIndex(BOOK_DESCRIPTION));
-//        book.PageCount = c.getInt(c.getColumnIndex(BOOK_PAGE_COUNT));
+        book.PageCount = c.getInt(c.getColumnIndex(BOOK_PAGE_COUNT));
         book.Status = c.getString(c.getColumnIndex(BOOK_STATUS));
-//        book.RentDuration = c.getInt(c.getColumnIndex(BOOK_RENT_DURATION));
-//        book.RentedTime = c.getInt(c.getColumnIndex(BOOK_RENTED_TIME));
+        book.RentDuration = c.getInt(c.getColumnIndex(BOOK_RENT_DURATION));
+        book.RentedTime = new Timestamp(c.getLong(c.getColumnIndex(BOOK_RENTED_TIME)));
         book.RentInformation = c.getString(c.getColumnIndex(BOOK_RENT_INFO));
         return book;
     }
@@ -377,8 +381,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         Request request = new Request();
         request.Id = c.getLong(c.getColumnIndex(REQUEST_ID));
         request.RequesterId = c.getLong(c.getColumnIndex(REQUESTER_ID));
-        request.BookId = c.getLong(c.getColumnIndex(BOOK_ID));
-//        request.RequestTimeStamp
+        request.BookId = c.getLong(c.getColumnIndex(REQUEST_BOOK_ID));
+        request.RequestTimeStamp = new Timestamp(c.getLong(c.getColumnIndex(REQUEST_TIMESTAMP)));
         request.HasCompleted = Boolean.valueOf(c.getString(c.getColumnIndex(HAS_COMPLETED)));
         return request;
     }

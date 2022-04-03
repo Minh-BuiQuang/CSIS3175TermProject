@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -82,16 +83,16 @@ public class BookAdapter extends RecyclerView.Adapter {
                 viewHolder .ShareButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(context, UpdateActivity.class);
+                        Intent i = new Intent(context, AddActivity.class);
                         i.putExtra("bookid", books.get(position).Id);
-                        i.putExtra("title", books.get(position).Title);
-                        i.putExtra("holderid", books.get(position).HolderId);
-                        i.putExtra("author", books.get(position).Author);
-                        i.putExtra("year", books.get(position).PublicationYear);
-                        i.putExtra("status", books.get(position).Status);
-                        i.putExtra("rentprice", books.get(position).RentPrice);
-                        i.putExtra("pagecount", books.get(position).PageCount);
-                        i.putExtra("isbn", books.get(position).Isbn);
+//                        i.putExtra("title", books.get(position).Title);
+//                        i.putExtra("holderid", books.get(position).HolderId);
+//                        i.putExtra("author", books.get(position).Author);
+//                        i.putExtra("year", books.get(position).PublicationYear);
+//                        i.putExtra("status", books.get(position).Status);
+//                        i.putExtra("rentprice", books.get(position).RentPrice);
+//                        i.putExtra("pagecount", books.get(position).PageCount);
+//                        i.putExtra("isbn", books.get(position).Isbn);
                         context.startActivity(i);
                     }
                 });

@@ -171,10 +171,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         //value.put(BOOK_HOLDER_ID, book.HolderId);
         value.put(BOOK_AUTHOR, book.Author);
         value.put(BOOK_PUBLISH_YEAR, book.PublicationYear);
-        //value.put(BOOK_PAGE_COUNT, book.PageCount);
-        value.put(BOOK_RENT_PRICE, book.RentPrice);
+        value.put(BOOK_PAGE_COUNT, book.PageCount);
+        //value.put(BOOK_RENT_PRICE, book.RentPrice);
         value.put(BOOK_DESCRIPTION, book.Description);
-        value.put(BOOK_STATUS, book.Status);
+        //value.put(BOOK_STATUS, book.Status);
         value.put(BOOK_ISBN, book.Isbn);
         long r = sqLiteDatabase.update(TABLE_BOOK, value, BOOK_ID + "=?", new String[]{book.Id.toString()});
         return  r > 0;
@@ -277,6 +277,22 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return new ArrayList<Book>(Arrays.asList(books));
+    }
+    public Book getBookByOwnerId(Long id) {
+        // array of columns to fetch user data
+        SQLiteDatabase db = this.getReadableDatabase();
+        // selection arguments
+        String[] selectionArgs = {id.toString()};
+        // query user table with conditions
+        Cursor cursor = db.rawQuery("select * from " + TABLE_BOOK + " where " + BOOK_ID + " =?", selectionArgs);
+        Book book = null;
+        if (cursor.getCount() > 0) {
+            cursor.moveToNext();
+            book = ToBook(cursor);
+        }
+        cursor.close();
+        db.close();
+        return book;
     }
 
     public ArrayList<Book> getBooksByOwnerId(Long id){

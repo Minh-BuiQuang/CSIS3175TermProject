@@ -20,7 +20,6 @@ import java.sql.SQLException;
 
 public class AddActivity extends AppCompatActivity {
 
-    DatabaseOpenHelper databaseOpenHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +66,7 @@ public class AddActivity extends AppCompatActivity {
             String isbn = IsbnEditText.getText().toString();
             String description = DescriptionEditText.getText().toString();
             int pageCount = 0;
+            DatabaseOpenHelper db = new DatabaseOpenHelper(this);
             try {
                 pageCount = Integer.parseInt(PageCountEditText.getText().toString());
             }
@@ -78,22 +78,69 @@ public class AddActivity extends AppCompatActivity {
                 return;
             }
             try {
-                //Create new book with entered information. Owner and Holder is current user who created this book
-                Book book = new Book(0l, title,App.getInstance().User.Id, App.getInstance().User.Id, isbn, author, publicationYear, description, pageCount, Book.STATUS_ACTIVE);
-                //Add newly created book to database
-                DatabaseOpenHelper db = new DatabaseOpenHelper(this);
-                boolean success = db.addBookRecord(book);
-                if(success) {
-                    Toast.makeText(this, "New book was added to your book list!", Toast.LENGTH_LONG).show();
-                    finish();
+                boolean success;
+                if(book == null) {
+                    book = new Book(0l, title,App.getInstance().User.Id, App.getInstance().User.Id, isbn, author, publicationYear, description, pageCount, Book.STATUS_ACTIVE);
+                    success = db.addBookRecord(book);
+                    if(success) {
+                        Toast.makeText(this, "New book was added to your book list!", Toast.LENGTH_LONG).show();
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Add book error!", Toast.LENGTH_LONG).show();
+                    }
+                }else {
+                    book.Title = title;
+                    book.Author = author;
+                    book.PublicationYear = publicationYear;
+                    book.Isbn = isbn;
+                    book.Description = description;
+                    book.PageCount = pageCount;
+
+                    success = db.updateBookRecord(book);
+                    if(success) {
+                        Toast.makeText(this, "Book Information Updated!", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
                 }
-                else
-                    Toast.makeText(this, "Add book error!", Toast.LENGTH_LONG).show();
+//                //Create new book with entered information. Owner and Holder is current user who created this book
+//                Book book = new Book(0l, title,App.getInstance().User.Id, App.getInstance().User.Id, isbn, author, publicationYear, description, pageCount, Book.STATUS_ACTIVE);
+//                //Add newly created book to database
+//                DatabaseOpenHelper db = new DatabaseOpenHelper(this);
+//                boolean success = db.addBookRecord(book);
+//                if(success) {
+//                    Toast.makeText(this, "New book was added to your book list!", Toast.LENGTH_LONG).show();
+//                    finish();
+//                }
+//                else
+//                    Toast.makeText(this, "Add book error!", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(this, "Add book error!", Toast.LENGTH_LONG).show();
             }
         });
+
+        //Long bookId = getIntent().getLongExtra(getString(R.string.stringUserId), -1);
+        Long bookId = getIntent().getLongExtra("bookid", 0);
+        //Toast.makeText(this, "Hi", Toast.LENGTH_SHORT).show();
+        if(bookId  > 0) {
+            DatabaseOpenHelper db = new DatabaseOpenHelper(this);
+            try {
+                book = db.getBookByOwnerId(bookId);
+                Toast.makeText(this, "Hi", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (book != null) {
+                AddButton.setText("Update");
+
+                TitleEditText.setText(book.Title);
+                AuthorEditText.setText(book.Author);
+                PublicationYearEditText.setText(book.PublicationYear);
+                IsbnEditText.setText(book.Isbn);
+                DescriptionEditText.setText(book.Description);
+                PageCountEditText.setText(String.valueOf(book.PageCount));
+            }
+        }
     }
     //Implement go back event for Back button on action bar
     @Override
@@ -107,4 +154,5 @@ public class AddActivity extends AppCompatActivity {
     }
     EditText TitleEditText, AuthorEditText, PublicationYearEditText, IsbnEditText, DescriptionEditText, PageCountEditText;
     Button AddButton;
+    Book book;
 }

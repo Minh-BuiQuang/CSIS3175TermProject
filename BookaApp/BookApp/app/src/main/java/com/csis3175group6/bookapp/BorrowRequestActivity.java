@@ -16,9 +16,13 @@ import android.widget.Toast;
 
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Book;
+import com.csis3175group6.bookapp.entities.Message;
 import com.csis3175group6.bookapp.entities.User;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 
 public class BorrowRequestActivity extends AppCompatActivity implements BookAdapter.ItemClickListener {
 
@@ -26,9 +30,10 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
     Book book;
     User user;
     BookAdapter adapter;
-    TextView receiverName, receiverEmail, receiverPhone;
+    TextView receiverName, receiverEmail, receiverPhone, txtDescription;
     Button btnRequest;
-
+    Message message;
+    DatabaseOpenHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +43,7 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         RecyclerView recyclerView = findViewById(R.id.book_recyclerview);
-        DatabaseOpenHelper db = new DatabaseOpenHelper(this);
+        db = new DatabaseOpenHelper(this);
         books = db.getBooks();
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new BookAdapter(this, books, BookAdapter.Mode.BORROW);
@@ -48,7 +53,24 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(BorrowRequestActivity.this, "Hi", Toast.LENGTH_SHORT).show();
+                txtDescription = findViewById(R.id.txtDescription);
+                String description = txtDescription.getText().toString();
+                Long receiverId = user.Id;
+                DatabaseOpenHelper databaseOpenHelper = new DatabaseOpenHelper(BorrowRequestActivity.this);
+                try{
+                    message = new Message(0l,App.getInstance().User.Id,receiverId, description);
+                    //Toast.makeText(BorrowRequestActivity.this, String.valueOf(receiverId), Toast.LENGTH_SHORT).show();
+                    boolean success = databaseOpenHelper.AddMessage(message);
+                    if(success) {
+                        Toast.makeText(BorrowRequestActivity.this, "Send request successfully", Toast.LENGTH_LONG).show();
+                        finish();
+                    } else {
+                        Toast.makeText(BorrowRequestActivity.this, "Cannot send request", Toast.LENGTH_LONG).show();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(BorrowRequestActivity.this, "Can not send message", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -69,7 +91,6 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
           receiverEmail = findViewById(R.id.txtReceiverEmail);
           receiverPhone = findViewById(R.id.txtReceiverPhone);
           book = adapter.getItem(position);
-          DatabaseOpenHelper db = new DatabaseOpenHelper(this);
           user = db.getUser(book.OwnerId);
           receiverName.setText(user.Name);
           receiverEmail.setText(user.Email);

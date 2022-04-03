@@ -1,6 +1,7 @@
 package com.csis3175group6.bookapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,7 +26,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
     private ArrayList<Message> Messages;
     private Mode Mode;
     private LayoutInflater inflater;
-
+    private Context context;
     public enum Mode {
         Send,
         Receive,
@@ -78,6 +79,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
         //Format Received message
         else if(message.ReceiverId == user.Id) {
             viewHolder.MessageLayout.setGravity(Gravity.LEFT);
+
         }
     }
 

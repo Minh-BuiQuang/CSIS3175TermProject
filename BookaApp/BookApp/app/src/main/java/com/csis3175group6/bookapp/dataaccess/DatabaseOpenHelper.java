@@ -278,7 +278,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.close();
         return new ArrayList<Book>(Arrays.asList(books));
     }
-    public Book getBookByOwnerId(Long id) {
+    public Book getBook(Long id) {
         // array of columns to fetch user data
         SQLiteDatabase db = this.getReadableDatabase();
         // selection arguments

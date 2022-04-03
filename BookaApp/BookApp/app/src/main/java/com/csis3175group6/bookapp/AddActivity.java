@@ -102,17 +102,6 @@ public class AddActivity extends AppCompatActivity {
                         finish();
                     }
                 }
-//                //Create new book with entered information. Owner and Holder is current user who created this book
-//                Book book = new Book(0l, title,App.getInstance().User.Id, App.getInstance().User.Id, isbn, author, publicationYear, description, pageCount, Book.STATUS_ACTIVE);
-//                //Add newly created book to database
-//                DatabaseOpenHelper db = new DatabaseOpenHelper(this);
-//                boolean success = db.addBookRecord(book);
-//                if(success) {
-//                    Toast.makeText(this, "New book was added to your book list!", Toast.LENGTH_LONG).show();
-//                    finish();
-//                }
-//                else
-//                    Toast.makeText(this, "Add book error!", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(this, "Add book error!", Toast.LENGTH_LONG).show();
@@ -125,7 +114,7 @@ public class AddActivity extends AppCompatActivity {
         if(bookId  > 0) {
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
             try {
-                book = db.getBookByOwnerId(bookId);
+                book = db.getBook(bookId);
                 Toast.makeText(this, "Hi", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();

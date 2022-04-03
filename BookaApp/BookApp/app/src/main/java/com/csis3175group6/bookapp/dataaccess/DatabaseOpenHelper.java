@@ -172,9 +172,11 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         value.put(BOOK_AUTHOR, book.Author);
         value.put(BOOK_PUBLISH_YEAR, book.PublicationYear);
         value.put(BOOK_PAGE_COUNT, book.PageCount);
-        //value.put(BOOK_RENT_PRICE, book.RentPrice);
+        value.put(BOOK_RENT_PRICE, book.RentPrice);
         value.put(BOOK_DESCRIPTION, book.Description);
-        //value.put(BOOK_STATUS, book.Status);
+        value.put(BOOK_STATUS, book.Status);
+        value.put(BOOK_RENT_DURATION, book.RentDuration);
+        value.put(BOOK_RENT_INFO, book.RentInformation);
         value.put(BOOK_ISBN, book.Isbn);
         long r = sqLiteDatabase.update(TABLE_BOOK, value, BOOK_ID + "=?", new String[]{book.Id.toString()});
         return  r > 0;
@@ -187,7 +189,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         values.put(REQUEST_BOOK_ID, request.BookId);
         values.put(REQUEST_TIMESTAMP, request.RequestTimeStamp.getTime());
         values.put(HAS_COMPLETED, request.HasCompleted);
-
         long r = sqLiteDatabase.insert(TABLE_REQUEST, null, values);
         return r > 0;
     }
@@ -404,6 +405,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         book.RentDuration = c.getInt(c.getColumnIndex(BOOK_RENT_DURATION));
         book.RentedTime = new Timestamp(c.getLong(c.getColumnIndex(BOOK_RENTED_TIME)));
         book.RentInformation = c.getString(c.getColumnIndex(BOOK_RENT_INFO));
+        book.RentPrice = c.getDouble(c.getColumnIndex(BOOK_RENT_PRICE));
         return book;
     }
 

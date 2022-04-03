@@ -27,8 +27,8 @@ public class Book{
     public String RentInformation;
 
     public static final String STATUS_ACTIVE = "Active"; //Default when created. Available to read, lend, give away.
-    public static final String STATUS_FOR_RENT = "ForRent";//Book become available to be rented or lent
-    public static final String STATUS_GIVEAWAY = "Giveaway";// Book become available to be given away
+    public static final String STATUS_FOR_RENT = "For Rent";//Book become available to be rented or lent
+    public static final String STATUS_GIVEAWAY = "Give away";// Book become available to be given away
     public static final String STATUS_RENTED = "Rented"; //Book is being rented, owner can still change information. Holder can read.
     public static final String STATUS_OVERDUE = "Overdue"; //Book is overdue to be returned. Once book is past due date, status become Overdue. Once owner confirm that book is returned, overdue fee will be calculated based on RentDuration and RentPrice
     public static final String STATUS_INACTIVE = "Inactive"; //Book no longer shown in owner book list. Still can be seen in read tracker.

@@ -12,21 +12,22 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleShare">
-
-        <RadioButton
-            android:id="@+id/opt_Share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/optShare" />
 
         <RadioButton
             android:id="@+id/opt_Rent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="@string/optRent" />
+
+        <RadioButton
+            android:id="@+id/opt_Share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/optShare" />
 
         <RadioButton
             android:id="@+id/opt_GiveAway"
@@ -52,61 +53,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="@string/inputNote"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputDate"
+        app:layout_constraintTop_toBottomOf="@+id/inputDuration"
         tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     <Button
         android:id="@+id/btnShare_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="40dp"
         android:text="@string/btnSubmit"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputNote" />
-
-    <Button
-        android:id="@+id/btnCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="44dp"
-        android:text="@string/txtCancel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnShare_2"
-        app:layout_constraintTop_toBottomOf="@+id/inputNote" />
+        app:layout_constraintTop_toBottomOf="@+id/inputPrice" />
 
     <EditText
         android:id="@+id/inputPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="@string/inputPrice"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/inputNote"
         tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     <EditText
-        android:id="@+id/inputDate"
+        android:id="@+id/inputDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
-        android:hint="@string/inputDate"
-        android:inputType="date"
+        android:hint="@string/inputDuration"
+        android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputPrice"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

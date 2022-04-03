@@ -73,6 +73,15 @@ public class BookAdapter extends RecyclerView.Adapter {
                 viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
                 viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
                 viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
+                viewHolder.ShareButton.setText("Share");
+                viewHolder.ShareButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, ShareBookActivity.class);
+                        intent.putExtra("bookid", books.get(position).Id);
+                        context.startActivity(intent);
+                    }
+                });
                 break;
             case UPDATE:
                 viewHolder.TitleTextView.setText(books.get(position).Title);

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -61,6 +62,7 @@ public class ShareBookActivity extends AppCompatActivity {
                     case 1: // share option
                         inputPrice.setEnabled(false);
                         inputPrice.setText("0");
+                        inputDuration.setEnabled(true);
                         inputNote.setEnabled(true);
                         break;
                     case 2: // give away option
@@ -75,16 +77,20 @@ public class ShareBookActivity extends AppCompatActivity {
         });
 
         submit.setOnClickListener(view -> {
-            double price = Double.parseDouble(inputPrice.getText().toString());
-            int duration = Integer.parseInt(inputDuration.getText().toString());
+            String price = (inputPrice.getText().toString());
+            String duration = (inputDuration.getText().toString());
             String note = inputNote.getText().toString();
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
 
+            if(price.equals("") || duration.equals("") || note.equals("") ) {
+                Toast.makeText(this, "Please fill in rent duration, price, and note.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             try {
                 boolean updated;
                 if (optShare.isChecked()) {
-                    book.RentPrice = price;
-                    book.RentDuration = duration;
+                    book.RentPrice = Double.parseDouble(price);
+                    book.RentDuration = Integer.parseInt(duration);
                     book.RentInformation = note;
                     book.Status = Book.STATUS_FOR_RENT;
                     updated = db.updateBookRecord(book);
@@ -93,8 +99,8 @@ public class ShareBookActivity extends AppCompatActivity {
                         finish();
                     }
                 } else if (optRent.isChecked()) {
-                    book.RentPrice = price;
-                    book.RentDuration = duration;
+                    book.RentPrice = Double.parseDouble(price);
+                    book.RentDuration = Integer.parseInt(duration);
                     book.RentInformation = note;
                     book.Status = Book.STATUS_FOR_RENT;
                     updated = db.updateBookRecord(book);
@@ -103,8 +109,8 @@ public class ShareBookActivity extends AppCompatActivity {
                         finish();
                     }
                 } else if (optGiveAway.isChecked()) {
-                    book.RentPrice = price;
-                    book.RentDuration = duration;
+                    book.RentPrice = Double.parseDouble(price);
+                    book.RentDuration = Integer.parseInt(duration);
                     book.RentInformation = note;
                     book.Status = Book.STATUS_GIVEAWAY;
                     updated = db.updateBookRecord(book);

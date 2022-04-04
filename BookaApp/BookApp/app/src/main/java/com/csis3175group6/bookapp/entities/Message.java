@@ -15,10 +15,12 @@ public class Message {
     public Timestamp TimeStamp;
     public boolean FromSystem;
     public Message () {}
-    public Message (Long id, Long senderId, Long receiverId, String content) {
+    public Message (Long id, Long senderId, Long receiverId, String content, Timestamp ts, boolean fromSystem) {
         Id = id;
         SenderId = senderId;
         ReceiverId = receiverId;
         Content = content;
+        TimeStamp = ts;
+        FromSystem = fromSystem;
     }
 }

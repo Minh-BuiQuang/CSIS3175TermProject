@@ -56,20 +56,25 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
                 txtDescription = findViewById(R.id.txtDescription);
                 String description = txtDescription.getText().toString();
                 Long receiverId = user.Id;
-                DatabaseOpenHelper databaseOpenHelper = new DatabaseOpenHelper(BorrowRequestActivity.this);
-                try{
-                    message = new Message(0l,App.getInstance().User.Id,receiverId, description);
-                    //Toast.makeText(BorrowRequestActivity.this, String.valueOf(receiverId), Toast.LENGTH_SHORT).show();
-                    boolean success = databaseOpenHelper.AddMessage(message);
-                    if(success) {
-                        Toast.makeText(BorrowRequestActivity.this, "Send request successfully", Toast.LENGTH_LONG).show();
-                        finish();
-                    } else {
-                        Toast.makeText(BorrowRequestActivity.this, "Cannot send request", Toast.LENGTH_LONG).show();
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
-                    Toast.makeText(BorrowRequestActivity.this, "Can not send message", Toast.LENGTH_LONG).show();
+                Timestamp ts = new Timestamp(System.currentTimeMillis());
+//                Toast.makeText(BorrowRequestActivity.this, String.valueOf(receiverId), Toast.LENGTH_SHORT).show();
+
+                if(description.isEmpty()) {
+                    Toast.makeText(BorrowRequestActivity.this, "Please write some notes!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                message = new Message();
+                message.TimeStamp = new Timestamp(System.currentTimeMillis());
+                message.Content = description;
+                message.SenderId = App.getInstance().User.Id;
+                message.ReceiverId = receiverId;
+                message.FromSystem = false;
+                boolean success = db.AddMessage(message);
+
+                if(success){
+                    Toast.makeText(BorrowRequestActivity.this, "Sending message successfully!", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(BorrowRequestActivity.this, "Cannot send message.", Toast.LENGTH_LONG).show();
                 }
             }
         });

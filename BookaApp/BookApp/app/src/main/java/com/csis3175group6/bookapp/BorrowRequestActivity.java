@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,11 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_borrow_request);
+
+        //Get linearlayout
+        LinearLayout contactLayout = (LinearLayout) findViewById(R.id.popUpContactInfo);
+        //Set contact layout to invisible
+        contactLayout.setVisibility(View.INVISIBLE);
 
         //Enable back button on action bar
         ActionBar actionBar = getSupportActionBar();
@@ -92,13 +98,24 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
     }
     @Override
     public void onItemClick(View view, int position) {
-          receiverName = findViewById(R.id.txtReceiver);
-          receiverEmail = findViewById(R.id.txtReceiverEmail);
-          receiverPhone = findViewById(R.id.txtReceiverPhone);
-          book = adapter.getItem(position);
-          user = db.getUser(book.OwnerId);
-          receiverName.setText(user.Name);
-          receiverEmail.setText(user.Email);
-          receiverPhone.setText(user.Phone);
+        LinearLayout contactLayout = (LinearLayout) findViewById(R.id.popUpContactInfo);
+        contactLayout.setVisibility(View.VISIBLE);
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) contactLayout.getLayoutParams();
+        lp.height = 1200;
+        contactLayout.setLayoutParams(lp);
+
+        LinearLayout bookListLayout = (LinearLayout) findViewById(R.id.bookListView);
+        LinearLayout.LayoutParams lpb = (LinearLayout.LayoutParams) bookListLayout.getLayoutParams();
+        lpb.weight = 2;
+        bookListLayout.setLayoutParams(lpb);
+        
+        receiverName = findViewById(R.id.txtReceiver);
+        receiverEmail = findViewById(R.id.txtReceiverEmail);
+        receiverPhone = findViewById(R.id.txtReceiverPhone);
+        book = adapter.getItem(position);
+        user = db.getUser(book.OwnerId);
+        receiverName.setText(user.Name);
+        receiverEmail.setText(user.Email);
+        receiverPhone.setText(user.Phone);
     }
 }

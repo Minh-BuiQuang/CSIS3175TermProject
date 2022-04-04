@@ -115,7 +115,6 @@ public class AddActivity extends AppCompatActivity {
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
             try {
                 book = db.getBook(bookId);
-                Toast.makeText(this, "Hi", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
             }

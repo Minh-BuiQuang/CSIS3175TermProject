@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.csis3175group6.bookapp.entities.*;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -181,8 +180,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         long r = sqLiteDatabase.update(TABLE_BOOK, value, BOOK_ID + "=?", new String[]{book.Id.toString()});
         return  r > 0;
 }
-
-    public boolean addShareRecord(Request request, SQLiteDatabase sqLiteDatabase) {
+    public boolean addRequestRecord(Request request) {
+        return addRequestRecord(request, null);
+    }
+    public boolean addRequestRecord(Request request, SQLiteDatabase sqLiteDatabase) {
         if(sqLiteDatabase == null) sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(REQUESTER_ID, request.RequesterId);

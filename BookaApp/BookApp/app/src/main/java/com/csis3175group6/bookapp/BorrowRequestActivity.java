@@ -18,11 +18,11 @@ import android.widget.Toast;
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Book;
 import com.csis3175group6.bookapp.entities.Message;
+import com.csis3175group6.bookapp.entities.Request;
 import com.csis3175group6.bookapp.entities.User;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 
 public class BorrowRequestActivity extends AppCompatActivity implements BookAdapter.ItemClickListener {
@@ -33,7 +33,6 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
     BookAdapter adapter;
     TextView receiverName, receiverEmail, receiverPhone, txtDescription;
     Button btnRequest;
-    Message message;
     DatabaseOpenHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,18 +75,37 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
                     Toast.makeText(BorrowRequestActivity.this, "Please write some notes!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                Message systemMessage = new Message();
+                User user = App.getInstance().User;
+                systemMessage.TimeStamp = new Timestamp(System.currentTimeMillis());
+                systemMessage.SenderId = user.Id;
+                systemMessage.Content = user.Name + " has requested " + book.Title;
+                systemMessage.ReceiverId = receiverId;
+                systemMessage.FromSystem = true;
+
+                Message message;
                 message = new Message();
                 message.TimeStamp = new Timestamp(System.currentTimeMillis());
                 message.Content = description;
                 message.SenderId = App.getInstance().User.Id;
                 message.ReceiverId = receiverId;
                 message.FromSystem = false;
-                boolean success = db.AddMessage(message);
+
+                Request request = new Request();
+                request.RequesterId = App.getInstance().User.Id;
+                request.BookId = book.Id;
+                request.RequestTimeStamp = new Timestamp(System.currentTimeMillis());
+                boolean success = db.AddMessage(systemMessage) && db.AddMessage(message) && db.addRequestRecord(request);
 
                 if(success){
-                    Toast.makeText(BorrowRequestActivity.this, "Sending message successfully!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(BorrowRequestActivity.this, "Book requested!", Toast.LENGTH_LONG).show();
+                    finish();
+                    Intent intent = new Intent(BorrowRequestActivity.this, MessageActivity.class);
+                    intent.putExtra("userId", book.OwnerId);
+                    startActivity(intent);
                 }else{
-                    Toast.makeText(BorrowRequestActivity.this, "Cannot send message.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(BorrowRequestActivity.this, "Error requesting book", Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -63,11 +63,15 @@ public class MessageAdapter extends RecyclerView.Adapter {
         User user = App.getInstance().User;
         //Format views for system message
         if(message.FromSystem) {
-            viewHolder.MessageLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            params.gravity = Gravity.CENTER_HORIZONTAL;
+            viewHolder.MessageLayout.setLayoutParams(params);
             viewHolder.MessageLayout.setBackgroundColor(Color.parseColor("#00000000"));
-            viewHolder.TimeTextView.setVisibility(View.INVISIBLE);
-            viewHolder.DateTextView.setVisibility(View.INVISIBLE);
-            viewHolder.MessageTextView.setTextColor(Color.BLACK);
+            viewHolder.TimeTextView.setVisibility(View.GONE);
+            viewHolder.DateTextView.setVisibility(View.GONE);
+            viewHolder.MessageTextView.setTextColor(Color.GRAY);
+            viewHolder.MessageTextView.setTextSize(14);
+
         }
         //Format Sent message
         else if(message.SenderId == user.Id) {

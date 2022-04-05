@@ -62,7 +62,6 @@ public class BookAdapter extends RecyclerView.Adapter {
         viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
         switch (mode){
             case BORROW:
-                viewHolder.ShareButton.setVisibility(View.INVISIBLE);
                 user = db.getUser(books.get(position).OwnerId);
                 viewHolder.OwnerNameTextView.setText("Owner: " + user.Name);
             break;

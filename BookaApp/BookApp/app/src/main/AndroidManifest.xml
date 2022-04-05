@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectLayout">
         <activity
+            android:name=".ViewMessageActivity"
+            android:exported="false" />
+        <activity
             android:name=".UpdateBookViewActivity"
             android:exported="false" />
         <activity

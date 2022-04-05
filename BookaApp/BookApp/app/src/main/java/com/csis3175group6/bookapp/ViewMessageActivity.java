@@ -2,13 +2,12 @@ package com.csis3175group6.bookapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Message;
@@ -28,18 +27,20 @@ public class ViewMessageActivity extends AppCompatActivity {
         ArrayList<HashMap<String, String>> userMessageList = new ArrayList<>();
 
         DatabaseOpenHelper db = new DatabaseOpenHelper(this);
-        ArrayList<Message> messages = db.GetMessageDistinct(App.getInstance().User.Id);
+        ArrayList<Message> messages = db.GetMessageByUserId(App.getInstance().User.Id);
+        ArrayList<Message> filteredMessages = new ArrayList<>();
         for (Message message : messages) {
             User receiver = db.getUser(message.ReceiverId);
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put("UserName", receiver.Name);
-            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy h:mm a");
-            hashMap.put("TimeStamp", timeFormat.format(message.TimeStamp.getTime()));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM");
+            hashMap.put("Timestamp", dateFormat.format(message.TimeStamp.getTime()));
+            hashMap.put("Content", message.Content);
             userMessageList.add(hashMap);
         }
 
         UserMessageListView = findViewById(R.id.message_listview);
-        SimpleAdapter adapter = new SimpleAdapter(this, userMessageList, R.layout.user_item,new String[] {"UserName", "Timestamp"}, new int[]{R.id.username_textview, R.id.timestamp_textview}) {
+        SimpleAdapter adapter = new SimpleAdapter(this, userMessageList, R.layout.user_item,new String[] {"UserName", "Content", "Timestamp"}, new int[]{R.id.username_textview, R.id.message_textview, R.id.timestamp_textview}) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -50,7 +51,9 @@ public class ViewMessageActivity extends AppCompatActivity {
         };
         UserMessageListView.setAdapter(adapter);
         UserMessageListView.setOnItemClickListener((adapterView, view, i, l) -> {
-                Toast.makeText(getBaseContext(), "Position " + i,Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ViewMessageActivity.this, MessageActivity.class);
+            intent.putExtra("userId", messages.get(i).ReceiverId);
+            startActivity(intent);
         });
     }
 

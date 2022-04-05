@@ -134,7 +134,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.option_menu, menu);
 
         //Hide admin options if user is not an admin
-        if(App.getInstance().User.Role.equals(User.ROLE_USER)) {
+        User user = App.getInstance().User;
+        if(user!= null && user.Role.equals(User.ROLE_USER)) {
             MenuItem item = menu.findItem(R.id.itemUserList);
             item.setVisible(false);
         }
@@ -151,6 +152,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.itemUserList:
                 startActivity(new Intent(MainActivity.this, UserActivity.class));
+                break;
+            case R.id.itemMessageList:
+                startActivity(new Intent(MainActivity.this, ViewMessageActivity.class));
                 break;
             case R.id.itemLogOut:
                 //Set user to null and how login screen

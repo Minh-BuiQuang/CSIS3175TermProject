@@ -375,6 +375,18 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return messages;
     }
 
+    public ArrayList<Message> GetMessageByUserId(Long userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + TABLE_MESSAGE +
+                " where " + MESSAGE_SENDER_ID + "=? or " + MESSAGE_RECEIVER_ID + "=? order by " + MESSAGE_TIMESTAMP + " desc",
+                new String[]{userId.toString(), userId.toString()});
+        ArrayList<Message> messages = new ArrayList<>();
+        while (cursor.moveToNext()) messages.add(ToMessage(cursor));
+        cursor.close();
+        db.close();
+        return messages;
+    }
+
     @SuppressLint("Range")
     private User ToUser(Cursor c) {
         User user = new User();

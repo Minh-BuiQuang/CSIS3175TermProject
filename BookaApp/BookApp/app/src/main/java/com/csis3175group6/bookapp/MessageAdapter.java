@@ -55,7 +55,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
         viewHolder.MessageTextView.setText(message.Content);
 
         SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         viewHolder.TimeTextView.setText(timeFormat.format(message.TimeStamp.getTime()));
         viewHolder.DateTextView.setText(dateFormat.format(message.TimeStamp.getTime()));
         viewHolder.MessageTextView.setText(message.Content);
@@ -67,7 +67,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             viewHolder.MessageLayout.setBackgroundColor(Color.parseColor("#00000000"));
             viewHolder.TimeTextView.setVisibility(View.INVISIBLE);
             viewHolder.DateTextView.setVisibility(View.INVISIBLE);
-            viewHolder.MessageTextView.setTextColor(Color.GREEN);
+            viewHolder.MessageTextView.setTextColor(Color.BLACK);
         }
         //Format Sent message
         else if(message.SenderId == user.Id) {
@@ -98,7 +98,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             MessageLayout = itemView.findViewById(R.id.message_layout);
             MessageTextView = itemView.findViewById(R.id.message_textview);
             TimeTextView = itemView.findViewById(R.id.time_textview);
-            DateTextView = itemView.findViewById(R.id.time_textview);
+            DateTextView = itemView.findViewById(R.id.date_textview);
         }
     }
 }

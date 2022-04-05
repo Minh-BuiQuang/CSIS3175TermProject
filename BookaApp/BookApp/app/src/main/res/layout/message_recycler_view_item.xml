@@ -16,7 +16,7 @@
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="match_parent"
-           android:textColor="@color/black"
+           android:textColor="@color/white"
            android:id="@+id/message_textview"
            android:gravity="center_vertical"
            android:textSize="18dp"/>
@@ -27,18 +27,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="50dp"
-                android:textSize="12dp"
+                android:width="80dp"
+                android:textSize="10dp"
                 android:textAlignment="viewEnd"
-                android:textColor="#40000000"
+                android:textColor="#DDDDDD"
                 android:id="@+id/date_textview"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="50dp"
-                android:textSize="12dp"
+                android:width="80dp"
+                android:textSize="10dp"
                 android:textAlignment="viewEnd"
-                android:textColor="#40000000"
+                android:textColor="#DDDDDD"
                 android:id="@+id/time_textview"/>
         </LinearLayout>
     </LinearLayout>

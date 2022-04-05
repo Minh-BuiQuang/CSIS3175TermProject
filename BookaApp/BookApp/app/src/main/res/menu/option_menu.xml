@@ -4,6 +4,8 @@
         android:title="@string/txtUserInfo"/>
     <item android:id="@+id/itemUserList"
         android:title="@string/txtUserList"/>
+    <item android:id="@+id/itemMessageList"
+        android:title="@string/messages_txt"/>
     <item android:id="@+id/itemLogOut"
         android:title="@string/txtLogOut"/>
 </menu>

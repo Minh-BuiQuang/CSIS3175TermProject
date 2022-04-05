@@ -88,7 +88,8 @@ public class MessageActivity extends AppCompatActivity {
         MessageRecyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                MessageRecyclerView.smoothScrollToPosition(Messages.size() - 1);
+                if(Messages.size() > 0)
+                    MessageRecyclerView.smoothScrollToPosition(Messages.size() - 1);
             }
         }, 50);
     }

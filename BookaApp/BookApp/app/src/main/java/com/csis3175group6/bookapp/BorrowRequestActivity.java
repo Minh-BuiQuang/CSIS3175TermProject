@@ -51,8 +51,15 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
         RecyclerView recyclerView = findViewById(R.id.book_recyclerview);
         db = new DatabaseOpenHelper(this);
         books = db.getBooks();
+        ArrayList<Book> sharedBook = new ArrayList();
+
+        //Filter the books that are being shared and not owned by the current logged in user.
+        for (Book book : books) {
+            if((book.Status.equals(Book.STATUS_FOR_RENT) || book.Status.equals(Book.STATUS_GIVEAWAY)) && book.OwnerId != App.getInstance().User.Id)
+                sharedBook.add(book);
+        }
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        adapter = new BookAdapter(this, books, BookAdapter.Mode.BORROW);
+        adapter = new BookAdapter(this, sharedBook, BookAdapter.Mode.BORROW);
         adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
         btnRequest = findViewById(R.id.btnRequest);

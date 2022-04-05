@@ -46,9 +46,11 @@ public class ViewMessageActivity extends AppCompatActivity {
         }
 
         for (Message message : filteredMessages) {
-            User receiver = db.getUser(message.ReceiverId);
+            User loggedInUser = App.getInstance().User;
+            Long targetUserId = loggedInUser.Id == message.SenderId ? message.ReceiverId : message.SenderId;
+            User targetUser = db.getUser(targetUserId);
             HashMap<String, String> hashMap = new HashMap<>();
-            hashMap.put("UserName", receiver.Name);
+            hashMap.put("UserName", targetUser.Name);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM");
             hashMap.put("Timestamp", dateFormat.format(message.TimeStamp.getTime()));
             hashMap.put("Content", message.Content);
@@ -68,7 +70,10 @@ public class ViewMessageActivity extends AppCompatActivity {
         UserMessageListView.setAdapter(adapter);
         UserMessageListView.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent intent = new Intent(ViewMessageActivity.this, MessageActivity.class);
-            intent.putExtra("userId", messages.get(i).ReceiverId);
+            Long loggedInUserId = App.getInstance().User.Id;
+            Message message = messages.get(i);
+            Long targetId = loggedInUserId == message.SenderId ? message.ReceiverId : message.SenderId;
+                intent.putExtra("userId", targetId);
             startActivity(intent);
         });
     }

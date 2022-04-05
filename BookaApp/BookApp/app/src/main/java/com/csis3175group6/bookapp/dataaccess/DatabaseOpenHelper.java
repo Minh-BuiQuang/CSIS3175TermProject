@@ -366,8 +366,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public ArrayList<Message> GetMessage(Long senderId, Long receiverId) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from " + TABLE_MESSAGE +
-                " where " + MESSAGE_SENDER_ID + "=? and " + MESSAGE_RECEIVER_ID + "=?",
-                new String[]{senderId.toString(),receiverId.toString()});
+                " where (" + MESSAGE_SENDER_ID + "=? and " + MESSAGE_RECEIVER_ID + "=?) or ("  +
+                        MESSAGE_RECEIVER_ID + "=? and " + MESSAGE_SENDER_ID + "=?)",
+                new String[]{senderId.toString(),receiverId.toString(),senderId.toString(),receiverId.toString()});
         ArrayList<Message> messages = new ArrayList<>();
         while(cursor.moveToNext()) messages.add(ToMessage(cursor));
         cursor.close();

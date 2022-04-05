@@ -327,6 +327,19 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return request;
     }
 
+    public ArrayList<Request> getRequestsByBookId(Long bookId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + TABLE_REQUEST + " where " + BOOK_ID + "=?", new String[] {bookId.toString()});
+        Request[] requests = new Request[cursor.getCount()];
+        int index = 0;
+        while(cursor.moveToNext()) {
+            requests[index++] = ToRequest(cursor);
+        }
+        cursor.close();
+        db.close();
+        return new ArrayList<Request>(Arrays.asList(requests));
+    }
+
     public ArrayList<Request> getRequests() {
        SQLiteDatabase db = this.getReadableDatabase();
        Cursor cursor = db.rawQuery("select * from " + TABLE_REQUEST, null);

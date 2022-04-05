@@ -123,24 +123,40 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
     }
     @Override
     public void onItemClick(View view, int position) {
-        LinearLayout contactLayout = (LinearLayout) findViewById(R.id.popUpContactInfo);
-        contactLayout.setVisibility(View.VISIBLE);
-        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) contactLayout.getLayoutParams();
-        lp.height = 1200;
-        contactLayout.setLayoutParams(lp);
-
-        LinearLayout bookListLayout = (LinearLayout) findViewById(R.id.bookListView);
-        LinearLayout.LayoutParams lpb = (LinearLayout.LayoutParams) bookListLayout.getLayoutParams();
-        lpb.weight = 2;
-        bookListLayout.setLayoutParams(lpb);
-        
-        receiverName = findViewById(R.id.txtReceiver);
-        receiverEmail = findViewById(R.id.txtReceiverEmail);
-        receiverPhone = findViewById(R.id.txtReceiverPhone);
         book = adapter.getItem(position);
         user = db.getUser(book.OwnerId);
-        receiverName.setText(user.Name);
-        receiverEmail.setText(user.Email);
-        receiverPhone.setText(user.Phone);
+        ArrayList<Request> requests = db.getRequestsByBookId(book.Id);
+        boolean requested = false;
+        User user = App.getInstance().User;
+        for (Request request : requests) {
+            if(request.HasCompleted == false && request.RequesterId == user.Id)
+                requested = true;
+        }
+        if(requested) {
+            Toast.makeText(this, "This book was already requested!\nYou can send a message to remind the owner", Toast.LENGTH_LONG).show();
+            finish();
+            Intent intent = new Intent(BorrowRequestActivity.this, MessageActivity.class);
+            intent.putExtra("userId", book.OwnerId);
+            startActivity(intent);
+        }
+        else {
+            LinearLayout contactLayout = (LinearLayout) findViewById(R.id.popUpContactInfo);
+            contactLayout.setVisibility(View.VISIBLE);
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) contactLayout.getLayoutParams();
+            lp.height = 1200;
+            contactLayout.setLayoutParams(lp);
+
+            LinearLayout bookListLayout = (LinearLayout) findViewById(R.id.bookListView);
+            LinearLayout.LayoutParams lpb = (LinearLayout.LayoutParams) bookListLayout.getLayoutParams();
+            lpb.weight = 2;
+            bookListLayout.setLayoutParams(lpb);
+
+            receiverName = findViewById(R.id.txtReceiver);
+            receiverEmail = findViewById(R.id.txtReceiverEmail);
+            receiverPhone = findViewById(R.id.txtReceiverPhone);
+            receiverName.setText(user.Name);
+            receiverEmail.setText(user.Email);
+            receiverPhone.setText(user.Phone);
+        }
     }
 }

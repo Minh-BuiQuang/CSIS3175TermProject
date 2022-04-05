@@ -127,9 +127,9 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
         user = db.getUser(book.OwnerId);
         ArrayList<Request> requests = db.getRequestsByBookId(book.Id);
         boolean requested = false;
-        User user = App.getInstance().User;
+        User useR = App.getInstance().User;
         for (Request request : requests) {
-            if(request.HasCompleted == false && request.RequesterId == user.Id)
+            if(request.HasCompleted == false && request.RequesterId == useR.Id)
                 requested = true;
         }
         if(requested) {

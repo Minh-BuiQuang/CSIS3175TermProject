@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:id="@+id/book_request"
         android:weightSum="10">
         <LinearLayout
             android:layout_width="0dp"
@@ -43,6 +44,25 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="5dp" />
+                <TextView
+                    android:id="@+id/page_count_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:id="@+id/status_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/description_textview"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:layout_marginTop="5dp" />-->
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -50,13 +70,27 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/owner_name_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"/>
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"/>
             <TextView
-                android:id="@+id/status_textview"
+                android:id="@+id/rent_duration_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp" />
+            <TextView
+                android:id="@+id/rent_price_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp" />
+            <TextView
+                android:id="@+id/rent_time_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"

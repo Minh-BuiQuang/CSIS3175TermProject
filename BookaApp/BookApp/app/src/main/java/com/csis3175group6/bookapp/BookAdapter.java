@@ -3,10 +3,12 @@ package com.csis3175group6.bookapp;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Book;
+import com.csis3175group6.bookapp.entities.Request;
 import com.csis3175group6.bookapp.entities.User;
 
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ public class BookAdapter extends RecyclerView.Adapter {
 
     private ArrayList<Book> books;
     private User user;
+    private ArrayList<Request> requests;
     private LayoutInflater inflater;
     private Mode mode;
     private Context context;
@@ -60,6 +64,24 @@ public class BookAdapter extends RecyclerView.Adapter {
         viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
         viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
         viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
+        viewHolder.PageCountTextView.setText("Page count: " + books.get(position).PageCount);
+//        viewHolder.DescriptionTextView.setText("Description: " + books.get(position).Description);
+        //Update book status if the book available for rent and display rent information
+        if(books.get(position).Status.equals(Book.STATUS_FOR_RENT)){
+//            viewHolder.BookRequestLayout.setBackgroundColor(Color.GREEN);
+            viewHolder.StatusTextView.setTextColor(Color.GREEN);
+            viewHolder.StatusTextView.setText("This book is available for rent.");
+            viewHolder.RentTimeTextView.setText("Rent start at " + books.get(position).RentedTime);
+            viewHolder.RentDurationTextView.setText("You can rent the book for " + books.get(position).RentDuration + " days.");
+            viewHolder.RentPriceTextView.setText("Rent price is $ " + books.get(position).RentPrice);
+        }
+        //Check if book has been requested then change the color and status of the book
+        requests = db.getRequestsByBookId(books.get(position).Id);
+        for (Request request : requests) {
+            if(request.HasCompleted == false && request.RequesterId == App.getInstance().User.Id)
+                viewHolder.StatusTextView.setTextColor(Color.MAGENTA);
+                viewHolder.StatusTextView.setText("Request in progress");
+        }
         switch (mode){
             case BORROW:
                 user = db.getUser(books.get(position).OwnerId);
@@ -91,7 +113,8 @@ public class BookAdapter extends RecyclerView.Adapter {
 
     public class ViewHolder extends RecyclerView.ViewHolder  implements View
             .OnClickListener{
-        TextView TitleTextView, OwnerNameTextView, AuthorTextView, YearTextView, StatusTextView;
+//        LinearLayout BookRequestLayout;
+        TextView TitleTextView, OwnerNameTextView, AuthorTextView, YearTextView, StatusTextView, PageCountTextView, RentPriceTextView, RentDurationTextView, RentTimeTextView, DescriptionTextView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             TitleTextView = itemView.findViewById(R.id.title_textview);
@@ -99,6 +122,13 @@ public class BookAdapter extends RecyclerView.Adapter {
             AuthorTextView = itemView.findViewById(R.id.author_textview);
             YearTextView = itemView.findViewById(R.id.year_textview);
             StatusTextView = itemView.findViewById(R.id.status_textview);
+            PageCountTextView = itemView.findViewById(R.id.page_count_textview);
+            RentPriceTextView = itemView.findViewById(R.id.rent_price_textview);
+            RentDurationTextView = itemView.findViewById(R.id.rent_duration_textview);
+            RentTimeTextView = itemView.findViewById(R.id.rent_time_textview);
+//            BookRequestLayout = itemView.findViewById(R.id.book_request);
+//            DescriptionTextView = itemView.findViewById(R.id.description_textview);
+
             TitleTextView.setOnClickListener(view -> {
                 if(shareButtonClickListener != null) {
                     shareButtonClickListener.onShareButtonClickListener(view, getAdapterPosition());

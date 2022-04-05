@@ -55,6 +55,7 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
         //Filter the books that are being shared and not owned by the current logged in user.
         for (Book book : books) {
             if((book.Status.equals(Book.STATUS_FOR_RENT) || book.Status.equals(Book.STATUS_GIVEAWAY)) && book.OwnerId != App.getInstance().User.Id)
+
                 sharedBook.add(book);
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -130,6 +131,7 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
         User useR = App.getInstance().User;
         for (Request request : requests) {
             if(request.HasCompleted == false && request.RequesterId == useR.Id)
+
                 requested = true;
         }
         if(requested) {

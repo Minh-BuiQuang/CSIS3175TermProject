@@ -138,5 +138,6 @@
     <string name="optRent">For Rent</string>
     <string name="optGiveAway">Give away</string>
     <string name="inputPrice">Please input price</string>
+    <string name="messages_txt">Messages</string>
 
 </resources>

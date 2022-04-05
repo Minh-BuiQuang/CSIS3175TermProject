@@ -29,7 +29,23 @@ public class ViewMessageActivity extends AppCompatActivity {
         DatabaseOpenHelper db = new DatabaseOpenHelper(this);
         ArrayList<Message> messages = db.GetMessageByUserId(App.getInstance().User.Id);
         ArrayList<Message> filteredMessages = new ArrayList<>();
-        for (Message message : messages) {
+
+        //Check if conversation already exist in the filtered list
+        //Add only the latest message of each conversation
+        //Messages with the same receiver and sender or the other way around is considered one conversation.
+        for (int i = 0; i < messages.size(); i++) {
+            boolean conversationExists = false;
+            Message message = messages.get(i);
+            for (int j = 0; j < filteredMessages.size(); j++) {
+                Message filteredMessage = filteredMessages.get(j);
+                if((message.SenderId == filteredMessage.SenderId && message.ReceiverId == filteredMessage.ReceiverId) ||
+                        (message.SenderId == filteredMessage.ReceiverId && message.ReceiverId == filteredMessage.SenderId))
+                    conversationExists = true;
+            }
+            if(!conversationExists) filteredMessages.add(message);
+        }
+
+        for (Message message : filteredMessages) {
             User receiver = db.getUser(message.ReceiverId);
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put("UserName", receiver.Name);

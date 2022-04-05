@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,7 +42,7 @@ public class UpdateBookViewActivity extends AppCompatActivity implements BookAda
         books = db.getBooksByOwnerId(App.getInstance().User.Id);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new BookAdapter(this, books, BookAdapter.Mode.UPDATE);
-        //adapter.setItemClickListener(this);
+        adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
     }
     //Implement go back event for Back button on action bar
@@ -55,6 +57,8 @@ public class UpdateBookViewActivity extends AppCompatActivity implements BookAda
     }
     @Override
     public void onItemClick(View view, int position) {
-
+        Intent i = new Intent(this, AddActivity.class);
+        i.putExtra("bookid", books.get(position).Id);
+        startActivity(i);
     }
 }

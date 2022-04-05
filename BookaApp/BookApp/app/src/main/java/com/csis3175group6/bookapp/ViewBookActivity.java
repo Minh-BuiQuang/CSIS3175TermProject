@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +17,7 @@ import com.csis3175group6.bookapp.entities.Book;
 
 import java.util.ArrayList;
 
-public class ViewBookActivity extends AppCompatActivity implements BookAdapter.IShareButtonClickListener{
+public class ViewBookActivity extends AppCompatActivity implements BookAdapter.IShareButtonClickListener, BookAdapter.ItemClickListener {
     ArrayList<Book> books;
     BookAdapter adapter;
     @Override
@@ -37,6 +38,7 @@ public class ViewBookActivity extends AppCompatActivity implements BookAdapter.I
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new BookAdapter(this, books, BookAdapter.Mode.SHARE);
         adapter.setShareButtonClickListener(this);
+        adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
     }
     //Implement go back event for Back button on action bar
@@ -52,5 +54,12 @@ public class ViewBookActivity extends AppCompatActivity implements BookAdapter.I
     @Override
     public void onShareButtonClickListener(View view, int position) {
         Toast.makeText(this, "Clicked on book: " + books.get(position).Title, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Intent intent = new Intent(this, ShareBookActivity.class);
+        intent.putExtra("bookid", books.get(position).Id);
+        startActivity(intent);
     }
 }

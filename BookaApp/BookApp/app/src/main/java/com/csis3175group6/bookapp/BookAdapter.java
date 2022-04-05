@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class BookAdapter extends RecyclerView.Adapter {
 
     private ArrayList<Book> books;
-    private ArrayList<User> users;
     private User user;
     private LayoutInflater inflater;
     private Mode mode;
@@ -55,57 +54,18 @@ public class BookAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         BookAdapter.ViewHolder viewHolder = (BookAdapter.ViewHolder)holder;
-        viewHolder.TitleTextView.setText(books.get(position).Title);
         DatabaseOpenHelper db = new DatabaseOpenHelper(context);
 
+        viewHolder.TitleTextView.setText(books.get(position).Title);
+        viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
+        viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
+        viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
         switch (mode){
             case BORROW:
                 viewHolder.ShareButton.setVisibility(View.INVISIBLE);
-                viewHolder.TitleTextView.setText(books.get(position).Title);
                 user = db.getUser(books.get(position).OwnerId);
                 viewHolder.OwnerNameTextView.setText("Owner: " + user.Name);
-                viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
-                viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
-                viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
             break;
-            case SHARE:
-                viewHolder.TitleTextView.setText(books.get(position).Title);
-                viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
-                viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
-                viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
-                viewHolder.ShareButton.setText("Share");
-                viewHolder.ShareButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(context, ShareBookActivity.class);
-                        intent.putExtra("bookid", books.get(position).Id);
-                        context.startActivity(intent);
-                    }
-                });
-                break;
-            case UPDATE:
-                viewHolder.TitleTextView.setText(books.get(position).Title);
-                viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
-                viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
-                viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
-                viewHolder.ShareButton.setText("Update");
-                viewHolder .ShareButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(context, AddActivity.class);
-                        i.putExtra("bookid", books.get(position).Id);
-//                        i.putExtra("title", books.get(position).Title);
-//                        i.putExtra("holderid", books.get(position).HolderId);
-//                        i.putExtra("author", books.get(position).Author);
-//                        i.putExtra("year", books.get(position).PublicationYear);
-//                        i.putExtra("status", books.get(position).Status);
-//                        i.putExtra("rentprice", books.get(position).RentPrice);
-//                        i.putExtra("pagecount", books.get(position).PageCount);
-//                        i.putExtra("isbn", books.get(position).Isbn);
-                        context.startActivity(i);
-                    }
-                });
-                break;
         }
     }
 
@@ -132,11 +92,9 @@ public class BookAdapter extends RecyclerView.Adapter {
 
     public class ViewHolder extends RecyclerView.ViewHolder  implements View
             .OnClickListener{
-        Button ShareButton;
         TextView TitleTextView, OwnerNameTextView, AuthorTextView, YearTextView, StatusTextView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ShareButton = itemView.findViewById(R.id.share_btn);
             TitleTextView = itemView.findViewById(R.id.title_textview);
             OwnerNameTextView = itemView.findViewById(R.id.owner_name_textview);
             AuthorTextView = itemView.findViewById(R.id.author_textview);
@@ -148,7 +106,6 @@ public class BookAdapter extends RecyclerView.Adapter {
                 }
             });
             itemView.setOnClickListener(this);
-
         }
         @Override
         public void onClick(View v) {

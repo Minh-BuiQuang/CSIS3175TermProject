@@ -17,6 +17,7 @@ import com.csis3175group6.bookapp.entities.Request;
 import com.csis3175group6.bookapp.entities.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BookAdapter extends RecyclerView.Adapter {
 
@@ -60,15 +61,23 @@ public class BookAdapter extends RecyclerView.Adapter {
         viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
         viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
         viewHolder.PageCountTextView.setText("Page count: " + books.get(position).PageCount);
+        double total = books.get(position).RentDuration * books.get(position).RentPrice;
+        if(total > 0){
+            viewHolder.TotalPriceTextView.setText("Total rent price is $" + total);
+        }else{
+            viewHolder.TotalPriceTextView.setText("You can borrow this book for free <3");
+        }
 //        viewHolder.DescriptionTextView.setText("Description: " + books.get(position).Description);
         //Update book status if the book available for rent and display rent information
         if(books.get(position).Status.equals(Book.STATUS_FOR_RENT)){
 //            viewHolder.BookRequestLayout.setBackgroundColor(Color.GREEN);
             viewHolder.StatusTextView.setTextColor(Color.GREEN);
             viewHolder.StatusTextView.setText("This book is available for rent.");
-            viewHolder.RentTimeTextView.setText("Rent start at " + books.get(position).RentedTime);
+            String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
+            viewHolder.RentTimeTextView.setText("Rent start at " + currentDateTimeString);
             viewHolder.RentDurationTextView.setText("You can rent the book for " + books.get(position).RentDuration + " days.");
             viewHolder.RentPriceTextView.setText("Rent price is $ " + books.get(position).RentPrice);
+
         }
         //Check if book has been requested then change the color and status of the book
         requests = db.getActiveRequestsByBookId(books.get(position).Id);
@@ -103,7 +112,7 @@ public class BookAdapter extends RecyclerView.Adapter {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
-        TextView TitleTextView, OwnerNameTextView, AuthorTextView, YearTextView, StatusTextView, PageCountTextView, RentPriceTextView, RentDurationTextView, RentTimeTextView, DescriptionTextView;
+        TextView TitleTextView, OwnerNameTextView, AuthorTextView, YearTextView, StatusTextView, PageCountTextView, RentPriceTextView, RentDurationTextView, RentTimeTextView, TotalPriceTextView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             TitleTextView = itemView.findViewById(R.id.title_textview);
@@ -115,6 +124,7 @@ public class BookAdapter extends RecyclerView.Adapter {
             RentPriceTextView = itemView.findViewById(R.id.rent_price_textview);
             RentDurationTextView = itemView.findViewById(R.id.rent_duration_textview);
             RentTimeTextView = itemView.findViewById(R.id.rent_time_textview);
+            TotalPriceTextView = itemView.findViewById(R.id.total_price_textview);
             itemView.setOnClickListener(this);
         }
         @Override

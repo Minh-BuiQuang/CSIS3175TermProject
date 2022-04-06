@@ -85,9 +85,10 @@ public class BookAdapter extends RecyclerView.Adapter {
                 }
                 //Check if book has been requested then change the color and status of the book
                 for (Request request : requests) {
-                    if (request.RequesterId == App.getInstance().User.Id)
+                    if (request.RequesterId == App.getInstance().User.Id) {
                         viewHolder.StatusTextView.setTextColor(Color.MAGENTA);
-                    viewHolder.StatusTextView.setText("You requested this book.\nWaiting for owner.");
+                        viewHolder.StatusTextView.setText("You requested this book.\nWaiting for owner.");
+                    }
                 }
                 break;
             case SHARE:

@@ -9,9 +9,10 @@ public class Request {
     public Timestamp RequestTimeStamp;
     public Boolean HasCompleted;
 
-    public Request() {}
+    public Request() {
+    }
 
-    public Request (Long id, Long requesterId, Long bookId, Timestamp requestTimeStamp, Boolean hasCompleted) {
+    public Request(Long id, Long requesterId, Long bookId, Timestamp requestTimeStamp, Boolean hasCompleted) {
         Id = id;
         RequesterId = requesterId;
         BookId = bookId;

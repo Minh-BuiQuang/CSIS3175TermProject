@@ -16,7 +16,8 @@ public class User {
     public static final String ROLE_USER = "user";
     public static final String ROLE_ADMIN = "admin";
 
-    public User(){}
+    public User() {
+    }
 
     public User(Long id, String name, String role, String pinCode, String address, String zipcode, String phone, String email) {
         Id = id;

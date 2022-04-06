@@ -10,11 +10,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Book;
 
 public class BorrowActivity extends AppCompatActivity {
     DatabaseOpenHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,7 @@ public class BorrowActivity extends AppCompatActivity {
             startActivity(new Intent(BorrowActivity.this, BorrowRequestActivity.class));
         });
     }
+
     //Implement go back event for Back button on action bar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

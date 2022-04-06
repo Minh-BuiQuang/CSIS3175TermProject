@@ -25,6 +25,7 @@ import java.sql.SQLException;
 public class SignUpActivity extends AppCompatActivity {
 
     DatabaseOpenHelper databaseOpenHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,22 +58,21 @@ public class SignUpActivity extends AppCompatActivity {
             String zipCode = ZipCodeEditText.getText().toString();
             String phone = PhoneEditText.getText().toString();
             String email = EmailEditText.getText().toString();
-            if(userName.equals("") || password.equals("") || address.equals("") ||
-            zipCode.equals("") || phone.equals("") || email.equals("")) {
+            if (userName.equals("") || password.equals("") || address.equals("") ||
+                    zipCode.equals("") || phone.equals("") || email.equals("")) {
                 Toast.makeText(this, "Please complete the required fields", Toast.LENGTH_LONG).show();
                 return;
             }
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
             try {
                 boolean success;
-                if(EdittingUser == null) {
+                if (EdittingUser == null) {
                     success = db.addUserRecord(new User(0l, userName, User.ROLE_USER, password, address, zipCode, phone, email));
-                    if(success) {
+                    if (success) {
                         Toast.makeText(this, "New user created!", Toast.LENGTH_LONG).show();
                         finish();
                     }
-                }
-                else {
+                } else {
                     EdittingUser.Name = userName;
                     EdittingUser.PinCode = password;
                     EdittingUser.Address = address;
@@ -81,7 +81,7 @@ public class SignUpActivity extends AppCompatActivity {
                     EdittingUser.Email = email;
 
                     success = db.updateUserRec(EdittingUser);
-                    if(success) {
+                    if (success) {
                         Toast.makeText(this, "User Information Updated!", Toast.LENGTH_LONG).show();
                         finish();
                     }
@@ -94,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
         //Check if User object exists. If it does, we'll update user instead of create new.
         //Update UI for user information update view
         Long userId = getIntent().getLongExtra(getString(R.string.stringUserId), -1);
-        if(userId  >= 0) {
+        if (userId >= 0) {
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
             try {
                 EdittingUser = db.getUser(userId);
@@ -115,6 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
     }
+
     //Implement go back event for Back button on action bar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -125,6 +126,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     EditText UserNameEditText, PasswordEditText, AddressEditText, ZipCodeEditText, PhoneEditText, EmailEditText;
     TextView InfoTextView;
     Button SignUpButton, SignInButton;

@@ -22,21 +22,22 @@ import java.util.Collections;
 
 public class MessageAdapter extends RecyclerView.Adapter {
 
-    private Context Context;
-    private ArrayList<Message> Messages;
+    private final Context Context;
+    private final ArrayList<Message> Messages;
     private Mode Mode;
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     private Context context;
+
     public enum Mode {
         Send,
         Receive,
         System
     }
 
-    public MessageAdapter (Context context, ArrayList<Message> messages) {
+    public MessageAdapter(Context context, ArrayList<Message> messages) {
         inflater = LayoutInflater.from(context);
         Context = context;
-        Collections.sort(messages, (x,y) -> x.TimeStamp.compareTo(y.TimeStamp));
+        Collections.sort(messages, (x, y) -> x.TimeStamp.compareTo(y.TimeStamp));
         Messages = messages;
     }
 
@@ -50,7 +51,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        MessageAdapter.ViewHolder viewHolder = (MessageAdapter.ViewHolder)holder;
+        MessageAdapter.ViewHolder viewHolder = (MessageAdapter.ViewHolder) holder;
         Message message = Messages.get(position);
         viewHolder.MessageTextView.setText(message.Content);
 
@@ -62,7 +63,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
         User user = App.getInstance().User;
         //Format views for system message
-        if(message.FromSystem) {
+        if (message.FromSystem) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
             params.gravity = Gravity.CENTER_HORIZONTAL;
             viewHolder.TimeTextView.setVisibility(View.GONE);
@@ -73,7 +74,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             viewHolder.MessageLayout.setBackgroundColor(Color.parseColor("#00000000"));
         }
         //Format Sent message
-        else if(message.SenderId == user.Id) {
+        else if (message.SenderId == user.Id) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
             params.gravity = Gravity.RIGHT;
             viewHolder.TimeTextView.setVisibility(View.VISIBLE);
@@ -84,7 +85,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             viewHolder.MessageLayout.setBackground(Context.getDrawable(R.drawable.round_edittext_green));
         }
         //Format Received message
-        else if(message.ReceiverId == user.Id) {
+        else if (message.ReceiverId == user.Id) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
             viewHolder.MessageLayout.setGravity(Gravity.LEFT);
             viewHolder.TimeTextView.setVisibility(View.VISIBLE);

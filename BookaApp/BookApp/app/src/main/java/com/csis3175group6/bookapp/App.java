@@ -7,6 +7,7 @@ import com.csis3175group6.bookapp.entities.User;
 public class App extends Application {
 
     static App sInstance;
+
     @Override
     public void onCreate() {
         super.onCreate();

@@ -36,9 +36,9 @@ public class ShareBookActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         radioGroup = findViewById(R.id.radioGroup);
-        optShare = (RadioButton) findViewById(R.id.opt_Share);
-        optRent = (RadioButton) findViewById(R.id.opt_Rent);
-        optGiveAway = (RadioButton) findViewById(R.id.opt_GiveAway);
+        optShare = findViewById(R.id.opt_Share);
+        optRent = findViewById(R.id.opt_Rent);
+        optGiveAway = findViewById(R.id.opt_GiveAway);
         inputPrice = findViewById(R.id.inputPrice);
         inputDuration = findViewById(R.id.inputDuration);
         inputNote = findViewById(R.id.inputNote);
@@ -82,7 +82,7 @@ public class ShareBookActivity extends AppCompatActivity {
             String note = inputNote.getText().toString();
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
 
-            if(price.equals("") || duration.equals("") || note.equals("") ) {
+            if (price.equals("") || duration.equals("") || note.equals("")) {
                 Toast.makeText(this, "Please fill in rent duration, price, and note.", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -126,7 +126,7 @@ public class ShareBookActivity extends AppCompatActivity {
         });
 
         Long bookId = getIntent().getLongExtra("bookId", 0);
-        if(bookId  > 0) {
+        if (bookId > 0) {
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
             try {
                 book = db.getBook(bookId);

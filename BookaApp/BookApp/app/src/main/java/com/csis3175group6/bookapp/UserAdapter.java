@@ -15,15 +15,17 @@ import com.csis3175group6.bookapp.entities.User;
 import java.util.ArrayList;
 
 public class UserAdapter extends RecyclerView.Adapter {
-    private  ArrayList<User> users;
-    private LayoutInflater inflater;
-    private boolean isRequestMode;
+    private final ArrayList<User> users;
+    private final LayoutInflater inflater;
+    private final boolean isRequestMode;
     private IClickEvents iClickEvents;
-    public UserAdapter (Context context, ArrayList<User> users, boolean isRequestMode) {
+
+    public UserAdapter(Context context, ArrayList<User> users, boolean isRequestMode) {
         inflater = LayoutInflater.from(context);
         this.users = users;
         this.isRequestMode = isRequestMode;
     }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,7 +40,7 @@ public class UserAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ViewHolder viewHolder = (ViewHolder)holder;
+        ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.NameTextView.setText(users.get(position).Name);
         viewHolder.PhoneTextView.setText(users.get(position).Phone);
         viewHolder.AddressTextView.setText(users.get(position).Address);
@@ -52,6 +54,7 @@ public class UserAdapter extends RecyclerView.Adapter {
     public class ViewHolder extends RecyclerView.ViewHolder {
         Button EditButton, MessageButton, AcceptButton;
         TextView NameTextView, PhoneTextView, AddressTextView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             NameTextView = itemView.findViewById(R.id.textview_username);
@@ -61,15 +64,18 @@ public class UserAdapter extends RecyclerView.Adapter {
             MessageButton = itemView.findViewById(R.id.message_btn);
             AcceptButton = itemView.findViewById(R.id.accept_btn);
             EditButton.setOnClickListener(view -> {
-                if(iClickEvents != null) iClickEvents.onItemEditButtonClick(view, getAdapterPosition());
+                if (iClickEvents != null)
+                    iClickEvents.onItemEditButtonClick(view, getAdapterPosition());
             });
             MessageButton.setOnClickListener(view -> {
-                if(iClickEvents != null) iClickEvents.onItemMessageButtonClick(view, getAdapterPosition());
+                if (iClickEvents != null)
+                    iClickEvents.onItemMessageButtonClick(view, getAdapterPosition());
             });
             AcceptButton.setOnClickListener(view -> {
-                if(iClickEvents != null) iClickEvents.onItemAcceptButtonClick(view, getAdapterPosition());
+                if (iClickEvents != null)
+                    iClickEvents.onItemAcceptButtonClick(view, getAdapterPosition());
             });
-            if(isRequestMode) {
+            if (isRequestMode) {
                 AcceptButton.setVisibility(View.VISIBLE);
                 EditButton.setVisibility(View.GONE);
             }
@@ -78,7 +84,9 @@ public class UserAdapter extends RecyclerView.Adapter {
 
     public interface IClickEvents {
         void onItemEditButtonClick(View view, int position);
+
         void onItemMessageButtonClick(View view, int position);
+
         void onItemAcceptButtonClick(View view, int position);
     }
 }

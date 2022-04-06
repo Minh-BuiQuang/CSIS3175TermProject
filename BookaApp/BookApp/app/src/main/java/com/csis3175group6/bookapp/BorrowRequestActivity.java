@@ -34,13 +34,14 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
     TextView receiverName, receiverEmail, receiverPhone, txtDescription;
     Button btnRequest;
     DatabaseOpenHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_borrow_request);
 
         //Get linearlayout
-        LinearLayout contactLayout = (LinearLayout) findViewById(R.id.popUpContactInfo);
+        LinearLayout contactLayout = findViewById(R.id.popUpContactInfo);
         //Set contact layout to invisible
         contactLayout.setVisibility(View.INVISIBLE);
 
@@ -54,7 +55,7 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
 
         //Filter the books that are being shared and not owned by the current logged in user.
         for (Book book : books) {
-            if((book.Status.equals(Book.STATUS_FOR_RENT) || book.Status.equals(Book.STATUS_GIVEAWAY)) && book.OwnerId != App.getInstance().User.Id)
+            if ((book.Status.equals(Book.STATUS_FOR_RENT) || book.Status.equals(Book.STATUS_GIVEAWAY)) && book.OwnerId != App.getInstance().User.Id)
 
                 sharedBook.add(book);
         }
@@ -72,7 +73,7 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
                 Timestamp ts = new Timestamp(System.currentTimeMillis());
 //                Toast.makeText(BorrowRequestActivity.this, String.valueOf(receiverId), Toast.LENGTH_SHORT).show();
 
-                if(description.isEmpty()) {
+                if (description.isEmpty()) {
                     Toast.makeText(BorrowRequestActivity.this, "Please write some notes!", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -99,13 +100,13 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
                 request.RequestTimeStamp = new Timestamp(System.currentTimeMillis());
                 boolean success = db.addMessageRecord(systemMessage) && db.addMessageRecord(message) && db.addRequestRecord(request);
 
-                if(success){
+                if (success) {
                     Toast.makeText(BorrowRequestActivity.this, "Book requested!", Toast.LENGTH_LONG).show();
                     finish();
                     Intent intent = new Intent(BorrowRequestActivity.this, MessageActivity.class);
                     intent.putExtra("userId", book.OwnerId);
                     startActivity(intent);
-                }else{
+                } else {
                     Toast.makeText(BorrowRequestActivity.this, "Error requesting book", Toast.LENGTH_LONG).show();
                 }
             }
@@ -122,6 +123,7 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onItemClick(View view, int position) {
         book = adapter.getItem(position);
@@ -130,25 +132,24 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
         boolean requested = false;
         User useR = App.getInstance().User;
         for (Request request : requests) {
-            if(request.HasCompleted == false && request.RequesterId == useR.Id)
+            if (request.HasCompleted == false && request.RequesterId == useR.Id)
 
                 requested = true;
         }
-        if(requested) {
+        if (requested) {
             Toast.makeText(this, "This book was already requested!\nYou can send a message to remind the owner", Toast.LENGTH_LONG).show();
             finish();
             Intent intent = new Intent(BorrowRequestActivity.this, MessageActivity.class);
             intent.putExtra("userId", book.OwnerId);
             startActivity(intent);
-        }
-        else {
-            LinearLayout contactLayout = (LinearLayout) findViewById(R.id.popUpContactInfo);
+        } else {
+            LinearLayout contactLayout = findViewById(R.id.popUpContactInfo);
             contactLayout.setVisibility(View.VISIBLE);
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) contactLayout.getLayoutParams();
             lp.height = 1200;
             contactLayout.setLayoutParams(lp);
 
-            LinearLayout bookListLayout = (LinearLayout) findViewById(R.id.bookListView);
+            LinearLayout bookListLayout = findViewById(R.id.bookListView);
             LinearLayout.LayoutParams lpb = (LinearLayout.LayoutParams) bookListLayout.getLayoutParams();
             lpb.weight = 2;
             bookListLayout.setLayoutParams(lpb);

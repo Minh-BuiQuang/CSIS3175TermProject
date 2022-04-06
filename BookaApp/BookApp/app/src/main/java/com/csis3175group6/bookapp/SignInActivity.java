@@ -23,6 +23,7 @@ public class SignInActivity extends AppCompatActivity {
         UserNameEditText.setText(null);
         PasswordEditText.setText(null);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

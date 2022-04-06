@@ -47,12 +47,12 @@ public class UserActivity extends AppCompatActivity implements UserAdapter.IClic
         DatabaseOpenHelper db = new DatabaseOpenHelper(this);
         Users = db.getUsers();
         ArrayList<User> filteredUsers = new ArrayList<User>();
-        if(IsRequestMode) {
+        if (IsRequestMode) {
             Requests = new ArrayList<>();
             ArrayList<Request> requests = db.getActiveRequestsByBookId(BookId);
             for (User user : Users) {
                 for (Request request : requests) {
-                    if(user.Id == request.RequesterId) {
+                    if (user.Id == request.RequesterId) {
                         filteredUsers.add(user);
                         Requests.add(request);
                     }
@@ -65,6 +65,7 @@ public class UserActivity extends AppCompatActivity implements UserAdapter.IClic
         Adapter.setClickEvents(this);
         recyclerView.setAdapter(Adapter);
     }
+
     //Implement go back event for Back button on action bar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -75,6 +76,7 @@ public class UserActivity extends AppCompatActivity implements UserAdapter.IClic
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onItemEditButtonClick(View view, int position) {
         Intent intent = new Intent(UserActivity.this, SignUpActivity.class);
@@ -96,12 +98,12 @@ public class UserActivity extends AppCompatActivity implements UserAdapter.IClic
         DatabaseOpenHelper db = new DatabaseOpenHelper(this);
         Request request = Requests.get(position);
         Book book = db.getBook(request.BookId);
-        if(book.Status.equals(Book.STATUS_FOR_RENT)) {
+        if (book.Status.equals(Book.STATUS_FOR_RENT)) {
             //Start tracking rented at time. Status will become OVERDUE when RentDuration passed.
             book.RentedTime = new Timestamp(System.currentTimeMillis());
             book.HolderId = request.RequesterId;
             book.Status = Book.STATUS_RENTED;
-        } else if(book.Status.equals(Book.STATUS_GIVEAWAY)) {
+        } else if (book.Status.equals(Book.STATUS_GIVEAWAY)) {
             //Set the book owner to the requester, reset book status
             book.OwnerId = request.RequesterId;
             book.HolderId = request.RequesterId;
@@ -124,8 +126,8 @@ public class UserActivity extends AppCompatActivity implements UserAdapter.IClic
         message.ReceiverId = request.RequesterId;
         message.TimeStamp = new Timestamp(System.currentTimeMillis());
         message.FromSystem = true;
-        if(book.Status.equals(Book.STATUS_RENTED)) {
-            message.Content = "The book \""+ book.Title +"\" has been shared to " + requester.Name;
+        if (book.Status.equals(Book.STATUS_RENTED)) {
+            message.Content = "The book \"" + book.Title + "\" has been shared to " + requester.Name;
         } else {
             message.Content = "The book \"" + book.Title + "\" has been given to " + requester.Name;
         }

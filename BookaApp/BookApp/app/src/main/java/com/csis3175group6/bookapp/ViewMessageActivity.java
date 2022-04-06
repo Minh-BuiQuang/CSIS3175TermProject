@@ -38,11 +38,11 @@ public class ViewMessageActivity extends AppCompatActivity {
             Message message = messages.get(i);
             for (int j = 0; j < filteredMessages.size(); j++) {
                 Message filteredMessage = filteredMessages.get(j);
-                if((message.SenderId == filteredMessage.SenderId && message.ReceiverId == filteredMessage.ReceiverId) ||
+                if ((message.SenderId == filteredMessage.SenderId && message.ReceiverId == filteredMessage.ReceiverId) ||
                         (message.SenderId == filteredMessage.ReceiverId && message.ReceiverId == filteredMessage.SenderId))
                     conversationExists = true;
             }
-            if(!conversationExists) filteredMessages.add(message);
+            if (!conversationExists) filteredMessages.add(message);
         }
 
         for (Message message : filteredMessages) {
@@ -58,7 +58,7 @@ public class ViewMessageActivity extends AppCompatActivity {
         }
 
         UserMessageListView = findViewById(R.id.message_listview);
-        SimpleAdapter adapter = new SimpleAdapter(this, userMessageList, R.layout.user_item,new String[] {"UserName", "Content", "Timestamp"}, new int[]{R.id.username_textview, R.id.message_textview, R.id.timestamp_textview}) {
+        SimpleAdapter adapter = new SimpleAdapter(this, userMessageList, R.layout.user_item, new String[]{"UserName", "Content", "Timestamp"}, new int[]{R.id.username_textview, R.id.message_textview, R.id.timestamp_textview}) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -73,7 +73,7 @@ public class ViewMessageActivity extends AppCompatActivity {
             Long loggedInUserId = App.getInstance().User.Id;
             Message message = messages.get(i);
             Long targetId = loggedInUserId == message.SenderId ? message.ReceiverId : message.SenderId;
-                intent.putExtra("userId", targetId);
+            intent.putExtra("userId", targetId);
             startActivity(intent);
         });
     }

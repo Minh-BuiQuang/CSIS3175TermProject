@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
     DatabaseOpenHelper db;
     ListView listView;
 
-    String mTitle[] = {"ADD A BOOK", "MY BOOK", "UPDATE BOOK", "BORROW BOOK", "TRACKING BOOK"};
-    String mDescription[] = {"Add your favourite books to library", "View book list", "Update book information",
-                            "Let's broaden your horizon", "Tracking your activities"};
-    int images[] = {R.drawable.add_img, R.drawable.view_img, R.drawable.update_img, R.drawable.borrow_img1, R.drawable.track_img};
+    String[] mTitle = {"ADD A BOOK", "MY BOOK", "UPDATE BOOK", "BORROW BOOK", "TRACKING BOOK"};
+    String[] mDescription = {"Add your favourite books to library", "View book list", "Update book information",
+            "Let's broaden your horizon", "Tracking your activities"};
+    int[] images = {R.drawable.add_img, R.drawable.view_img, R.drawable.update_img, R.drawable.borrow_img1, R.drawable.track_img};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     intent.putExtra("title", mTitle[0]);
                     intent.putExtra("description", mDescription[0]);
-                    intent.putExtra("position", ""+0);
+                    intent.putExtra("position", "" + 0);
                     startActivity(intent);
 
                 }
@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putInt("image", images[1]);
                     intent.putExtras(bundle);
-                   long ownerId = App.getInstance().User.Id;
+                    long ownerId = App.getInstance().User.Id;
                     Cursor c = db.getBookById(ownerId);
-                    if(c != null) {
+                    if (c != null) {
                         String[] myBooks = new String[c.getCount()];
                         int index = 0;
                         while (c.moveToNext()) {
@@ -83,14 +83,13 @@ public class MainActivity extends AppCompatActivity {
                         }
                         intent.putExtra("book-array", myBooks);
                         //startActivity(intent);
-                    }
-                    else{
+                    } else {
                         Toast.makeText(MainActivity.this,
                                 "nothing to read", Toast.LENGTH_SHORT).show();
                     }
                     intent.putExtra("title", mTitle[1]);
                     intent.putExtra("description", mDescription[1]);
-                    intent.putExtra("position", ""+1);
+                    intent.putExtra("position", "" + 1);
                     startActivity(intent);
                 }
 
@@ -101,10 +100,10 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     intent.putExtra("title", mTitle[2]);
                     intent.putExtra("description", mDescription[2]);
-                    intent.putExtra("position", ""+2);
+                    intent.putExtra("position", "" + 2);
                     startActivity(intent);
                 }
-                
+
                 if (position == 3) {
                     Intent intent = new Intent(getApplicationContext(), BorrowActivity.class);
                     Bundle bundle = new Bundle();
@@ -112,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     intent.putExtra("title", mTitle[3]);
                     intent.putExtra("description", mDescription[3]);
-                    intent.putExtra("position", ""+3);
+                    intent.putExtra("position", "" + 3);
                     startActivity(intent);
                 }
 
@@ -123,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     intent.putExtra("title", mTitle[4]);
                     intent.putExtra("description", mDescription[4]);
-                    intent.putExtra("position", ""+4);
+                    intent.putExtra("position", "" + 4);
                     startActivity(intent);
                 }
             }
@@ -136,12 +135,13 @@ public class MainActivity extends AppCompatActivity {
 
         //Hide admin options if user is not an admin
         User user = App.getInstance().User;
-        if(user!= null && user.Role.equals(User.ROLE_USER)) {
+        if (user != null && user.Role.equals(User.ROLE_USER)) {
             MenuItem item = menu.findItem(R.id.itemUserList);
             item.setVisible(false);
         }
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -169,11 +169,11 @@ public class MainActivity extends AppCompatActivity {
     class MyAdapter extends ArrayAdapter<String> {
 
         Context context;
-        String rTitle[];
-        String rDescription[];
-        int rImages[];
+        String[] rTitle;
+        String[] rDescription;
+        int[] rImages;
 
-        MyAdapter(Context c, String title[], String description[], int imgs[]) {
+        MyAdapter(Context c, String[] title, String[] description, int[] imgs) {
             super(c, R.layout.row, R.id.textView1, title);
             this.context = c;
             this.rTitle = title;
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            LayoutInflater layoutInflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View row = layoutInflater.inflate(R.layout.row, parent, false);
 

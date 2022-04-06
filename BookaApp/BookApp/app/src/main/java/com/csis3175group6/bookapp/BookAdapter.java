@@ -21,28 +21,30 @@ import java.util.Date;
 
 public class BookAdapter extends RecyclerView.Adapter {
 
-    private ArrayList<Book> books;
+    private final ArrayList<Book> books;
     private User user;
     private ArrayList<Request> requests;
-    private LayoutInflater inflater;
-    private Mode mode;
-    private Context context;
+    private final LayoutInflater inflater;
+    private final Mode mode;
+    private final Context context;
     private ItemClickListener itemClickListener;
 
 
-    public enum Mode{
+    public enum Mode {
         SHARE,
         EDIT,
         BORROW,
         TRACK,
         UPDATE
     }
-    public BookAdapter (Context context, ArrayList<Book> books, Mode mode) {
+
+    public BookAdapter(Context context, ArrayList<Book> books, Mode mode) {
         inflater = LayoutInflater.from(context);
         this.books = books;
         this.mode = mode;
         this.context = context;
     }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,7 +55,7 @@ public class BookAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        BookAdapter.ViewHolder viewHolder = (BookAdapter.ViewHolder)holder;
+        BookAdapter.ViewHolder viewHolder = (BookAdapter.ViewHolder) holder;
         DatabaseOpenHelper db = new DatabaseOpenHelper(context);
         Book book = books.get(position);
         viewHolder.TitleTextView.setText(book.Title);
@@ -63,43 +65,45 @@ public class BookAdapter extends RecyclerView.Adapter {
         viewHolder.PageCountTextView.setText("Page count: " + book.PageCount);
         requests = db.getActiveRequestsByBookId(book.Id);
         double total = book.RentDuration * book.RentPrice;
-        switch (mode){
+        switch (mode) {
             case BORROW:
                 user = db.getUser(book.OwnerId);
                 viewHolder.OwnerNameTextView.setText("Owner: " + user.Name);
-                if(total > 0){
+                if (total > 0) {
                     viewHolder.TotalPriceTextView.setText("Total rent price is $" + total);
-                }else{
+                } else {
                     viewHolder.TotalPriceTextView.setText("You can borrow this book for free <3");
                 }
                 //Update book status if the book available for rent and display rent information
-                if(book.Status.equals(Book.STATUS_FOR_RENT)){
+                if (book.Status.equals(Book.STATUS_FOR_RENT)) {
                     viewHolder.StatusTextView.setTextColor(Color.GREEN);
                     viewHolder.StatusTextView.setText("This book is available for rent.");
                     viewHolder.RentDurationTextView.setText("You can rent the book for " + book.RentDuration + " days.");
-                    if(book.RentPrice > 0) viewHolder.RentPriceTextView.setText("Price: $" + book.RentPrice + "/day(s)");
+                    if (book.RentPrice > 0)
+                        viewHolder.RentPriceTextView.setText("Price: $" + book.RentPrice + "/day(s)");
 
                 }
                 //Check if book has been requested then change the color and status of the book
                 for (Request request : requests) {
-                    if(request.RequesterId == App.getInstance().User.Id)
+                    if (request.RequesterId == App.getInstance().User.Id)
                         viewHolder.StatusTextView.setTextColor(Color.MAGENTA);
                     viewHolder.StatusTextView.setText("You requested this book.\nWaiting for owner.");
                 }
                 break;
             case SHARE:
-                if(book.Status.equals(Book.STATUS_FOR_RENT)) {
+                if (book.Status.equals(Book.STATUS_FOR_RENT)) {
                     viewHolder.StatusTextView.setTextColor(requests.size() > 0 ? Color.MAGENTA : Color.GREEN);
-                    viewHolder.StatusTextView.setText("You are sharing this book\nThere are " + requests.size()+ " request(s)!");
+                    viewHolder.StatusTextView.setText("You are sharing this book\nThere are " + requests.size() + " request(s)!");
                     viewHolder.RentDurationTextView.setText("You are sharing the book for " + book.RentDuration + " days.");
-                    if(book.RentPrice > 0) viewHolder.RentPriceTextView.setText("Price: $" + book.RentPrice + "/day(s)");
+                    if (book.RentPrice > 0)
+                        viewHolder.RentPriceTextView.setText("Price: $" + book.RentPrice + "/day(s)");
                 } else if (book.Status.equals(Book.STATUS_GIVEAWAY)) {
                     viewHolder.StatusTextView.setTextColor(requests.size() > 0 ? Color.MAGENTA : Color.GREEN);
-                    viewHolder.StatusTextView.setText("You are giving away this book\nThere are " + requests.size()+ " request(s)!");
+                    viewHolder.StatusTextView.setText("You are giving away this book\nThere are " + requests.size() + " request(s)!");
                 } else if (book.Status.equals(Book.STATUS_ACTIVE)) {
                     viewHolder.StatusTextView.setTextColor(Color.GREEN);
                     viewHolder.StatusTextView.setText("You can share this book.");
-                } else if(book.Status.equals(Book.STATUS_RENTED)) {
+                } else if (book.Status.equals(Book.STATUS_RENTED)) {
                     User bookHolder = db.getUser(book.HolderId);
                     viewHolder.StatusTextView.setTextColor(Color.BLUE);
                     viewHolder.StatusTextView.setText("This book is shared to " + bookHolder.Name);
@@ -113,16 +117,17 @@ public class BookAdapter extends RecyclerView.Adapter {
         return books.size();
     }
 
-    public void setItemClickListener(ItemClickListener itemClickListener){
+    public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
 
-    public Book getItem(int id){
+    public Book getItem(int id) {
         return books.get(id);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView TitleTextView, OwnerNameTextView, AuthorTextView, YearTextView, StatusTextView, PageCountTextView, RentPriceTextView, RentDurationTextView, RentTimeTextView, TotalPriceTextView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             TitleTextView = itemView.findViewById(R.id.title_textview);
@@ -137,14 +142,15 @@ public class BookAdapter extends RecyclerView.Adapter {
             TotalPriceTextView = itemView.findViewById(R.id.total_price_textview);
             itemView.setOnClickListener(this);
         }
+
         @Override
         public void onClick(View v) {
-            if(itemClickListener!=null)
+            if (itemClickListener != null)
                 itemClickListener.onItemClick(v, getAdapterPosition());
         }
     }
 
-    public interface ItemClickListener{
+    public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
 }

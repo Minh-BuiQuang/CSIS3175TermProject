@@ -69,26 +69,25 @@ public class AddActivity extends AppCompatActivity {
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
             try {
                 pageCount = Integer.parseInt(PageCountEditText.getText().toString());
+            } catch (Exception e) {
             }
-            catch (Exception e){}
 
-            if(title.equals("") || pageCount <= 0)
-            {
+            if (title.equals("") || pageCount <= 0) {
                 Toast.makeText(this, "Please enter book title and valid number of pages", Toast.LENGTH_LONG).show();
                 return;
             }
             try {
                 boolean success;
-                if(book == null) {
-                    book = new Book(0l, title,App.getInstance().User.Id, App.getInstance().User.Id, isbn, author, publicationYear, description, pageCount, Book.STATUS_ACTIVE);
+                if (book == null) {
+                    book = new Book(0l, title, App.getInstance().User.Id, App.getInstance().User.Id, isbn, author, publicationYear, description, pageCount, Book.STATUS_ACTIVE);
                     success = db.addBookRecord(book);
-                    if(success) {
+                    if (success) {
                         Toast.makeText(this, "New book was added to your book list!", Toast.LENGTH_LONG).show();
                         finish();
                     } else {
                         Toast.makeText(this, "Add book error!", Toast.LENGTH_LONG).show();
                     }
-                }else {
+                } else {
                     book.Title = title;
                     book.Author = author;
                     book.PublicationYear = publicationYear;
@@ -97,7 +96,7 @@ public class AddActivity extends AppCompatActivity {
                     book.PageCount = pageCount;
 
                     success = db.updateBookRecord(book);
-                    if(success) {
+                    if (success) {
                         Toast.makeText(this, "Book Information Updated!", Toast.LENGTH_LONG).show();
                         finish();
                     }
@@ -111,7 +110,7 @@ public class AddActivity extends AppCompatActivity {
         //Long bookId = getIntent().getLongExtra(getString(R.string.stringUserId), -1);
         Long bookId = getIntent().getLongExtra("bookid", 0);
         //Toast.makeText(this, "Hi", Toast.LENGTH_SHORT).show();
-        if(bookId  > 0) {
+        if (bookId > 0) {
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
             try {
                 book = db.getBook(bookId);
@@ -130,6 +129,7 @@ public class AddActivity extends AppCompatActivity {
             }
         }
     }
+
     //Implement go back event for Back button on action bar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -140,6 +140,7 @@ public class AddActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     EditText TitleEditText, AuthorEditText, PublicationYearEditText, IsbnEditText, DescriptionEditText, PageCountEditText;
     Button AddButton;
     Book book;

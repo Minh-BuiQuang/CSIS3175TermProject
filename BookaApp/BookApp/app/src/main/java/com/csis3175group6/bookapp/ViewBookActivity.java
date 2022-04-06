@@ -25,6 +25,7 @@ public class ViewBookActivity extends AppCompatActivity implements BookAdapter.I
     ArrayList<Book> books;
     ArrayList<Integer> requestCounts;
     BookAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,13 +73,13 @@ public class ViewBookActivity extends AppCompatActivity implements BookAdapter.I
         Book book = books.get(position);
 
         //If book is already lent away, show UI to take back the book
-        if(book.Status.equals(Book.STATUS_RENTED) || book.Status.equals(Book.STATUS_OVERDUE)) {
+        if (book.Status.equals(Book.STATUS_RENTED) || book.Status.equals(Book.STATUS_OVERDUE)) {
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
             User holder = db.getUser(book.HolderId);
             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int response) {
-                    switch (response){
+                    switch (response) {
                         case DialogInterface.BUTTON_POSITIVE:
                             book.HolderId = App.getInstance().User.Id;
                             book.RentPrice = -1;
@@ -101,7 +102,7 @@ public class ViewBookActivity extends AppCompatActivity implements BookAdapter.I
                     .setNegativeButton("No", dialogClickListener).show();
         }
         //Show list of requesters if this book has requests
-        else if(requestCounts.get(position) > 0){
+        else if (requestCounts.get(position) > 0) {
             Intent intent = new Intent(this, UserActivity.class);
             intent.putExtra("bookId", book.Id);
             startActivity(intent);

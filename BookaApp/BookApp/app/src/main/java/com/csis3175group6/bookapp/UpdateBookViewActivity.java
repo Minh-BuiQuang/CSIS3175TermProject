@@ -1,4 +1,3 @@
-
 package com.csis3175group6.bookapp;
 
 import androidx.annotation.NonNull;
@@ -21,10 +20,11 @@ import com.csis3175group6.bookapp.entities.Book;
 
 import java.util.ArrayList;
 
-public class UpdateBookViewActivity extends AppCompatActivity implements BookAdapter.ItemClickListener{
+public class UpdateBookViewActivity extends AppCompatActivity implements BookAdapter.ItemClickListener {
     ArrayList<Book> books;
     Book book;
     BookAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +45,7 @@ public class UpdateBookViewActivity extends AppCompatActivity implements BookAda
         adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
     }
+
     //Implement go back event for Back button on action bar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -55,6 +56,7 @@ public class UpdateBookViewActivity extends AppCompatActivity implements BookAda
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onItemClick(View view, int position) {
         Intent i = new Intent(this, AddActivity.class);

@@ -25,6 +25,7 @@ public class MessageActivity extends AppCompatActivity {
     ArrayList<Message> Messages;
     MessageAdapter Adapter;
     RecyclerView MessageRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,7 @@ public class MessageActivity extends AppCompatActivity {
         Long userId = getIntent().getLongExtra(getString(R.string.stringUserId), -1);
         DatabaseOpenHelper db = new DatabaseOpenHelper(this);
         Receiver = db.getUser(userId);
-        if(Receiver == null) {
+        if (Receiver == null) {
             Toast.makeText(this, "Error starting conversation!", Toast.LENGTH_LONG).show();
             finish();
         }
@@ -54,7 +55,7 @@ public class MessageActivity extends AppCompatActivity {
         MessageRecyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
-                if ( i3 < i7) ScrollToBottom();
+                if (i3 < i7) ScrollToBottom();
             }
         });
 
@@ -63,7 +64,7 @@ public class MessageActivity extends AppCompatActivity {
         SendButton.setOnClickListener(view -> {
             //Add a new message
             String content = MessageEdittext.getText().toString();
-            if(content.isEmpty()) return;
+            if (content.isEmpty()) return;
             Message message = new Message();
             message.TimeStamp = new Timestamp(System.currentTimeMillis());
             message.Content = content;
@@ -71,7 +72,7 @@ public class MessageActivity extends AppCompatActivity {
             message.ReceiverId = Receiver.Id;
             message.FromSystem = false;
             boolean success = db.addMessageRecord(message);
-            if(!success) {
+            if (!success) {
                 Toast.makeText(this, "Error sending message!", Toast.LENGTH_LONG).show();
                 return;
             }
@@ -87,7 +88,7 @@ public class MessageActivity extends AppCompatActivity {
         MessageRecyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(Messages.size() > 0)
+                if (Messages.size() > 0)
                     MessageRecyclerView.smoothScrollToPosition(Messages.size() - 1);
             }
         }, 50);

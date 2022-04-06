@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import com.csis3175group6.bookapp.entities.*;
 
 import java.sql.Timestamp;
@@ -125,8 +126,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public boolean addUserRecord(User user) {
         return addUserRecord(user, null);
     }
+
     public boolean addUserRecord(User user, SQLiteDatabase sqLiteDatabase) {
-        if(sqLiteDatabase == null) sqLiteDatabase = this.getWritableDatabase();
+        if (sqLiteDatabase == null) sqLiteDatabase = this.getWritableDatabase();
         ContentValues value = new ContentValues();
         value.put(USER_NAME, user.Name);
         value.put(USER_PINCODE, user.PinCode);
@@ -139,12 +141,14 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         long r = sqLiteDatabase.insert(TABLE_USER, null, value);
         return r > 0;
     }
+
     public boolean addBookRecord(Book book) {
         return addBookRecord(book, null);
     }
+
     //OWNER AND HOLDER == USER_ID, insert update, delete return boolean
     public boolean addBookRecord(Book book, SQLiteDatabase sqLiteDatabase) {
-        if(sqLiteDatabase == null) sqLiteDatabase = this.getWritableDatabase();
+        if (sqLiteDatabase == null) sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(BOOK_TITLE, book.Title);
         values.put(BOOK_OWNER_ID, book.OwnerId);
@@ -162,9 +166,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         long r = sqLiteDatabase.insert(TABLE_BOOK, null, values);
         return r > 0;
     }
-    public boolean updateBookRecord(Book book){
-    SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-    ContentValues value = new ContentValues();
+
+    public boolean updateBookRecord(Book book) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues value = new ContentValues();
         value.put(BOOK_ID, book.Id);
         value.put(BOOK_TITLE, book.Title);
         value.put(BOOK_OWNER_ID, book.OwnerId);
@@ -179,13 +184,15 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         value.put(BOOK_RENT_INFO, book.RentInformation);
         value.put(BOOK_ISBN, book.Isbn);
         long r = sqLiteDatabase.update(TABLE_BOOK, value, BOOK_ID + "=?", new String[]{book.Id.toString()});
-        return  r > 0;
-}
+        return r > 0;
+    }
+
     public boolean addRequestRecord(Request request) {
         return addRequestRecord(request, null);
     }
+
     public boolean addRequestRecord(Request request, SQLiteDatabase sqLiteDatabase) {
-        if(sqLiteDatabase == null) sqLiteDatabase = this.getWritableDatabase();
+        if (sqLiteDatabase == null) sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(REQUESTER_ID, request.RequesterId);
         values.put(REQUEST_BOOK_ID, request.BookId);
@@ -193,14 +200,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         values.put(HAS_COMPLETED, request.HasCompleted);
         long r = sqLiteDatabase.insert(TABLE_REQUEST, null, values);
         return r > 0;
-    }
-
-    //tra ve object
-    public Cursor viewUserRecord() {
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_BOOK;
-        Cursor c = sqLiteDatabase.rawQuery(query, null);
-        return c;
     }
 
     public boolean updateUserRec(User user) {
@@ -259,8 +258,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("select * from " + TABLE_USER, null);
         User[] users = new User[cursor.getCount()];
         int index = 0;
-        while(cursor.moveToNext())
-        {
+        while (cursor.moveToNext()) {
             users[index++] = ToUser(cursor);
         }
         cursor.close();
@@ -273,14 +271,14 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("select * from " + TABLE_BOOK, null);
         Book[] books = new Book[cursor.getCount()];
         int index = 0;
-        while(cursor.moveToNext())
-        {
+        while (cursor.moveToNext()) {
             books[index++] = ToBook(cursor);
         }
         cursor.close();
         db.close();
         return new ArrayList<Book>(Arrays.asList(books));
     }
+
     public Book getBook(Long id) {
         // array of columns to fetch user data
         SQLiteDatabase db = this.getReadableDatabase();
@@ -298,15 +296,14 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return book;
     }
 
-    public ArrayList<Book> getBooksByOwnerId(Long id){
+    public ArrayList<Book> getBooksByOwnerId(Long id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] selectionArgs = {id.toString()};
         //Cursor c = db.rawQuery("select * from " + TABLE_BOOK + " inner join " + TABLE_USER + " on Book.OwnerId =?", selectionArgs);
-        Cursor c = db.rawQuery("Select * from Book where Book.OwnerId =?",selectionArgs);
+        Cursor c = db.rawQuery("Select * from Book where Book.OwnerId =?", selectionArgs);
         Book[] books = new Book[c.getCount()];
         int index = 0;
-        while(c.moveToNext())
-        {
+        while (c.moveToNext()) {
             books[index++] = ToBook(c);
         }
         c.close();
@@ -314,26 +311,12 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return new ArrayList<Book>(Arrays.asList(books));
     }
 
-    public Request getRequest(Long id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] selectionArgs = {id.toString()};
-        Cursor cursor = db.rawQuery("select * from " + TABLE_REQUEST + " where " + REQUEST_ID + " =?", selectionArgs);
-        Request request = null;
-        if (cursor.getCount() > 0) {
-            cursor.moveToNext();
-            request = ToRequest(cursor);
-        }
-        cursor.close();
-        db.close();
-        return request;
-    }
-
     public ArrayList<Request> getActiveRequestsByBookId(Long bookId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from " + TABLE_REQUEST + " where " + BOOK_ID + "=? AND " + HAS_COMPLETED + " is not true", new String[] {bookId.toString()});
+        Cursor cursor = db.rawQuery("select * from " + TABLE_REQUEST + " where " + BOOK_ID + "=? AND " + HAS_COMPLETED + " is not true", new String[]{bookId.toString()});
         Request[] requests = new Request[cursor.getCount()];
         int index = 0;
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
             requests[index++] = ToRequest(cursor);
         }
         cursor.close();
@@ -359,26 +342,13 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
-    public ArrayList<Request> getRequests() {
-       SQLiteDatabase db = this.getReadableDatabase();
-       Cursor cursor = db.rawQuery("select * from " + TABLE_REQUEST, null);
-       Request[] requests = new Request[cursor.getCount()];
-       int index = 0;
-       while(cursor.moveToNext()) {
-           requests[index++] = ToRequest(cursor);
-       }
-       cursor.close();
-       db.close();
-       return new ArrayList<Request>(Arrays.asList(requests));
-    }
-
     public Cursor getBookById(Long id) {
-    SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         String[] selectionArgs = {id.toString()};
-    String query = "Select * from Book where Book.OwnerId =?";
-    Cursor cursor = db.rawQuery(query,selectionArgs);
+        String query = "Select * from Book where Book.OwnerId =?";
+        Cursor cursor = db.rawQuery(query, selectionArgs);
 
-    return cursor;
+        return cursor;
     }
 
     public boolean addMessageRecord(Message message) {
@@ -390,7 +360,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         values.put(MESSAGE_RECEIVER_ID, message.ReceiverId);
         values.put(MESSAGE_TIMESTAMP, message.TimeStamp.getTime());
         values.put(MESSAGE_FROM_SYSTEM, message.FromSystem);
-        long result = sqLiteDatabase.insert(TABLE_MESSAGE,null, values);
+        long result = sqLiteDatabase.insert(TABLE_MESSAGE, null, values);
         sqLiteDatabase.close();
         return result > 0;
 
@@ -399,11 +369,11 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public ArrayList<Message> GetMessage(Long senderId, Long receiverId) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from " + TABLE_MESSAGE +
-                " where (" + MESSAGE_SENDER_ID + "=? and " + MESSAGE_RECEIVER_ID + "=?) or ("  +
+                        " where (" + MESSAGE_SENDER_ID + "=? and " + MESSAGE_RECEIVER_ID + "=?) or (" +
                         MESSAGE_RECEIVER_ID + "=? and " + MESSAGE_SENDER_ID + "=?)",
-                new String[]{senderId.toString(),receiverId.toString(),senderId.toString(),receiverId.toString()});
+                new String[]{senderId.toString(), receiverId.toString(), senderId.toString(), receiverId.toString()});
         ArrayList<Message> messages = new ArrayList<>();
-        while(cursor.moveToNext()) messages.add(ToMessage(cursor));
+        while (cursor.moveToNext()) messages.add(ToMessage(cursor));
         cursor.close();
         db.close();
         return messages;
@@ -412,7 +382,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public ArrayList<Message> GetMessageByUserId(Long userId) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from " + TABLE_MESSAGE +
-                " where " + MESSAGE_SENDER_ID + "=? or " + MESSAGE_RECEIVER_ID + "=? order by " + MESSAGE_TIMESTAMP + " desc",
+                        " where " + MESSAGE_SENDER_ID + "=? or " + MESSAGE_RECEIVER_ID + "=? order by " + MESSAGE_TIMESTAMP + " desc",
                 new String[]{userId.toString(), userId.toString()});
         ArrayList<Message> messages = new ArrayList<>();
         while (cursor.moveToNext()) messages.add(ToMessage(cursor));
@@ -472,22 +442,22 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         message.Id = c.getLong(c.getColumnIndex(MESSAGE_ID));
         message.SenderId = c.getLong(c.getColumnIndex(MESSAGE_SENDER_ID));
         message.ReceiverId = c.getLong(c.getColumnIndex(MESSAGE_RECEIVER_ID));
-        message.FromSystem = c.getInt(c.getColumnIndex(MESSAGE_FROM_SYSTEM))!=0;
+        message.FromSystem = c.getInt(c.getColumnIndex(MESSAGE_FROM_SYSTEM)) != 0;
         message.Content = c.getString(c.getColumnIndex(MESSAGE_CONTENT));
         message.TimeStamp = new Timestamp(c.getLong(c.getColumnIndex(MESSAGE_TIMESTAMP)));
         return message;
     }
 
     private void PopulateData(SQLiteDatabase db) {
-        addUserRecord(new User(0l,"Admin", User.ROLE_ADMIN, "1111", "02 Crest Line Point","a3gr5d","7784561235","ccamelli0@wufoo.com"), db);
-        addUserRecord(new User(0l, "Bruce", User.ROLE_USER, "1234","36851 Sunbrook Center", "a5dy1f", "778465151", "cdunhill1@blinklist.com"), db);
-        addUserRecord(new User(0l, "Edward", User.ROLE_USER, "1234","425 Orin Circle", "r4xe4d", "6041114567", "lshoemark2@furl.net"), db);
-        addUserRecord(new User(0l, "Barbara", User.ROLE_USER, "1234","5 Havey Road", "e5ga6r", "6045451133", "ldebischop3@xinhuanet.com"), db);
+        addUserRecord(new User(0l, "Admin", User.ROLE_ADMIN, "1111", "02 Crest Line Point", "a3gr5d", "7784561235", "ccamelli0@wufoo.com"), db);
+        addUserRecord(new User(0l, "Bruce", User.ROLE_USER, "1234", "36851 Sunbrook Center", "a5dy1f", "778465151", "cdunhill1@blinklist.com"), db);
+        addUserRecord(new User(0l, "Edward", User.ROLE_USER, "1234", "425 Orin Circle", "r4xe4d", "6041114567", "lshoemark2@furl.net"), db);
+        addUserRecord(new User(0l, "Barbara", User.ROLE_USER, "1234", "5 Havey Road", "e5ga6r", "6045451133", "ldebischop3@xinhuanet.com"), db);
 
-        addBookRecord(new Book(0l,"The Great Gatsby", 1l,1l,"12343264","F. Scott Fitzgerald", "1925","The Great Gatsby is a 1925 novel by American writer F. Scott Fitzgerald. Set in the Jazz Age on Long Island, near New York City, the novel depicts first-person narrator Nick Carraway's interactions with mysterious millionaire Jay Gatsby and Gatsby's obsession to reunite with his former lover, Daisy Buchanan.", 328, Book.STATUS_ACTIVE), db);
-        addBookRecord(new Book(0l,"Pride and Prejudice", 1l,1l,"44654512365","Jane Austen", "1832","The Pride of Jane Austen! The story is set in England in the late 18th century.", 210, Book.STATUS_ACTIVE), db);
-        addBookRecord(new Book(0l,"Lord of the Flies", 1l,1l,"122213213","William Golding", "1954","Lord of the Flies is a 1954 debut novel by Nobel Prize-winning British author William Golding.", 254, Book.STATUS_ACTIVE), db);
-        addBookRecord(new Book(0l,"Fahrenheit 451", 2l,2l,"12354543","Ray Bradbury", "1953","Fahrenheit 451 is a 1953 dystopian novel by American writer Ray Bradbury. Often regarded as one of his best works, the novel presents a future American society where books are outlawed and \"firemen\" burn any that are found.", 256, Book.STATUS_FOR_RENT), db);
-        addBookRecord(new Book(0l,"The Count of Monte Cristo", 2l,2l,"98656532","Alexandre Dumas", "1844","The Count of Monte Cristo is an adventure novel written by French author Alexandre Dumas completed in 1844.", 421, Book.STATUS_FOR_RENT), db);
+        addBookRecord(new Book(0l, "The Great Gatsby", 1l, 1l, "12343264", "F. Scott Fitzgerald", "1925", "The Great Gatsby is a 1925 novel by American writer F. Scott Fitzgerald. Set in the Jazz Age on Long Island, near New York City, the novel depicts first-person narrator Nick Carraway's interactions with mysterious millionaire Jay Gatsby and Gatsby's obsession to reunite with his former lover, Daisy Buchanan.", 328, Book.STATUS_ACTIVE), db);
+        addBookRecord(new Book(0l, "Pride and Prejudice", 1l, 1l, "44654512365", "Jane Austen", "1832", "The Pride of Jane Austen! The story is set in England in the late 18th century.", 210, Book.STATUS_ACTIVE), db);
+        addBookRecord(new Book(0l, "Lord of the Flies", 1l, 1l, "122213213", "William Golding", "1954", "Lord of the Flies is a 1954 debut novel by Nobel Prize-winning British author William Golding.", 254, Book.STATUS_ACTIVE), db);
+        addBookRecord(new Book(0l, "Fahrenheit 451", 2l, 2l, "12354543", "Ray Bradbury", "1953", "Fahrenheit 451 is a 1953 dystopian novel by American writer Ray Bradbury. Often regarded as one of his best works, the novel presents a future American society where books are outlawed and \"firemen\" burn any that are found.", 256, Book.STATUS_FOR_RENT), db);
+        addBookRecord(new Book(0l, "The Count of Monte Cristo", 2l, 2l, "98656532", "Alexandre Dumas", "1844", "The Count of Monte Cristo is an adventure novel written by French author Alexandre Dumas completed in 1844.", 421, Book.STATUS_FOR_RENT), db);
     }
 }

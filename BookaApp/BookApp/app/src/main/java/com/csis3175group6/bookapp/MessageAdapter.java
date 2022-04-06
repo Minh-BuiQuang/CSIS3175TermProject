@@ -65,24 +65,34 @@ public class MessageAdapter extends RecyclerView.Adapter {
         if(message.FromSystem) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
             params.gravity = Gravity.CENTER_HORIZONTAL;
-            viewHolder.MessageLayout.setLayoutParams(params);
-            viewHolder.MessageLayout.setBackgroundColor(Color.parseColor("#00000000"));
             viewHolder.TimeTextView.setVisibility(View.GONE);
             viewHolder.DateTextView.setVisibility(View.GONE);
             viewHolder.MessageTextView.setTextColor(Color.GRAY);
             viewHolder.MessageTextView.setTextSize(14);
-
+            viewHolder.MessageLayout.setLayoutParams(params);
+            viewHolder.MessageLayout.setBackgroundColor(Color.parseColor("#00000000"));
         }
         //Format Sent message
         else if(message.SenderId == user.Id) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
             params.gravity = Gravity.RIGHT;
+            viewHolder.TimeTextView.setVisibility(View.VISIBLE);
+            viewHolder.DateTextView.setVisibility(View.VISIBLE);
+            viewHolder.MessageTextView.setTextColor(Color.WHITE);
+            viewHolder.MessageTextView.setTextSize(20);
             viewHolder.MessageLayout.setLayoutParams(params);
             viewHolder.MessageLayout.setBackground(Context.getDrawable(R.drawable.round_edittext_green));
         }
         //Format Received message
         else if(message.ReceiverId == user.Id) {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
             viewHolder.MessageLayout.setGravity(Gravity.LEFT);
+            viewHolder.TimeTextView.setVisibility(View.VISIBLE);
+            viewHolder.DateTextView.setVisibility(View.VISIBLE);
+            viewHolder.MessageTextView.setTextColor(Color.WHITE);
+            viewHolder.MessageTextView.setTextSize(20);
+            viewHolder.MessageLayout.setLayoutParams(params);
+            viewHolder.MessageLayout.setBackground(Context.getDrawable(R.drawable.round_edittext_gray));
 
         }
     }

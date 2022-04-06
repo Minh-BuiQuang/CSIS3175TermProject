@@ -125,7 +125,7 @@ public class UserActivity extends AppCompatActivity implements UserAdapter.IClic
         message.TimeStamp = new Timestamp(System.currentTimeMillis());
         message.FromSystem = true;
         if(book.Status.equals(Book.STATUS_RENTED)) {
-            message.Content = "The book \""+ book.Title +"\" has been lent to " + requester.Name;
+            message.Content = "The book \""+ book.Title +"\" has been shared to " + requester.Name;
         } else {
             message.Content = "The book \"" + book.Title + "\" has been given to " + requester.Name;
         }

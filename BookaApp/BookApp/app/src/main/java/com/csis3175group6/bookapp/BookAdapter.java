@@ -55,42 +55,56 @@ public class BookAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         BookAdapter.ViewHolder viewHolder = (BookAdapter.ViewHolder)holder;
         DatabaseOpenHelper db = new DatabaseOpenHelper(context);
-
-        viewHolder.TitleTextView.setText(books.get(position).Title);
-        viewHolder.AuthorTextView.setText("Author: " + books.get(position).Author);
-        viewHolder.YearTextView.setText("Publication year: " + books.get(position).PublicationYear);
-        viewHolder.StatusTextView.setText("Status: " + books.get(position).Status);
-        viewHolder.PageCountTextView.setText("Page count: " + books.get(position).PageCount);
-        double total = books.get(position).RentDuration * books.get(position).RentPrice;
-        if(total > 0){
-            viewHolder.TotalPriceTextView.setText("Total rent price is $" + total);
-        }else{
-            viewHolder.TotalPriceTextView.setText("You can borrow this book for free <3");
-        }
-//        viewHolder.DescriptionTextView.setText("Description: " + books.get(position).Description);
-        //Update book status if the book available for rent and display rent information
-        if(books.get(position).Status.equals(Book.STATUS_FOR_RENT)){
-//            viewHolder.BookRequestLayout.setBackgroundColor(Color.GREEN);
-            viewHolder.StatusTextView.setTextColor(Color.GREEN);
-            viewHolder.StatusTextView.setText("This book is available for rent.");
-            String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
-            viewHolder.RentTimeTextView.setText("Rent start at " + currentDateTimeString);
-            viewHolder.RentDurationTextView.setText("You can rent the book for " + books.get(position).RentDuration + " days.");
-            viewHolder.RentPriceTextView.setText("Rent price is $ " + books.get(position).RentPrice);
-
-        }
-        //Check if book has been requested then change the color and status of the book
-        requests = db.getActiveRequestsByBookId(books.get(position).Id);
-        for (Request request : requests) {
-            if(request.HasCompleted == false && request.RequesterId == App.getInstance().User.Id)
-                viewHolder.StatusTextView.setTextColor(Color.MAGENTA);
-                viewHolder.StatusTextView.setText("Request in progress");
-        }
+        Book book = books.get(position);
+        viewHolder.TitleTextView.setText(book.Title);
+        viewHolder.AuthorTextView.setText("Author: " + book.Author);
+        viewHolder.YearTextView.setText("Publication year: " + book.PublicationYear);
+        viewHolder.StatusTextView.setText("Status: " + book.Status);
+        viewHolder.PageCountTextView.setText("Page count: " + book.PageCount);
+        requests = db.getActiveRequestsByBookId(book.Id);
+        double total = book.RentDuration * book.RentPrice;
         switch (mode){
             case BORROW:
-                user = db.getUser(books.get(position).OwnerId);
+                user = db.getUser(book.OwnerId);
                 viewHolder.OwnerNameTextView.setText("Owner: " + user.Name);
-            break;
+                if(total > 0){
+                    viewHolder.TotalPriceTextView.setText("Total rent price is $" + total);
+                }else{
+                    viewHolder.TotalPriceTextView.setText("You can borrow this book for free <3");
+                }
+                //Update book status if the book available for rent and display rent information
+                if(book.Status.equals(Book.STATUS_FOR_RENT)){
+                    viewHolder.StatusTextView.setTextColor(Color.GREEN);
+                    viewHolder.StatusTextView.setText("This book is available for rent.");
+                    viewHolder.RentDurationTextView.setText("You can rent the book for " + book.RentDuration + " days.");
+                    if(book.RentPrice > 0) viewHolder.RentPriceTextView.setText("Price: $" + book.RentPrice + "/day(s)");
+
+                }
+                //Check if book has been requested then change the color and status of the book
+                for (Request request : requests) {
+                    if(request.RequesterId == App.getInstance().User.Id)
+                        viewHolder.StatusTextView.setTextColor(Color.MAGENTA);
+                    viewHolder.StatusTextView.setText("You requested this book.\nWaiting for owner.");
+                }
+                break;
+            case SHARE:
+                if(book.Status.equals(Book.STATUS_FOR_RENT)) {
+                    viewHolder.StatusTextView.setTextColor(requests.size() > 0 ? Color.MAGENTA : Color.GREEN);
+                    viewHolder.StatusTextView.setText("You are sharing this book\nThere are " + requests.size()+ " request(s)!");
+                    viewHolder.RentDurationTextView.setText("You are sharing the book for " + book.RentDuration + " days.");
+                    if(book.RentPrice > 0) viewHolder.RentPriceTextView.setText("Price: $" + book.RentPrice + "/day(s)");
+                } else if (book.Status.equals(Book.STATUS_GIVEAWAY)) {
+                    viewHolder.StatusTextView.setTextColor(requests.size() > 0 ? Color.MAGENTA : Color.GREEN);
+                    viewHolder.StatusTextView.setText("You are giving away this book\nThere are " + requests.size()+ " request(s)!");
+                } else if (book.Status.equals(Book.STATUS_ACTIVE)) {
+                    viewHolder.StatusTextView.setTextColor(Color.GREEN);
+                    viewHolder.StatusTextView.setText("You can share this book.");
+                } else if(book.Status.equals(Book.STATUS_RENTED)) {
+                    User bookHolder = db.getUser(book.HolderId);
+                    viewHolder.StatusTextView.setTextColor(Color.BLUE);
+                    viewHolder.StatusTextView.setText("This book is shared to " + bookHolder.Name);
+                }
+                break;
         }
     }
 
@@ -105,10 +119,6 @@ public class BookAdapter extends RecyclerView.Adapter {
 
     public Book getItem(int id){
         return books.get(id);
-    }
-
-    public interface IShareButtonClickListener {
-        void onShareButtonClickListener(View view, int position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{

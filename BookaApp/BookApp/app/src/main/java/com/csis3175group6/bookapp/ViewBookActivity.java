@@ -77,8 +77,8 @@ public class ViewBookActivity extends AppCompatActivity implements BookAdapter.I
             User holder = db.getUser(book.HolderId);
             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which){
+                public void onClick(DialogInterface dialog, int response) {
+                    switch (response){
                         case DialogInterface.BUTTON_POSITIVE:
                             book.HolderId = App.getInstance().User.Id;
                             book.RentPrice = -1;
@@ -97,7 +97,7 @@ public class ViewBookActivity extends AppCompatActivity implements BookAdapter.I
             };
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("This book is being kept by " + holder.Name + "\nHas the person given it back?").setPositiveButton("Yes", dialogClickListener)
+            builder.setMessage("This book is being kept by " + holder.Name + "\nHave you got it back?").setPositiveButton("Yes", dialogClickListener)
                     .setNegativeButton("No", dialogClickListener).show();
         }
         //Show list of requesters if this book has requests

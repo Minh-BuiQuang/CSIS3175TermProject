@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Welcome, " + App.getInstance().User.Name + "!");
         listView = findViewById(R.id.listView);
         MyAdapter adapter = new MyAdapter(this, mTitle, mDescription, images);
         listView.setAdapter(adapter);

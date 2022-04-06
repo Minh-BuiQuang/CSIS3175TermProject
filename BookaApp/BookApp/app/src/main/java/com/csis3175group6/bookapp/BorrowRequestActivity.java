@@ -97,7 +97,7 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
                 request.RequesterId = App.getInstance().User.Id;
                 request.BookId = book.Id;
                 request.RequestTimeStamp = new Timestamp(System.currentTimeMillis());
-                boolean success = db.AddMessage(systemMessage) && db.AddMessage(message) && db.addRequestRecord(request);
+                boolean success = db.addMessageRecord(systemMessage) && db.addMessageRecord(message) && db.addRequestRecord(request);
 
                 if(success){
                     Toast.makeText(BorrowRequestActivity.this, "Book requested!", Toast.LENGTH_LONG).show();
@@ -126,7 +126,7 @@ public class BorrowRequestActivity extends AppCompatActivity implements BookAdap
     public void onItemClick(View view, int position) {
         book = adapter.getItem(position);
         user = db.getUser(book.OwnerId);
-        ArrayList<Request> requests = db.getRequestsByBookId(book.Id);
+        ArrayList<Request> requests = db.getActiveRequestsByBookId(book.Id);
         boolean requested = false;
         User useR = App.getInstance().User;
         for (Request request : requests) {

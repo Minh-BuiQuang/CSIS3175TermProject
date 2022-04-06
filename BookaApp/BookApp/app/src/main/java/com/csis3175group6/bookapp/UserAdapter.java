@@ -17,10 +17,12 @@ import java.util.ArrayList;
 public class UserAdapter extends RecyclerView.Adapter {
     private  ArrayList<User> users;
     private LayoutInflater inflater;
+    private boolean isRequestMode;
     private IClickEvents iClickEvents;
-    public UserAdapter (Context context, ArrayList<User> users) {
+    public UserAdapter (Context context, ArrayList<User> users, boolean isRequestMode) {
         inflater = LayoutInflater.from(context);
         this.users = users;
+        this.isRequestMode = isRequestMode;
     }
     @NonNull
     @Override
@@ -48,7 +50,7 @@ public class UserAdapter extends RecyclerView.Adapter {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        Button EditButton, MessageButton;
+        Button EditButton, MessageButton, AcceptButton;
         TextView NameTextView, PhoneTextView, AddressTextView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,23 +59,26 @@ public class UserAdapter extends RecyclerView.Adapter {
             AddressTextView = itemView.findViewById(R.id.textview_address);
             EditButton = itemView.findViewById(R.id.edit_btn);
             MessageButton = itemView.findViewById(R.id.message_btn);
-
+            AcceptButton = itemView.findViewById(R.id.accept_btn);
             EditButton.setOnClickListener(view -> {
-                if(iClickEvents != null) {
-                    iClickEvents.onItemEditButtonClick(view, getAdapterPosition());
-                }
+                if(iClickEvents != null) iClickEvents.onItemEditButtonClick(view, getAdapterPosition());
             });
-
             MessageButton.setOnClickListener(view -> {
-                if(iClickEvents != null) {
-                    iClickEvents.onItemMessageButtonClick(view, getAdapterPosition());
-                }
+                if(iClickEvents != null) iClickEvents.onItemMessageButtonClick(view, getAdapterPosition());
             });
+            AcceptButton.setOnClickListener(view -> {
+                if(iClickEvents != null) iClickEvents.onItemAcceptButtonClick(view, getAdapterPosition());
+            });
+            if(isRequestMode) {
+                AcceptButton.setVisibility(View.VISIBLE);
+                EditButton.setVisibility(View.GONE);
+            }
         }
     }
 
     public interface IClickEvents {
         void onItemEditButtonClick(View view, int position);
         void onItemMessageButtonClick(View view, int position);
+        void onItemAcceptButtonClick(View view, int position);
     }
 }

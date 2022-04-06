@@ -2,15 +2,11 @@ package com.csis3175group6.bookapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,7 +36,6 @@ public class BookAdapter extends RecyclerView.Adapter {
         TRACK,
         UPDATE
     }
-    IShareButtonClickListener shareButtonClickListener;
     public BookAdapter (Context context, ArrayList<Book> books, Mode mode) {
         inflater = LayoutInflater.from(context);
         this.books = books;
@@ -76,7 +71,7 @@ public class BookAdapter extends RecyclerView.Adapter {
             viewHolder.RentPriceTextView.setText("Rent price is $ " + books.get(position).RentPrice);
         }
         //Check if book has been requested then change the color and status of the book
-        requests = db.getRequestsByBookId(books.get(position).Id);
+        requests = db.getActiveRequestsByBookId(books.get(position).Id);
         for (Request request : requests) {
             if(request.HasCompleted == false && request.RequesterId == App.getInstance().User.Id)
                 viewHolder.StatusTextView.setTextColor(Color.MAGENTA);
@@ -103,17 +98,11 @@ public class BookAdapter extends RecyclerView.Adapter {
         return books.get(id);
     }
 
-    public void setShareButtonClickListener(IShareButtonClickListener shareButtonClickListener) {
-        this.shareButtonClickListener = shareButtonClickListener;
-    }
-
     public interface IShareButtonClickListener {
         void onShareButtonClickListener(View view, int position);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder  implements View
-            .OnClickListener{
-//        LinearLayout BookRequestLayout;
+    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
         TextView TitleTextView, OwnerNameTextView, AuthorTextView, YearTextView, StatusTextView, PageCountTextView, RentPriceTextView, RentDurationTextView, RentTimeTextView, DescriptionTextView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -126,14 +115,6 @@ public class BookAdapter extends RecyclerView.Adapter {
             RentPriceTextView = itemView.findViewById(R.id.rent_price_textview);
             RentDurationTextView = itemView.findViewById(R.id.rent_duration_textview);
             RentTimeTextView = itemView.findViewById(R.id.rent_time_textview);
-//            BookRequestLayout = itemView.findViewById(R.id.book_request);
-//            DescriptionTextView = itemView.findViewById(R.id.description_textview);
-
-            TitleTextView.setOnClickListener(view -> {
-                if(shareButtonClickListener != null) {
-                    shareButtonClickListener.onShareButtonClickListener(view, getAdapterPosition());
-                }
-            });
             itemView.setOnClickListener(this);
         }
         @Override
@@ -142,8 +123,6 @@ public class BookAdapter extends RecyclerView.Adapter {
                 itemClickListener.onItemClick(v, getAdapterPosition());
         }
     }
-
-
 
     public interface ItemClickListener{
         void onItemClick(View view, int position);

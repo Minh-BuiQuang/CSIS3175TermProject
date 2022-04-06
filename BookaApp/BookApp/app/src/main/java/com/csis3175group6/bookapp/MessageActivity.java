@@ -17,7 +17,6 @@ import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Message;
 import com.csis3175group6.bookapp.entities.User;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -71,7 +70,7 @@ public class MessageActivity extends AppCompatActivity {
             message.SenderId = App.getInstance().User.Id;
             message.ReceiverId = Receiver.Id;
             message.FromSystem = false;
-            boolean success = db.AddMessage(message);
+            boolean success = db.addMessageRecord(message);
             if(!success) {
                 Toast.makeText(this, "Error sending message!", Toast.LENGTH_LONG).show();
                 return;

@@ -10,15 +10,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.csis3175group6.bookapp.dataaccess.DatabaseOpenHelper;
 import com.csis3175group6.bookapp.entities.Book;
 
 import java.util.ArrayList;
 
-public class ViewBookActivity extends AppCompatActivity implements BookAdapter.IShareButtonClickListener, BookAdapter.ItemClickListener {
+public class ViewBookActivity extends AppCompatActivity implements BookAdapter.ItemClickListener {
     ArrayList<Book> books;
+    ArrayList<Integer> requestCounts;
     BookAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +34,15 @@ public class ViewBookActivity extends AppCompatActivity implements BookAdapter.I
         super.onResume();
         RecyclerView recyclerView = findViewById(R.id.book_recyclerview);
         DatabaseOpenHelper db = new DatabaseOpenHelper(this);
+        //Get books and request counts for each book
         books = db.getBooksByOwnerId(App.getInstance().User.Id);
+        requestCounts = new ArrayList<>();
+        for (Book book : books) {
+            requestCounts.add(db.getActiveRequestsByBookId(book.Id).size());
+        }
+        //Set books to adapter
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new BookAdapter(this, books, BookAdapter.Mode.SHARE);
-        adapter.setShareButtonClickListener(this);
         adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
     }
@@ -51,15 +56,20 @@ public class ViewBookActivity extends AppCompatActivity implements BookAdapter.I
         }
         return super.onOptionsItemSelected(item);
     }
-    @Override
-    public void onShareButtonClickListener(View view, int position) {
-        Toast.makeText(this, "Clicked on book: " + books.get(position).Title, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void onItemClick(View view, int position) {
-        Intent intent = new Intent(this, ShareBookActivity.class);
-        intent.putExtra("bookid", books.get(position).Id);
-        startActivity(intent);
+        //Show list of requesters if this book has requests
+        if(requestCounts.get(position) > 0){
+            Intent intent = new Intent(this, UserActivity.class);
+            intent.putExtra("bookId", books.get(position).Id);
+            startActivity(intent);
+        }
+        //Allow user to create a new/update/cancel sharing this book
+        else {
+            Intent intent = new Intent(this, ShareBookActivity.class);
+            intent.putExtra("bookId", books.get(position).Id);
+            startActivity(intent);
+        }
     }
 }

@@ -55,7 +55,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
         viewHolder.MessageTextView.setText(message.Content);
 
         SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d-MMM-yy");
         viewHolder.TimeTextView.setText(timeFormat.format(message.TimeStamp.getTime()));
         viewHolder.DateTextView.setText(dateFormat.format(message.TimeStamp.getTime()));
         viewHolder.MessageTextView.setText(message.Content);

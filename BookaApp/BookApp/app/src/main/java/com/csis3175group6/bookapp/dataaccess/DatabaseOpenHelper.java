@@ -167,7 +167,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     ContentValues value = new ContentValues();
         value.put(BOOK_ID, book.Id);
         value.put(BOOK_TITLE, book.Title);
-        //value.put(BOOK_HOLDER_ID, book.HolderId);
+        value.put(BOOK_OWNER_ID, book.OwnerId);
+        value.put(BOOK_HOLDER_ID, book.HolderId);
         value.put(BOOK_AUTHOR, book.Author);
         value.put(BOOK_PUBLISH_YEAR, book.PublicationYear);
         value.put(BOOK_PAGE_COUNT, book.PageCount);
@@ -327,9 +328,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return request;
     }
 
-    public ArrayList<Request> getRequestsByBookId(Long bookId) {
+    public ArrayList<Request> getActiveRequestsByBookId(Long bookId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from " + TABLE_REQUEST + " where " + BOOK_ID + "=?", new String[] {bookId.toString()});
+        Cursor cursor = db.rawQuery("select * from " + TABLE_REQUEST + " where " + BOOK_ID + "=? AND " + HAS_COMPLETED + " is not true", new String[] {bookId.toString()});
         Request[] requests = new Request[cursor.getCount()];
         int index = 0;
         while(cursor.moveToNext()) {
@@ -338,6 +339,24 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return new ArrayList<Request>(Arrays.asList(requests));
+    }
+
+    public boolean updateRequestRecords(ArrayList<Request> requests) {
+        boolean success = true;
+        for (Request request : requests) {
+            success &= updateRequestRecord(request);
+        }
+        return success;
+    }
+
+
+    public boolean updateRequestRecord(Request request) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(HAS_COMPLETED, request.HasCompleted);
+        long result = sqLiteDatabase.update(TABLE_REQUEST, values, REQUEST_ID + "=?", new String[]{request.Id.toString()});
+        sqLiteDatabase.close();
+        return result > 0;
     }
 
     public ArrayList<Request> getRequests() {
@@ -362,7 +381,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     return cursor;
     }
 
-    public boolean AddMessage(Message message) {
+    public boolean addMessageRecord(Message message) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(MESSAGE_ID, message.Id);

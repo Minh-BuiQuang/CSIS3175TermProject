@@ -139,5 +139,6 @@
     <string name="optGiveAway">Give away</string>
     <string name="inputPrice">Please input price</string>
     <string name="messages_txt">Messages</string>
+    <string name="accept_button_text">Accept Button</string>
 
 </resources>

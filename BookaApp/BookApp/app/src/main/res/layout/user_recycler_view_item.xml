@@ -81,6 +81,18 @@
                 app:iconTint="@color/white" />
 
             <Button
+                android:id="@+id/accept_btn"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:contentDescription="@string/accept_button_text"
+                app:icon="@drawable/ok_icon"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="30dp"
+                app:iconTint="@color/white"
+                android:visibility="gone"/>
+
+            <Button
                 android:id="@+id/message_btn"
                 android:layout_width="40dp"
                 android:layout_height="50dp"
@@ -88,8 +100,7 @@
                 app:icon="@android:drawable/stat_notify_chat"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
-                app:iconSize="15dp"
-                app:iconTint="@color/purple_200" />
+                app:iconSize="15dp"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView >

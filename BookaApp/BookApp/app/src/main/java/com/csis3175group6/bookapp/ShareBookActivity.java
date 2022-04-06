@@ -125,7 +125,7 @@ public class ShareBookActivity extends AppCompatActivity {
             }
         });
 
-        Long bookId = getIntent().getLongExtra("bookid", 0);
+        Long bookId = getIntent().getLongExtra("bookId", 0);
         if(bookId  > 0) {
             DatabaseOpenHelper db = new DatabaseOpenHelper(this);
             try {
